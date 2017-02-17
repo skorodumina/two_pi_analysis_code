@@ -147,9 +147,8 @@ gROOT->ProcessLine( "gErrorIgnoreLevel = kWarning; " );
     ostringstream qqq;
     ostringstream qqq1;
     
-	 
+	Float_t Pgen,Prec; 
     Long64_t j;
- Double_t fract_integ[3][6][18];   
 
  Short_t m, ti;
  Long64_t i,nstart,nstop,n_incl,n_elast, k_long;
@@ -165,7 +164,8 @@ gROOT->ProcessLine( "gErrorIgnoreLevel = kWarning; " );
 
 Float_t ARR_MMC_PIM_MISS[5][8][8] = {{{1.,1.,1.,1.,1.,1.,1.,1.},{1.,1.,1.,1.,1.,1.,1.,1.},{1.,1.,1.,1.,1.,1.,1.,1.},{0.,0.,0.,0.,0.,0.,0.,0.},{0.,0.,0.,0.,0.,0.,0.,0.},{0.,0.,0.,0.,0.,0.,0.,0.},{0.,0.,0.,0.,0.,0.,0.,0.},{0.,0.,0.,0.,0.,0.,0.,0.}},{{0.,0.,1.,1.,1.,1.,1.,1.},{1.,1.,1.,1.,1.,1.,1.,1.},{1.,1.,1.,1.,1.,1.,1.,1.},{1.,1.,1.,1.,1.,1.,1.,1.},{1.,1.,1.,1.,1.,1.,1.,0.},{1.,1.,1.,1.,1.,1.,0.,0.},{1.,1.,1.,1.,1.,0.,0.,0.},{0.,0.,0.,0.,0.,0.,0.,0.}},{{0.,0.,0.,1.,1.,1.,1.,1.},{0.,0.,0.,0.,1.,1.,1.,1.},{0.,0.,1.,1.,1.,1.,1.,1.},{1.,1.,1.,1.,1.,1.,1.,1.},{1.,1.,1.,1.,1.,1.,1.,0.},{1.,1.,1.,1.,1.,1.,0.,0.},{1.,1.,1.,1.,1.,0.,0.,0.},{1.,1.,0.,0.,0.,0.,0.,0.}},{{0.,0.,1.,1.,1.,1.,1.,1.},{0.,0.,0.,1.,1.,1.,1.,1.},{0.,1.,1.,1.,1.,1.,1.,1.},{1.,1.,1.,1.,1.,1.,1.,0.},{1.,1.,1.,1.,1.,1.,1.,0.},{1.,1.,1.,1.,1.,1.,0.,0.},{1.,1.,1.,1.,1.,1.,0.,0.},{1.,1.,1.,1.,1.,0.,0.,0.}},{{1.,1.,1.,1.,1.,1.,0.,0.},{1.,1.,1.,1.,1.,1.,0.,0.},{1.,1.,1.,1.,1.,1.,0.,0.},{1.,1.,1.,1.,1.,1.,0.,0.},{1.,1.,1.,1.,1.,1.,0.,0.},{1.,1.,1.,1.,1.,0.,0.,0.},{1.,1.,1.,1.,1.,0.,0.,0.},{1.,1.,1.,1.,0.,0.,0.,0.}}};
 
-Float_t MMcut_pim_miss[21] = {0.2,0.2,0.2,0.25,0.25,0.25,0.25,0.22,0.22,0.22,0.22,0.27,0.3,0.27,0.3,0.25,0.27,0.27,0.27,0.27,0.27};
+//Float_t MMcut_pim_miss[21] = {0.2,0.2,0.2,0.25,0.25,0.25,0.25,0.22,0.22,0.22,0.22,0.27,0.3,0.27,0.3,0.25,0.27,0.27,0.27,0.27,0.27};
+Float_t MMcut_pim_miss[21] = {0.2,0.22,0.25,0.26,0.26,0.3,0.27,0.25,0.25,0.24,0.24,0.27,0.3,0.27,0.3,0.27,0.3,0.3,0.3,0.3,0.3};
 
 Float_t fract_fsi_corr[12][21] = {{1.,1.,1.,1.,1.,1.,1.,1.,1.,1.,1.,1.,1.,1.,1.,1.,1.,1.,1.,1.,1.},{1., 1., 1., 1., 1., 1., 1., 0.949666, 0.946763, 0.92825, 0.92762, 0.942042, 0.969058, 0.939906, 0.972951, 0.920794, 0.938765, 0.952647, 0.943091, 0.948361, 0.963557},{1., 1., 1., 1., 1., 1., 1., 0.993911, 0.893549, 0.970045, 0.961446, 0.859731, 0.911005, 0.949457, 0.897599, 0.987884, 0.926785, 0.961528, 0.962106, 0.943108, 1.},{1., 1., 1., 1., 1., 1., 1., 0.994626, 0.92888, 0.974134, 0.938982, 0.912881, 0.886699, 0.95578, 0.953117, 0.980564, 0.935179, 0.955753, 0.971683, 0.966479, 1.},{1., 1., 1., 1., 1., 1., 1., 0.976887, 0.915209, 0.920231, 0.971177, 0.938058, 0.90531, 0.963204, 0.936656, 0.988965, 0.929378, 0.957025, 0.987681, 1., 1.},{1., 1., 1., 1., 1., 1., 1., 0.946144, 0.960353, 0.98249, 0.9808, 0.970148, 0.945595, 0.969558, 0.963168, 0.979624, 0.95783, 0.953134, 1., 1., 1.},{1., 1., 1., 1., 1., 1., 1., 0.999138, 0.989533, 0.970615, 0.99736, 0.93694, 0.938233, 0.948618, 0.958399, 0.977104, 1., 1., 1., 1., 1.},{1., 1., 1., 1., 1., 1., 1., 0.995786, 0.941906, 0.954921, 0.991707, 0.943651, 0.936837, 0.950524, 0.941602, 0.983574, 1., 1., 1., 1., 1.},{1., 1., 1., 1., 1., 1., 1., 0.995372, 0.992961, 0.996496, 0.992185, 0.956822, 0.943974, 0.88652, 1., 1., 1., 1., 1., 1., 1.},{1., 1., 1., 1., 1., 1., 1., 0.991166, 0.998852, 0.99667, 0.981678, 0.9876, 1., 1., 1., 1., 1., 1., 1., 1., 1.},{1., 1., 1., 1., 1., 1., 1., 0.9561, 0.976256, 0.982884, 0.985384, 1., 1., 1., 1., 1., 1., 1., 1., 1., 1.},{1., 1., 1., 1., 1., 1., 1., 0.986958, 0.998352, 0.981677, 1., 1., 1., 1., 1., 1., 1., 1., 1., 1., 1.}} ;
 TH1I *hist_adc_off[12]; 
@@ -214,11 +214,11 @@ TH1I *hist_adc_off[12];
 	Float_t sc_z,fid_a,fid_b,a,b;
 	Float_t nx,ny,nz,par1,par2,th_min;
 	Float_t sx,sy,sz,px,py,pz;
-	Float_t delta_mom_p; 
+	Float_t delta_mom_p_ye, delta_mom_p_skor, delta_p_el_sim; 
 	Float_t E_gamma,E_p_gamma_lab,P_p_gamma_lab,beta1,gamma;
 	Float_t pip_fid_a_1,pip_fid_b_1;
 	Float_t th_min_1,par1_1,par2_1, pim_fid_a_1,pim_fid_b_1;
-	Float_t W_old,sigma;
+	Float_t W_old;
 	Float_t pf_x,pf_y,pf_z,pxel_new,pyel_new,pzel_new;
 	Float_t th_ph_pim, th_ph_pip,th_ph_pr;
 	
@@ -254,6 +254,8 @@ TH1I *hist_adc_off[12];
 	P4_P.SetXYZT(0,0,0,m_proton);
 	P4_D.SetXYZT(0,0,0,m_deutron);
 	 
+        Float_t p0_simomcor, p1_simomcor, p2_simomcor;
+	
 
 
 global();
@@ -269,10 +271,11 @@ global();
 		             {0.23,0.19,0.24,0.23,0.18,0.2,0.21,0.19,0.2,0.18,0.18,0.18,0.23,0.19,0.23,0.19,0.23,0.15,-1000.,-1000.},
 			     {0.24,0.2,0.28,0.24,0.2,0.2,0.2,0.2,0.2,0.22,0.2,0.25,0.22,0.25,0.25,0.5,-1000.,-1000.,-1000.,-1000.}}};
 
-
-        TFile *nphefile = new TFile("norm_nphe_gr50_Sept18.root","READ");
-	
-	
+//        TFile *nphefile = new TFile("norm_nphe_15jan17_gt_50.root","READ");
+//	TFile *nphefile = new TFile("norm_nphe_17jan17_indiv_seg.root","READ");
+//	 TFile *nphefile = new TFile("norm_nphe_26jan17_aft_ph_th_match.root","READ");
+	 TFile *nphefile = new TFile("norm_nphe_27jan17_aft_cc_match_gt50.root","READ");
+	 
         norm_nphe_s1 = (TH2F*)nphefile->Get("h_cc_nphe_final_s1");
 	norm_nphe_s2 = (TH2F*)nphefile->Get("h_cc_nphe_final_s2");
 	norm_nphe_s3 = (TH2F*)nphefile->Get("h_cc_nphe_final_s3");
@@ -286,7 +289,11 @@ global();
 	
 
       // cout << " bin content2 = " << avrg_nphe_sector1->GetBinContent(100,100) << "\n";
-cout << "qqq1 \n";ifstream input("phel_integr_fract.txt");
+cout << "qqq1 \n";
+
+ifstream input("phel_integr_fract_22jan17.txt");
+
+
 if(input.is_open()){
 i=0;
     while(!input.eof()){
@@ -325,8 +332,7 @@ input.close();
 //};
 //};
 
-
-
+ph_cc_match = 1000;
   for (m=1; m<=n_files; m++) {
 
 //sozdaem fail s imenem, vzyatim iz masiva strok  
@@ -522,10 +528,7 @@ br_pmt_hit->GetEntry(i);
   
   
   
-//p_fid_a = 24.*(1-exp(-1.*0.08*(th_P-9.)));
-//p_fid_b = -1.*25.*(1-exp(-1.*0.1*(th_P-10.)));
-  //pip_fid_a = 24.*(1-exp(-1.*0.08*(th_PIp-9.)));
-  // pip_fid_b = -1.*25.*(1-exp(-1.*0.1*(th_PIp-10.))); 
+
   
  
   if (br_ectot_el->GetLeaf("ECtot_EL")->GetValue() > (br_ecout_el->GetLeaf("ECout_EL")->GetValue()+br_ecin_el->GetLeaf("ECin_EL")->GetValue())) { 
@@ -562,19 +565,20 @@ hist_n_elast_1d->Fill(elastic);
 if ((LiveTime > 0.8) && (LiveTime <0.9) && (inclusive > 80000) &&(inclusive < 100000) && (elastic > 24000) && (elastic < 28000)){
  
  Qfull = Qfull + br_deltaQ->GetLeaf("deltaQ")->GetValue();
-  };
+ };
    
   
    
    block_prev = block_curr;
    };   
-	  
+ 
 
-
-
-
-	  
-//cout<<segment<<"\n";	  
+//----------------PROTON ENERGY LOSS-----------------------
+delta_mom_p_ye = corrfunc.correct_energy_theta_pf(P_P, th_P);
+P_P = P_P - delta_mom_p_ye;
+delta_mom_p_skor = corrfunc.corr_pr_mom_skor(P_P, th_P);
+P_P = P_P + delta_mom_p_skor;
+//---------------------------------------------------------
 
 //MOM CORR
 /*
@@ -644,24 +648,14 @@ P4_miss_0 = P4_EL + P4_P - P4_ELP_reg - P4_PP_reg - P4_PIm_reg -P4_PIp_reg;
 
 P4_miss_0_d = P4_EL + P4_D - P4_ELP_reg - P4_PP_reg - P4_PIm_reg -P4_PIp_reg;
 
+
+//cout<< P4_P[0]<<" "<< P4_P[1]<<" "<< P4_P[2]<<" "<< P4_P[3]<<" \n";
+
+//P4_miss_N = 
+
 //W_old = W;
 //W = sqrt((P4_PIp_reg+P4_PIm_reg+P4_PP_reg).Mag2());
 //W=sqrt((P4_P+P4_EL-P4_ELP_reg).Mag2());
-
-
-///ENERGY LOSS
-
-/*
-delta_mom_p = corrfunc.correct_energy_theta_pf(P_P, th_P);
-
-//cout << "theta = " << th_P << " P_P = " << P_P << " delta_p = " << delta_mom_p << "\n";
-
-P4_PP_cor.SetXYZT((delta_mom_p+P_P)*cos(ph_P*M_PI/180.)*sin(th_P*M_PI/180.),(delta_mom_p+P_P)*sin(ph_P*M_PI/180.)*sin(th_P*M_PI/180.),(delta_mom_p+P_P)*cos(th_P*M_PI/180.),sqrt((delta_mom_p+P_P)*(delta_mom_p+P_P)+m_proton*m_proton));
-
-P4_PIm_cor = P4_EL + P4_P - P4_ELP_reg - P4_PP_cor - P4_PIp_reg;
-P4_PIp_cor = P4_EL + P4_P - P4_ELP_reg - P4_PP_cor - P4_PIm_reg;
-*/
-
 
 
 
@@ -816,7 +810,6 @@ if ((W > 1.3)&&(W < 1.8125)&&(Q2 > 0.4)&&(Q2 < 1.)&&(npart>=4)){
 //if ((W > 1.3)&&(W < 1.825)&&(Q2 > 0.4)&&(Q2 < 1.)){
 if ((bool_proton_id_data)&&(bool_pip_id_data)&&(bool_pim_id_data)){
 
-//hist_PIm_miss_all_reg_1-> Fill(P4_PIm_miss.Mag2(),1.);
 
 //cout << P4_PIm_reg[0] << " "<<P4_PIm_reg[1] <<" "<<P4_PIm_reg[2] << " "<<P4_PIm_reg[3] << " reg \n";
 //cout << P4_PIm_miss[0] << " "<<P4_PIm_miss[1] <<" " <<P4_PIm_miss[2] << " "<<P4_PIm_miss[3] << " miss  \n";
@@ -843,25 +836,13 @@ th_ph_pr = 180./M_PI*acos((P4_PP_reg.Vect().Dot((P4_EL-P4_ELP_reg).Vect()))/(((P
 
 if ((P4_miss_0[3] >  0.)) {
 
-h_test->Fill(z_P-z_PIp,fract_integ[pmt_hit+1][sector-1][segment]);
+
 h_z_P->Fill(z_P,fract_integ[pmt_hit+1][sector-1][segment]);
 h_z_PIp->Fill(z_PIp,fract_integ[pmt_hit+1][sector-1][segment]);
 h_z_PIm->Fill(z_PIm,fract_integ[pmt_hit+1][sector-1][segment]);
 
-hist_PIm_miss_all_reg_1-> Fill(P4_PIp_reg.Mag2(),fract_integ[pmt_hit+1][sector-1][segment]);
 
-//if ((P4_miss_0.Vect()).Mag()>0.2) h_test_2d_1->Fill(P_P,P_PIp,fract_integ[pmt_hit+1][sector-1][segment]);
-//h_test_2d_2->Fill(P_P,P_PIp,fract_integ[pmt_hit+1][sector-1][segment]);
 
-if ((P4_miss_0.Vect()).Mag()>0.2) h_test_2d_3->Fill(P4_PP_reg[3],P4_PIp_reg[3],fract_integ[pmt_hit+1][sector-1][segment]);
-h_test_2d_4->Fill(P4_PP_reg[3],P4_PIp_reg[3],fract_integ[pmt_hit+1][sector-1][segment]);
-
-h_test_2d_5->Fill(((P4_PP_reg.Vect()).Dot(P4_PIp_reg.Vect()))/((P4_PP_reg.Vect()).Mag())/((P4_PIp_reg.Vect()).Mag()),(P4_miss_0.Vect()).Mag(),fract_integ[pmt_hit+1][sector-1][segment]);
-h_test_2d_6->Fill((((P4_PP_reg.Vect()).Cross(P4_PIp_reg.Vect())).Mag())/((P4_PP_reg.Vect()).Mag())/((P4_PIp_reg.Vect()).Mag()),(P4_miss_0.Vect()).Mag(),fract_integ[pmt_hit+1][sector-1][segment]);
-h_test_2d_7->Fill(((((P4_PP_reg.Vect()).Cross(P4_PIp_reg.Vect())).Cross((P4_EL-P4_ELP_reg).Vect())).Mag())/((P4_PP_reg.Vect()).Mag())/((P4_PIp_reg.Vect()).Mag())/(((P4_EL-P4_ELP_reg).Vect()).Mag()),(P4_miss_0.Vect()).Mag(),fract_integ[pmt_hit+1][sector-1][segment]);
-
-if ((P4_miss_0.Vect()).Mag()>0.2) h_test_2d_8->Fill(P_PIp,th_PIp,fract_integ[pmt_hit+1][sector-1][segment]);
-h_test_2d_9->Fill(P_PIp,th_PIp,fract_integ[pmt_hit+1][sector-1][segment]);
 
 
 if ((W>1.3)&&(W<1.8)&&(Q2>0.45)&&(Q2<0.5)){
@@ -912,7 +893,6 @@ h_mom_all_reg[int((W-1.3)/0.1)]-> Fill((P4_miss_0.Vect()).Mag(),fract_integ[pmt_
 
 //if ((P_P>0.4)&&(z_P>-2.5)&&(z_P<2.)&&(z_PIp>-2.5)&&(z_PIp<2.)&&((z_P-z_EL)>-2.5)&&((z_P-z_EL)<2.5)&&((z_PIp-z_EL)>-2.5)&&((z_PIp-z_EL)<2.5)&&((z_P-z_PIp)>-2.5)&&((z_P-z_PIp)<2.5)){
 
-//hist_PIm_miss_all_reg_2-> Fill(P4_PIm_miss.Mag2(),fract_integ[pmt_hit+1][sector-1][segment]);
 
 //h_pim_mis_all_reg_th_dep[int((W-1.3)/0.1)][int((th_PIm-20.)/10.)]-> Fill(P4_PIm_miss.Mag2(),fract_integ[pmt_hit+1][sector-1][segment]);
 //h_mom_all_reg_th_dep[int((W-1.3)/0.1)][int((th_PIm-20.)/10.)]-> Fill((P4_miss_0.Vect()).Mag(),fract_integ[pmt_hit+1][sector-1][segment]);
@@ -1034,11 +1014,9 @@ h_mis_mom_fermi_mmas_cut_7[int((W-1.3)/0.1)]->Fill((P4_miss_0.Vect()).Mag(),frac
 };
 */
 
-h_miss_mass_0-> Fill(P4_miss_0.Mag2(),1.);
+
 h_miss_mass_0_d-> Fill(P4_miss_0_d.Mag2(),1.);
 h_miss_mom_0_d->Fill((P4_miss_0_d.Vect()).Mag(),1.);
-
-
 
 
 
@@ -1060,9 +1038,28 @@ h_miss_mass_0_d_mmcut-> Fill(P4_miss_0_d.Mag2(),1.);
 //---
 h_delta_w_vs_w_old_data->Fill(W, W-W_old,1.);
 
-if ((P4_miss_0.Mag2()>-0.03)&&(P4_miss_0.Mag2()<0.003)){
-h_miss_mom_0->Fill((P4_miss_0.Vect()).Mag(),1.);
 
+if ((W>1.3)&&(W<1.8)&&(Q2>0.4)&&(Q2<0.6)){
+
+h_inv_NP[int((W-1.3)/0.1)]->Fill(sqrt((P4_PP_reg+P4_miss_0_d ).Mag2()),1.);
+h_inv_NPIp[int((W-1.3)/0.1)]->Fill(sqrt((P4_PIp_reg+P4_miss_0_d ).Mag2()),1.);
+h_inv_NPIm[int((W-1.3)/0.1)]->Fill(sqrt((P4_PIm_reg+P4_miss_0_d ).Mag2()),1.);
+};
+
+hist_PIm_miss_all_reg_1-> Fill(P4_PIm_miss.Mag2(),1.);
+
+//if ((P4_miss_0.Mag2()>-0.03)&&(P4_miss_0.Mag2()<0.003)){
+if ((P4_miss_0.Vect()).Mag() <0.2){ 
+
+
+
+h_miss_mom_0->Fill((P4_miss_0.Vect()).Mag(),1.);
+h_miss_mass_0-> Fill(P4_miss_0.Mag2(),1.);
+
+
+if ((P4_PIm_miss.Mag2()>-0.06)&&(P4_PIm_miss.Mag2()<0.1)){
+
+hist_PIm_miss_all_reg_2-> Fill(P4_PIm_miss.Mag2(),1.);
 
 h_miss_mom_0_cut_on0->Fill((P4_miss_0.Vect()).Mag(),1.);
 
@@ -1072,10 +1069,11 @@ hist_w_el_all_reg->Fill(W,1.);
 
 h_inprot_miss->Fill(P4_inprot_miss.Mag2(),1.); 
 h_inprot_miss_en->Fill(P4_inprot_miss[3],1.); 
-
+hist_PIm_miss_en->Fill(P4_PIm_miss[3],1.);
 //h_delta_w_vs_w_old_data->Fill(W, W-W_old,1.);
 h_delta_w_vs_w_old_data_mmcut->Fill(W, W-W_old,1.);
 selection_0_miss = true;
+P4_PIm_reg = P4_PIm_miss;
 // P4_inprot_miss =P4_EL - P4_ELP_reg - P4_PP_reg - P4_PIm_reg -P4_PIp_reg ;
 // P4_P = P4_inprot_miss;
 };
@@ -1089,10 +1087,10 @@ selection_0_miss = true;
 };
 
 };
-
+};
 
 //if ((W > 1.3)&&(W < 1.825)&&(Q2 > 0.4)&&(Q2 < 1.)&&(npart>=3)){
-if ((W > 1.3)&&(W < 1.825)&&(Q2 > 0.4)&&(Q2 < 1.)){
+if ((W > 1.3)&&(W < 1.825)&&(Q2 > 0.4)&&(Q2 < 1.)&&(npart>=3)){
 if ((bool_pip_id_data)&&(bool_proton_id_data)&&(n_PIm == 0)){
 
 
@@ -1104,7 +1102,7 @@ if (sqrt((P4_PIm_miss+P4_PP_reg)*(P4_PIm_miss+P4_PP_reg)) > m_pip + m_proton) {
 if (sqrt((P4_PIm_miss+P4_PP_reg)*(P4_PIm_miss+P4_PP_reg)) < W - m_pip) {
 
 h_mm_pim_vs_npart->Fill(npart,P4_PIm_miss.Mag2(),1.);
-hist_PIm_miss_en->Fill(P4_PIm_miss[3],1.);
+//hist_PIm_miss_en->Fill(P4_PIm_miss[3],1.);
 
 th_ph_pip = 180./M_PI*acos((P4_PIp_reg.Vect().Dot((P4_EL-P4_ELP_reg).Vect()))/(((P4_EL-P4_ELP_reg).Vect()).Mag())/((P4_PIp_reg.Vect()).Mag()));
 th_ph_pr = 180./M_PI*acos((P4_PP_reg.Vect().Dot((P4_EL-P4_ELP_reg).Vect()))/(((P4_EL-P4_ELP_reg).Vect()).Mag())/((P4_PP_reg.Vect()).Mag()));
@@ -1113,18 +1111,17 @@ if((P4_PIm_miss[3] > m_pip )) {
 //cout << n_PIm<<"\n";
 //if ((P_P>0.4)&&(th_P<35.)&&(th_PIp<90.)){
 
-if ((W>1.3)&&(W<1.8)&&(th_ph_pr>0.)&&(th_ph_pr<100.)){
+/*if ((W>1.3)&&(W<1.8)&&(th_ph_pr>0.)&&(th_ph_pr<100.)){
 h_pim_mis_th_dep_pr[int((W-1.3)/0.1)][int(th_ph_pr/2.)]-> Fill(P4_PIm_miss.Mag(),fract_integ[pmt_hit+1][sector-1][segment]);
 //h_mom_all_reg_th_dep_pr[int((W-1.3)/0.1)][int(th_ph_pr/3.)]-> Fill((P4_miss_0.Vect()).Mag(),fract_integ[pmt_hit+1][sector-1][segment]);
-};
+};*/
 
 //if ((W>1.3)&&(W<1.8)&&(th_P<40.)&&(th_PIp<90.)&&(P_P>0.4)&&(th_ph_pip<85.)&&(th_ph_pr<35.)){
 //if ((z_P>-2.5)&&(z_P<2.)&&(z_PIp>-2.5)&&(z_PIp<2.)&&((z_P-z_EL)>-2.5)&&((z_P-z_EL)<2.5)&&((z_PIp-z_EL)>-2.5)&&((z_PIp-z_EL)<2.5)&&((z_P-z_PIp)>-2.5)&&((z_P-z_PIp)<2.5)){
 //if ((W<1.6)||((W>1.6)&&(P4_PIm_miss.Mag()<0.25))){
 
 
-h_test_2d_1->Fill(P_P,P4_PIm_miss.Mag2(),fract_integ[pmt_hit+1][sector-1][segment]);
-h_test_2d_2->Fill(P_PIp,P4_PIm_miss.Mag2(),fract_integ[pmt_hit+1][sector-1][segment]);
+
 
 if ((th_PIp>10.)&&(th_PIp<130.)&&(th_P>10.)&&(th_P<70.)){
 if ((W > 1.6)&&(W < 1.7)&&(P4_PIm_miss.Mag() > arr_pim_mis_cuts_min[int((th_PIp-10.)/10.)][int((th_P-5.)/5.)])&&(P4_PIm_miss.Mag() < arr_pim_mis_cuts_max[int((th_PIp-10.)/10.)][int((th_P-5.)/5.)])){
@@ -1139,7 +1136,7 @@ hist_PIm_miss-> Fill(P4_PIm_miss.Mag2(),fract_integ[pmt_hit+1][sector-1][segment
 
 //if ((th_PIp>10.)&&(th_PIp<130.)&&(th_P>10.)&&(th_P<50.)&&(P_P > 0.25)&&(P_P < 1.5)){
 //if (((W>1.3)&&(W<1.5))||((W>1.5)&&(W<1.825)&&(ARR_MMC_PIM_MISS[int((P_P-0.25)/0.25)][int((th_PIp-10.)/15.)][int((th_P-10.)/5.)]==1))){
-
+/*
 if ((W>1.3)&&(W<1.825)&&(Q2>0.4)&&(Q2<0.6)) {
 h_pim_mis_fermi_nocut_1[int((Q2-0.4)/0.05)][int((W-1.3)/0.025)]->Fill(sqrt(abs(P4_PIm_miss.Mag2())),fract_integ[pmt_hit+1][sector-1][segment]);
 };
@@ -1166,12 +1163,12 @@ h_pim_mis_fermi_nocut_6[int((W-1.3)/0.025)]->Fill(sqrt(abs(P4_PIm_miss.Mag2())),
 
 if ((W>1.3)&&(W<1.55)&&(Q2>0.95)&&(Q2<1.0)) {
 h_pim_mis_fermi_nocut_7[int((W-1.3)/0.025)]->Fill(sqrt(abs(P4_PIm_miss.Mag2())),fract_integ[pmt_hit+1][sector-1][segment]);
-};
+};*/
 
 //};
 //};
 //};
-
+/*
 if ((th_PIp>10.)&&(th_PIp<130.)){
 h_pim_mis_all_reg_th_dep_pip[int((W-1.3)/0.1)][int((th_PIp-10.)/10.)]-> Fill(P4_PIm_miss.Mag(),fract_integ[pmt_hit+1][sector-1][segment]);
 };
@@ -1184,7 +1181,7 @@ if ((th_PIp>10.)&&(th_PIp<130.)&&(th_P>10.)&&(th_P<50.)&&(P_P > 0.25)&&(P_P < 1.
 h_pim_mis_th_dep[int((P_P-0.25)/0.25)][int((th_PIp-10.)/10.)][int((th_P-10.)/5.)]-> Fill(sqrt(abs(P4_PIm_miss.Mag2())),fract_integ[pmt_hit+1][sector-1][segment]);
 
 
-};
+};*/
 
 //};
 //if ((P4_PIm_miss.Mag2()> -0.0236)&&(P4_PIm_miss.Mag2()< 0.063)){
@@ -1213,50 +1210,10 @@ P4_PIm_reg = P4_PIm_miss;
 
 
 
-//if ((selection_pim_miss)||(selection_0_miss)) {
+
 if ((selection_pim_miss)||(selection_0_miss)) {
 
 //data_hist();
-
-if((W > 1.5)&&(W < 1.525)&&(Q2 > 0.45)&&(Q2 < 0.5)){
-h_inv_m_pip_pim->Fill(sqrt((P4_PIp_reg+P4_PIm_reg)*(P4_PIp_reg+P4_PIm_reg)),1.);
-h_inv_m_pip_p->Fill(sqrt((P4_PIp_reg+P4_PP_reg)*(P4_PIp_reg+P4_PP_reg)),1.);
-h_inv_m_pim_p->Fill(sqrt((P4_PP_reg+P4_PIm_reg)*(P4_PP_reg+P4_PIm_reg)),1.);
-
-};
-
-
-
-if ((selection_0_miss)){
-P4_PIm_miss = P4_EL + P4_P - P4_ELP_reg - P4_PP_reg - P4_PIp_reg;
-
-//if ((th_PIm>30.)&&(th_PIm<45.)) hist_PIm_miss_all_reg_1-> Fill(P4_PIm_miss.Mag2(),fract_integ[pmt_hit+1][sector-1][segment]);
-//if ((th_PIm>45.)&&(th_PIm<60.)) hist_PIm_miss_all_reg_2-> Fill(P4_PIm_miss.Mag2(),fract_integ[pmt_hit+1][sector-1][segment]);
-
-//if () hist_PIm_miss_all_reg_1-> Fill(P4_PIm_miss.Mag2(),fract_integ[pmt_hit+1][sector-1][segment]);
-
-h_mixed_prod_excl->Fill((((P4_PIp_reg.Vect()).Cross(P4_PIm_reg.Vect())).Dot(P4_PP_reg.Vect()))*(((P4_PIp_reg.Vect()).Cross(P4_PIm_reg.Vect())).Dot(P4_PP_reg.Vect())),fract_integ[pmt_hit+1][sector-1][segment]);
-
-
-
-
-//if ((((P4_PIp_reg.Vect()).Cross(P4_PIm_reg.Vect())).Dot(P4_PP_reg.Vect())>-0.001)&&(((P4_PIp_reg.Vect()).Cross(P4_PIm_reg.Vect())).Dot(P4_PP_reg.Vect())<0.001)) hist_PIm_miss_all_reg_2-> Fill(P4_PIm_miss.Mag2(),1.);
-
-
-};
-
-
-
-if ((selection_pim_miss)){
-
-
-h_mixed_prod_pimmiss->Fill(((P4_PIp_reg.Vect()).Cross(P4_PIm_reg.Vect())).Dot(P4_PP_reg.Vect()));
-
-};
-
-
-
-//if ((selection_0_miss)) h_delta_w_vs_w_old_data->Fill(W, W-W_old,1.);
 
 if((W > 1.3)&&(W < 1.825)&&(Q2 > 0.4)&&(Q2 < 1.)){
 rot_boost_cmsyst();
@@ -1282,9 +1239,9 @@ Var_3[4] = alpha_PPIm_piPIp;
 if((selection_pim_miss)){
 
 
-h_5dim_pim_1[int((Q2-0.4)/0.05)][int((W-1.3)/0.025)]->Fill(Var_1,fract_integ[pmt_hit+1][sector-1][segment]*fract_fsi_corr[int((Q2-0.4)/0.05)][int((W-1.3)/0.025)]);
-h_5dim_pim_2[int((Q2-0.4)/0.05)][int((W-1.3)/0.025)]->Fill(Var_2,fract_integ[pmt_hit+1][sector-1][segment]*fract_fsi_corr[int((Q2-0.4)/0.05)][int((W-1.3)/0.025)]);
-h_5dim_pim_3[int((Q2-0.4)/0.05)][int((W-1.3)/0.025)]->Fill(Var_3,fract_integ[pmt_hit+1][sector-1][segment]*fract_fsi_corr[int((Q2-0.4)/0.05)][int((W-1.3)/0.025)]); 
+h_5dim_pim_1[int((Q2-0.4)/0.05)][int((W-1.3)/0.025)]->Fill(Var_1,fract_integ[pmt_hit+1][sector-1][segment]);
+h_5dim_pim_2[int((Q2-0.4)/0.05)][int((W-1.3)/0.025)]->Fill(Var_2,fract_integ[pmt_hit+1][sector-1][segment]);
+h_5dim_pim_3[int((Q2-0.4)/0.05)][int((W-1.3)/0.025)]->Fill(Var_3,fract_integ[pmt_hit+1][sector-1][segment]); 
 };
 
 if ((selection_0_miss)) {
@@ -1991,10 +1948,22 @@ br_pmt_hit->GetEntry(i);
  //  pf_y = br_pf_y->GetLeaf("pf_y")->GetValue();
  //  pf_z = br_pf_z->GetLeaf("pf_z")->GetValue();
   
-//p_fid_a = 24.*(1-exp(-1.*0.08*(th_P-9.)));
-//p_fid_b = -1.*25.*(1-exp(-1.*0.1*(th_P-10.)));
-  //pip_fid_a = 24.*(1-exp(-1.*0.08*(th_PIp-9.)));
-  // pip_fid_b = -1.*25.*(1-exp(-1.*0.1*(th_PIp-10.))); 
+
+ 
+//----------ELECTRON MOMENTUM CORRECTION FOR SIM---------- 
+  if (indtype==1){
+  delta_p_el_sim = corrfunc.corr_el_mom_sim(P_EL, th_EL);
+  P_EL = P_EL + delta_p_el_sim;
+  };
+//--------------------------------------------------------
+//----------PROTON ENERGY LOSS----------------------------
+delta_mom_p_ye = corrfunc.correct_energy_theta_pf(P_P, th_P);
+P_P = P_P - delta_mom_p_ye;
+delta_mom_p_skor = corrfunc.corr_pr_mom_skor(P_P, th_P);
+P_P = P_P + delta_mom_p_skor;
+//--------------------------------------------------------
+
+
   
   if (br_ectot_el->GetLeaf("ECtot_EL")->GetValue() > (br_ecout_el->GetLeaf("ECout_EL")->GetValue()+br_ecin_el->GetLeaf("ECin_EL")->GetValue())) { 
           ECT  = br_ectot_el->GetLeaf("ECtot_EL")->GetValue();  
@@ -2076,6 +2045,9 @@ P4_miss_0 = P4_EL + P4_P - P4_ELP_reg - P4_PP_reg - P4_PIm_reg -P4_PIp_reg;
 //P4_miss_0_en_comp = P4_EL + P4_P - P4_ELP_for_miss_en_comp - P4_PP_reg - P4_PIm_reg -P4_PIp_reg;
 P4_miss_0_d = P4_EL + P4_D - P4_ELP_reg - P4_PP_reg - P4_PIm_reg -P4_PIp_reg;
 
+
+
+//if (indtype==2) cout << P4_PIm_miss.Mag()<<"\n";
 W_old = W;
 //W = sqrt((P4_PIp_reg+P4_PIm_reg+P4_PP_reg).Mag2());
 
@@ -2175,7 +2147,7 @@ if ((W > 1.3)&&(W < 1.625)&&(Q2 > 0.85)&&(Q2 < 0.9)) h_1d_rc_0875->Fill(W,sigma)
 if ((W > 1.3)&&(W < 1.6)&&(Q2 > 0.9)&&(Q2 < 0.95)) h_1d_rc_0925->Fill(W,sigma);
 if ((W > 1.3)&&(W < 1.55)&&(Q2 > 0.95)&&(Q2 < 1.)) h_1d_rc_0975->Fill(W,sigma);
 
-
+/*
 if ((W > 1.3)&&(W < 1.825)&&(Q2 > 0.4)&&(Q2 < 0.45)) h_1d_rc_0425_evt->Fill(W,1.);
 if ((W > 1.3)&&(W < 1.825)&&(Q2 > 0.45)&&(Q2 < 0.5)) h_1d_rc_0475_evt->Fill(W,1.);
 if ((W > 1.3)&&(W < 1.8)&&(Q2 > 0.5)&&(Q2 < 0.55)) h_1d_rc_0525_evt->Fill(W,1.);
@@ -2188,7 +2160,7 @@ if ((W > 1.3)&&(W < 1.65)&&(Q2 > 0.8)&&(Q2 < 0.85)) h_1d_rc_0825_evt->Fill(W,1.)
 if ((W > 1.3)&&(W < 1.625)&&(Q2 > 0.85)&&(Q2 < 0.9)) h_1d_rc_0875_evt->Fill(W,1.);
 if ((W > 1.3)&&(W < 1.6)&&(Q2 > 0.9)&&(Q2 < 0.95)) h_1d_rc_0925_evt->Fill(W,1.);
 if ((W > 1.3)&&(W < 1.55)&&(Q2 > 0.95)&&(Q2 < 1.)) h_1d_rc_0975_evt->Fill(W,1.);
-
+*/
 
 
 
@@ -2271,27 +2243,12 @@ th_ph_pr = 180./M_PI*acos((P4_PP_reg.Vect().Dot((P4_EL-P4_ELP_reg).Vect()))/(((P
 
 if ((P4_miss_0[3] >  0.)) {
 
-h_test_sim->Fill(z_P-z_PIp,sigma);
+
 h_z_P_sim ->Fill(z_P,sigma);
 h_z_PIp_sim->Fill(z_PIp,sigma);
 h_z_PIm_sim->Fill(z_PIm,sigma);
-hist_PIm_miss_all_reg_1_sim-> Fill(P4_PIp_reg.Mag2(),sigma);
-
 
  
-hist_PIm_miss_all_reg_2_sim-> Fill(P4_PIm_miss.Mag2(),sigma); 
-
-if ((P4_miss_0.Vect()).Mag() >0.2) h_test_2d_1_sim->Fill(P_P,th_P,sigma);
-h_test_2d_2_sim->Fill(P_P,th_P,sigma);
-
-h_test_2d_3_sim->Fill(P_EL,(P4_miss_0.Vect()).Mag(),sigma);
-h_test_2d_4_sim->Fill((((P4_PP_reg.Vect()).Cross(P4_PIp_reg.Vect())).Dot((P4_EL-P4_ELP_reg).Vect()))/((P4_PP_reg.Vect()).Mag())/((P4_PIp_reg.Vect()).Mag())/(((P4_EL-P4_ELP_reg).Vect()).Mag()),(P4_miss_0.Vect()).Mag(),sigma);
-h_test_2d_5_sim->Fill(((P4_PP_reg.Vect()).Dot(P4_PIp_reg.Vect()))/((P4_PP_reg.Vect()).Mag())/((P4_PIp_reg.Vect()).Mag()),(P4_miss_0.Vect()).Mag(),sigma);
-h_test_2d_6_sim->Fill((((P4_PP_reg.Vect()).Cross(P4_PIp_reg.Vect())).Mag())/((P4_PP_reg.Vect()).Mag())/((P4_PIp_reg.Vect()).Mag()),(P4_miss_0.Vect()).Mag(),sigma);
-h_test_2d_7_sim->Fill(((((P4_PP_reg.Vect()).Cross(P4_PIp_reg.Vect())).Cross((P4_EL-P4_ELP_reg).Vect())).Mag())/((P4_PP_reg.Vect()).Mag())/((P4_PIp_reg.Vect()).Mag())/(((P4_EL-P4_ELP_reg).Vect()).Mag()),(P4_miss_0.Vect()).Mag(),sigma);
-
-if ((P4_miss_0.Vect()).Mag()>0.2) h_test_2d_8_sim->Fill(P_PIp,th_PIp,sigma);
-h_test_2d_9_sim->Fill(P_PIp,th_PIp,sigma);
 
 if ((W>1.3)&&(W<1.8)&&(Q2>0.45)&&(Q2<0.5)){
 h_pim_mis_all_reg_sim[int((W-1.3)/0.1)]-> Fill(P4_PIm_miss.Mag2(),sigma);
@@ -2325,7 +2282,7 @@ h_mom_all_reg_th_dep_pip_sim[int((W-1.3)/0.1)][int((th_ph_pip-10.)/10.)]-> Fill(
 };*/
 //if ((P_P>0.4)&&(z_P>-2.5)&&(z_P<2.)&&(z_PIp>-2.5)&&(z_PIp<2.)&&((z_P-z_EL)>-2.5)&&((z_P-z_EL)<2.)&&((z_PIp-z_EL)>-2.5)&&((z_PIp-z_EL)<2.5)&&((z_P-z_PIp)>-2.5)&&((z_P-z_PIp)<2.5)){
 
-//hist_PIm_miss_all_reg_2_sim-> Fill(P4_PIm_miss.Mag2(),sigma); 
+
 //h_pim_mis_all_reg_th_dep_sim[int((W-1.3)/0.1)][int((th_PIm-20.)/10.)]-> Fill(P4_PIm_miss.Mag2(),sigma);
 //h_mom_all_reg_th_dep_sim[int((W-1.3)/0.1)][int((th_PIm-20.)/10.)]-> Fill((P4_miss_0.Vect()).Mag(),sigma); 
 
@@ -2448,10 +2405,6 @@ h_mis_mom_fermi_mmas_cut_sim_7[int((W-1.3)/0.1)]->Fill((P4_miss_0.Vect()).Mag(),
 };
 */
 
-//if ((P4_miss_0.Vect()).Mag()<0.2) hist_PIm_miss_all_reg_2_sim-> Fill(P4_PIm_miss.Mag2(),1.);
-//if ((P4_miss_0.Vect()).Mag()>0.2) hist_PIm_miss_all_reg_1_sim-> Fill(P4_PIm_miss.Mag2(),sigma);
-//hist_PIm_miss_all_reg_1_sim-> Fill(P4_PIm_miss.Mag2(),1.);
-h_miss_mass_0_sim-> Fill(P4_miss_0.Mag2(),1.);
 
 h_miss_mass_0_d_sim-> Fill(P4_miss_0_d.Mag2(),1.);
 h_miss_mom_0_d_sim->Fill((P4_miss_0_d.Vect()).Mag(),1.);
@@ -2471,9 +2424,20 @@ if ((P4_miss_0_d.Vect()).Mag()<0.2){
 h_miss_mass_0_d_sim_mmcut-> Fill(P4_miss_0_d.Mag2(),1.);
 };
 
-if ((P4_miss_0.Mag2()>-0.03)&&(P4_miss_0.Mag2()<0.003)){
+hist_PIm_miss_all_reg_1_sim-> Fill(P4_PIm_miss.Mag2(),sigma);
+if ((P4_miss_0.Vect()).Mag() <0.2){
+
+ 
+//if ((P4_miss_0.Mag2()>-0.03)&&(P4_miss_0.Mag2()<0.003)){
+h_miss_mass_0_sim-> Fill(P4_miss_0.Mag2(),1.);
+
+
+if ((P4_PIm_miss.Mag2()>-0.06)&&(P4_PIm_miss.Mag2()<0.1)){
+
+hist_PIm_miss_all_reg_2_sim-> Fill(P4_PIm_miss.Mag2(),sigma);
+
 h_miss_mom_0_cut_on0_sim->Fill((P4_miss_0.Vect()).Mag(),1.);
-//hist_PIm_miss_all_reg_2_sim-> Fill(P4_PIm_miss.Mag2(),1.);
+
 
 hist_w_sim_old_1dim->Fill(W,1.);
 hist_w_sim_new_1dim->Fill(W,1.);
@@ -2484,6 +2448,8 @@ hist_w_sim_new_1dim->Fill(W,1.);
 if (indtype==1) h_delta_w_vs_w_old_rec->Fill(W, W-W_old);
 
 selection_0_miss_sim = true;
+P4_PIm_reg = P4_PIm_miss;
+
 };
 };
 };
@@ -2495,9 +2461,9 @@ selection_0_miss_sim = true;
 };
 
 };
-
+};
 //if ((W > 1.3)&&(W < 1.825)&&(Q2 > 0.4)&&(Q2 < 1.)&&(npart>=3)){
-if ((W > 1.3)&&(W < 1.825)&&(Q2 > 0.4)&&(Q2 < 1.)){
+if ((W > 1.3)&&(W < 1.825)&&(Q2 > 0.4)&&(Q2 < 1.)&&(npart>=3)){
 if ((bool_pip_id_sim)&&(bool_proton_id_sim)&&(n_PIm == 0)){
 
 if (sqrt((P4_PIp_reg+P4_PIm_miss)*(P4_PIp_reg+P4_PIm_miss)) > 2*m_pip) {
@@ -2520,6 +2486,7 @@ if (P4_PIm_miss[3] > m_pip) {
 //if ((W<1.6)||((W>1.6)&&(P4_PIm_miss.Mag()<0.25))){
 //if ((th_PIp>10.)&&(th_PIp<130.)&&(th_P>10.)&&(th_P<50.)&&(P_P > 0.25)&&(P_P < 1.5)){
 //if (((W>1.3)&&(W<1.5))||((W>1.5)&&(W<1.825)&&(ARR_MMC_PIM_MISS[int((P_P-0.25)/0.25)][int((th_PIp-10.)/15.)][int((th_P-10.)/5.)]==1))){
+/*
 if ((W > 1.3)&&(W < 1.825)&&(Q2>0.4)&&(Q2<0.6)) {
 h_pim_mis_fermi_nocut_sim_1[int((Q2-0.4)/0.05)][int((W-1.3)/0.025)]->Fill(sqrt(abs(P4_PIm_miss.Mag2())),sigma);
 };
@@ -2546,11 +2513,12 @@ h_pim_mis_fermi_nocut_sim_6[int((W-1.3)/0.025)]->Fill(sqrt(abs(P4_PIm_miss.Mag2(
 
 if ((W > 1.3)&&(W < 1.55)&&(Q2>0.95)&&(Q2<1.0)) {
 h_pim_mis_fermi_nocut_sim_7[int((W-1.3)/0.025)]->Fill(sqrt(abs(P4_PIm_miss.Mag2())),sigma);
-};
+};*/
 
 //};
 //};
 //};
+/*
 if ((th_PIp>10.)&&(th_PIp<130.)){
 h_pim_mis_all_reg_th_dep_pip_sim[int((W-1.3)/0.1)][int((th_PIp-10.)/10.)]-> Fill(P4_PIm_miss.Mag(),sigma);
 };
@@ -2565,7 +2533,7 @@ if ((th_PIp>10.)&&(th_PIp<130.)&&(th_P>10.)&&(th_P<50.)&&(P_P > 0.25)&&(P_P <1.5
 h_pim_mis_th_dep_sim[int((P_P-0.25)/0.25)][int((th_PIp-10.)/10.)][int((th_P-10.)/5.)]-> Fill(sqrt(abs(P4_PIm_miss.Mag2())),sigma);
 
 
-};
+};*/
 
 if ((th_PIp>10.)&&(th_PIp<130.)&&(th_P>10.)&&(th_P<70.)){
 if ((W > 1.6)&&(W < 1.7)&&(P4_PIm_miss.Mag() > arr_pim_mis_cuts_min[int((th_PIp-10.)/10.)][int((th_P-5.)/5.)])&&(P4_PIm_miss.Mag() < arr_pim_mis_cuts_max[int((th_PIp-10.)/10.)][int((th_P-5.)/5.)])){
@@ -2596,16 +2564,13 @@ P4_PIm_reg = P4_PIm_miss;
 
 
 };//konets ifa electronnix cutov
-
+if (indtype==2) Pgen=P_EL;
+if (indtype==1) Prec=P_EL;
+//cout << Pgen<<" "<<Prec<<"\n";
+if (indtype==1) h_sim_mom_corr_test->Fill(Pgen-Prec,1.);
 
 if ((selection_pim_miss_sim)||(selection_0_miss_sim)) {
 
-if((W > 1.5)&&(W < 1.525)&&(Q2 > 0.45)&&(Q2 < 0.5)){
-h_inv_m_pip_pim_sim->Fill(sqrt((P4_PIp_reg+P4_PIm_reg)*(P4_PIp_reg+P4_PIm_reg)),1.);
-h_inv_m_pip_p_sim->Fill(sqrt((P4_PIp_reg+P4_PP_reg)*(P4_PIp_reg+P4_PP_reg)),1.);
-h_inv_m_pim_p_sim->Fill(sqrt((P4_PP_reg+P4_PIm_reg)*(P4_PP_reg+P4_PIm_reg)),1.);
-
-};
 
 if (sector ==1) {
 if (indtype ==1) hist_z_el_1_sim_1->Fill(z_EL,1.);
@@ -2641,26 +2606,6 @@ if (indtype ==1)  hist_z_el_6_sim_1->Fill(z_EL,1.);
 //if (indtype ==2)  hist_z_el_6_sim_2->Fill(z_EL,1.);
 
  };
-
-
-
-if ((selection_0_miss_sim)){
-P4_PIm_miss = P4_EL + P4_P - P4_ELP_reg - P4_PP_reg - P4_PIp_reg;
-
-//if () hist_PIm_miss_all_reg_1_sim-> Fill(P4_PIm_miss.Mag2(),sigma);
-
-h_mixed_prod_excl_sim->Fill((((P4_PIp_reg.Vect()).Cross(P4_PIm_reg.Vect())).Dot(P4_PP_reg.Vect()))*(((P4_PIp_reg.Vect()).Cross(P4_PIm_reg.Vect())).Dot(P4_PP_reg.Vect())),sigma);
-
-//if ((((P4_PIp_reg.Vect()).Cross(P4_PIm_reg.Vect())).Dot(P4_PP_reg.Vect())>-0.001)&&(((P4_PIp_reg.Vect()).Cross(P4_PIm_reg.Vect())).Dot(P4_PP_reg.Vect())<0.001)) hist_PIm_miss_all_reg_2_sim-> Fill(P4_PIm_miss.Mag2(),1.);
-
-};
-
-
-
-if ((selection_pim_miss_sim)){
-h_mixed_prod_pimmiss_sim->Fill(((P4_PIp_reg.Vect()).Cross(P4_PIm_reg.Vect())).Dot(P4_PP_reg.Vect()));
-};
-
 
 
 if((W > 1.3)&&(W < 1.825)&&(Q2 > 0.4)&&(Q2 < 1.)){

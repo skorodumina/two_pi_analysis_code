@@ -219,8 +219,7 @@ int output() {
  //    outFile->mkdir("5dim_excl_hist_data"); 
   //  outFile->mkdir("5dim_excl_hist_sim");
      
-     outFile->mkdir("w_int");
-     
+    /*    
      outFile->mkdir("new_gen_fermi_comp_0425"); 
        outFile->mkdir("new_gen_fermi_comp_0475"); 
        outFile->mkdir("new_gen_fermi_comp_0525"); 
@@ -232,15 +231,18 @@ int output() {
        outFile->mkdir("new_gen_fermi_comp_0825"); 
        outFile->mkdir("new_gen_fermi_comp_0875"); 
        outFile->mkdir("new_gen_fermi_comp_0925"); 
-       outFile->mkdir("new_gen_fermi_comp_0975"); 
+       outFile->mkdir("new_gen_fermi_comp_0975"); */
        
        outFile->mkdir("excl_diff_miss_mass_mom_5wbins");
-       outFile->mkdir("miss_mass_pim_th_dep_pim"); 
+ /*      outFile->mkdir("miss_mass_pim_th_dep_pim"); 
        outFile->mkdir("miss_mass_pim_th_dep_pip"); 
        outFile->mkdir("miss_mass_pim_th_dep_pr"); 
        outFile->mkdir("miss_mass_pim_top_th_dep_pr"); 
        
-       outFile->mkdir("miss_mass_pim_top_th_dep_arr"); 
+       outFile->mkdir("miss_mass_pim_top_th_dep_arr"); */
+       
+         outFile->mkdir("inv_m_fsi"); 
+       
       
   TDirectory *dir, *dir1, *dir2;  
     
@@ -393,33 +395,8 @@ ph_el_right[jo][io]->SetDirectory(dir1);
 outFile->cd(); 
    
 };  
-h_mixed_prod_excl->Write("", TObject::kOverwrite);
-h_mixed_prod_pimmiss->Write("", TObject::kOverwrite);
-h_mixed_prod_excl_sim->Write("", TObject::kOverwrite);
-h_mixed_prod_pimmiss_sim->Write("", TObject::kOverwrite);
 
-h_test->Write("", TObject::kOverwrite);
-h_test_sim->Write("", TObject::kOverwrite);
-h_test_2d_1->Write("", TObject::kOverwrite);
-h_test_2d_2->Write("", TObject::kOverwrite);
-h_test_2d_3->Write("", TObject::kOverwrite);
-h_test_2d_4->Write("", TObject::kOverwrite);
-h_test_2d_5->Write("", TObject::kOverwrite);
-h_test_2d_6->Write("", TObject::kOverwrite);
-h_test_2d_7->Write("", TObject::kOverwrite);
-h_test_2d_8->Write("", TObject::kOverwrite);
-h_test_2d_9->Write("", TObject::kOverwrite);
-
-h_test_2d_1_sim->Write("", TObject::kOverwrite);
-h_test_2d_2_sim->Write("", TObject::kOverwrite);
-h_test_2d_3_sim->Write("", TObject::kOverwrite);
-h_test_2d_4_sim->Write("", TObject::kOverwrite);
-h_test_2d_5_sim->Write("", TObject::kOverwrite);
-h_test_2d_6_sim->Write("", TObject::kOverwrite);
-h_test_2d_7_sim->Write("", TObject::kOverwrite);
-h_test_2d_8_sim->Write("", TObject::kOverwrite);
-h_test_2d_9_sim->Write("", TObject::kOverwrite);
-
+h_sim_mom_corr_test->Write("", TObject::kOverwrite); 
 h_z_P->Write("", TObject::kOverwrite); 
 h_z_PIp->Write("", TObject::kOverwrite); 
 h_z_PIm ->Write("", TObject::kOverwrite);
@@ -442,7 +419,7 @@ h_1d_rc_0825->Write("", TObject::kOverwrite);
 h_1d_rc_0875->Write("", TObject::kOverwrite);
 h_1d_rc_0925->Write("", TObject::kOverwrite);
 h_1d_rc_0975->Write("", TObject::kOverwrite);
-
+/*
 h_1d_rc_0425_evt->Write("", TObject::kOverwrite);
 h_1d_rc_0475_evt->Write("", TObject::kOverwrite);
 h_1d_rc_0525_evt->Write("", TObject::kOverwrite);
@@ -455,7 +432,7 @@ h_1d_rc_0825_evt->Write("", TObject::kOverwrite);
 h_1d_rc_0875_evt->Write("", TObject::kOverwrite);
 h_1d_rc_0925_evt->Write("", TObject::kOverwrite);
 h_1d_rc_0975_evt->Write("", TObject::kOverwrite);
-
+*/
 
 
       h_cos_th->Write("", TObject::kOverwrite);
@@ -642,6 +619,26 @@ h_cc_nphe_final_s3 -> Write("", TObject::kOverwrite);
 h_cc_nphe_final_s4 -> Write("", TObject::kOverwrite);
 h_cc_nphe_final_s5 -> Write("", TObject::kOverwrite);
 h_cc_nphe_final_s6 -> Write("", TObject::kOverwrite);
+
+
+th_cc_vs_seg_1  -> Write("", TObject::kOverwrite);
+th_cc_vs_seg_2  -> Write("", TObject::kOverwrite);
+th_cc_vs_seg_3  -> Write("", TObject::kOverwrite);
+th_cc_vs_seg_4  -> Write("", TObject::kOverwrite);
+th_cc_vs_seg_5  -> Write("", TObject::kOverwrite);
+th_cc_vs_seg_6  -> Write("", TObject::kOverwrite);
+
+th_cc_vs_seg_1_sim -> Write("", TObject::kOverwrite);
+th_cc_vs_seg_2_sim -> Write("", TObject::kOverwrite);
+th_cc_vs_seg_3_sim -> Write("", TObject::kOverwrite);
+th_cc_vs_seg_4_sim -> Write("", TObject::kOverwrite);
+th_cc_vs_seg_5_sim -> Write("", TObject::kOverwrite);
+th_cc_vs_seg_6_sim -> Write("", TObject::kOverwrite);
+
+
+
+
+
 
 
 /*norm_nphe_s1 -> Write("", TObject::kOverwrite);
@@ -1425,7 +1422,7 @@ th_vs_p_pim_2_sim[ti]->Write("", TObject::kOverwrite);
  
  
  };  
- 
+ /*
   outFile->cd("new_gen_fermi_comp_0425");
  
 for (ti=0; ti<5; ti++){
@@ -1665,7 +1662,7 @@ h_mis_mom_fermi_sim_7[ti]->Write("", TObject::kOverwrite);
 h_mis_mom_fermi_mmas_cut_7[ti]->Write("", TObject::kOverwrite); 
 h_mis_mom_fermi_mmas_cut_sim_7[ti]->Write("", TObject::kOverwrite); 
 
-};
+};*/
 
 outFile->cd("excl_diff_miss_mass_mom_5wbins");
 
@@ -1681,7 +1678,7 @@ for (tj=0; tj<5; tj++){
  h_pr_mis_all_reg[tj]->Write("", TObject::kOverwrite);
   h_pr_mis_all_reg_sim[tj]->Write("", TObject::kOverwrite); 
 };
-outFile->cd("miss_mass_pim_th_dep_pim");
+/*outFile->cd("miss_mass_pim_th_dep_pim");
 
 for (tj=0; tj<5; tj++){
 
@@ -1756,13 +1753,19 @@ h_pim_mis_th_dep_sim[ti][io][jo]->Write("", TObject::kOverwrite);
 
 };
 };
-};
-// outFile->cd("w_int");
-/// for (ti=0; ti<12; ti++){
-// h_w_int[ti]->Write("", TObject::kOverwrite); 
-// }; 
+};*/
+
+ outFile->cd("inv_m_fsi");
+ for (ti=0; ti<5; ti++) {
+ 
+ h_inv_NP[ti]->Write("", TObject::kOverwrite);
+h_inv_NPIp[ti]->Write("", TObject::kOverwrite);
+h_inv_NPIm[ti]->Write("", TObject::kOverwrite);
  
  
+ };
+
+
  
  
  

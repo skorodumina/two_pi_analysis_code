@@ -43,6 +43,8 @@ extern Int_t PdHit_EL,PdHit_PIp,PdHit_P,PdHit_PIm;
 extern Float_t m_proton,m_pip,beta;
 
 extern Float_t LiveTime,inclusive,elastic,P_EL,th_EL,z_EL,z_P,z_PIp,z_PIm,ph_EL,ECT,nphe,theta_cc,ph_cc;
+
+extern Float_t sigma;
 extern Float_t ph_P,th_P,P_P,beta_P,beta_PIp,beta_PIm;
 
 extern Float_t P_time,PIp_time,PIm_time;
@@ -60,37 +62,11 @@ extern Double_t theta_PIm_cm,theta_PIp_cm,theta_P_cm,phi_PIm_cm,phi_P_cm,phi_PIp
 extern TLorentzVector P4_EL,P4_ELP_reg,P4_PP_reg,P4_PIp_reg,P4_PIm_reg,P4_P;
 extern Double_t inv_m_pip_pim,inv_m_pip_p,inv_m_pim_p;
 
-extern TH1F *h_mixed_prod_excl;
-extern TH1F *h_mixed_prod_pimmiss;
-
-extern TH1F *h_mixed_prod_excl_sim;
-extern TH1F *h_mixed_prod_pimmiss_sim;
-
-extern TH1F *h_pim_mis_all_reg_th_dep_pim[5][12];
-extern TH1F *h_pim_mis_all_reg_th_dep_pim_sim[5][12];
-
-extern TH1F *h_mom_all_reg_th_dep_pim[5][12];
-extern TH1F *h_mom_all_reg_th_dep_pim_sim[5][12];
-
-extern TH1F *h_pim_mis_all_reg_th_dep_pip[5][12];
-extern TH1F *h_pim_mis_all_reg_th_dep_pip_sim[5][12];
-
-extern TH1F *h_mom_all_reg_th_dep_pip[5][12];
-extern TH1F *h_mom_all_reg_th_dep_pip_sim[5][12];
-
-extern TH1F *h_pim_mis_all_reg_th_dep_pr[5][12];
-extern TH1F *h_pim_mis_all_reg_th_dep_pr_sim[5][12];
-
-extern TH1F *h_pim_mis_th_dep_pr[5][12];
-extern TH1F *h_pim_mis_th_dep_pr_sim[5][12];
-
-extern TH1F *h_mom_all_reg_th_dep_pr[5][12];
-extern TH1F *h_mom_all_reg_th_dep_pr_sim[5][12];
+extern Float_t fract_integ[3][6][18];
 
 
-extern TH1F *h_pim_mis_th_dep[5][12][8];
-extern TH1F *h_pim_mis_th_dep_sim[5][12][8];
-
+extern Short_t ph_cc_match;
+extern TH1F *h_sim_mom_corr_test;
 
 extern TH1F *h_pim_mis_all_reg[5];
 extern TH1F *h_pim_mis_all_reg_sim[5];
@@ -106,87 +82,6 @@ extern TH1F *h_mom_all_reg[5];
 extern TH1F *h_mom_all_reg_sim[5];
 
 
-extern TH1F *h_test;
-extern TH1F *h_test_sim;
-extern TH2F *h_test_2d_1,*h_test_2d_2,*h_test_2d_3,*h_test_2d_4,*h_test_2d_5,*h_test_2d_6,*h_test_2d_7,*h_test_2d_8,*h_test_2d_9;
-
-extern TH2F *h_test_2d_1_sim,*h_test_2d_2_sim,*h_test_2d_3_sim,*h_test_2d_4_sim,*h_test_2d_5_sim,*h_test_2d_6_sim,*h_test_2d_7_sim,*h_test_2d_8_sim,*h_test_2d_9_sim;
-
-extern TH1F *h_z_P;
-extern TH1F *h_z_PIp;
-extern TH1F *h_z_PIm;
-
-extern TH1F *h_z_P_sim;
-extern TH1F *h_z_PIp_sim;
-extern TH1F *h_z_PIm_sim;
-extern TH1F *h_pim_mis_fermi_nocut_1[4][21];
-extern TH1F *h_pim_mis_fermi_nocut_sim_1[4][21];
-extern TH1F *h_pim_mis_fermi_momcut_1[4][5];
-extern TH1F *h_pim_mis_fermi_momcut_sim_1[4][5];
-extern TH1F *h_mis_mom_fermi_1[4][5];
-extern TH1F *h_mis_mom_fermi_sim_1[4][5];
-extern TH1F *h_mis_mom_fermi_mmas_cut_1[4][5];
-extern TH1F *h_mis_mom_fermi_mmas_cut_sim_1[4][5];
-
-
-
-extern TH1F *h_pim_mis_fermi_nocut_2[2][19];
-extern TH1F *h_pim_mis_fermi_nocut_sim_2[2][19];
-extern TH1F *h_pim_mis_fermi_momcut_2[2][5];
-extern TH1F *h_pim_mis_fermi_momcut_sim_2[2][5];
-extern TH1F *h_mis_mom_fermi_2[2][5];
-extern TH1F *h_mis_mom_fermi_sim_2[2][5];
-extern TH1F *h_mis_mom_fermi_mmas_cut_2[2][5];
-extern TH1F *h_mis_mom_fermi_mmas_cut_sim_2[2][5];
-
-
-extern TH1F *h_pim_mis_fermi_nocut_3[2][17];
-extern TH1F *h_pim_mis_fermi_nocut_sim_3[2][17];
-extern TH1F *h_pim_mis_fermi_momcut_3[2][4];
-extern TH1F *h_pim_mis_fermi_momcut_sim_3[2][4];
-extern TH1F *h_mis_mom_fermi_3[2][4];
-extern TH1F *h_mis_mom_fermi_sim_3[2][4];
-extern TH1F *h_mis_mom_fermi_mmas_cut_3[2][4];
-extern TH1F *h_mis_mom_fermi_mmas_cut_sim_3[2][4];
-
-
-extern TH1F *h_pim_mis_fermi_nocut_4[14];
-extern TH1F *h_pim_mis_fermi_nocut_sim_4[14];
-extern TH1F *h_pim_mis_fermi_momcut_4[4];
-extern TH1F *h_pim_mis_fermi_momcut_sim_4[4];
-extern TH1F *h_mis_mom_fermi_4[4];
-extern TH1F *h_mis_mom_fermi_sim_4[4];
-extern TH1F *h_mis_mom_fermi_mmas_cut_4[4];
-extern TH1F *h_mis_mom_fermi_mmas_cut_sim_4[4];
-
-extern TH1F *h_pim_mis_fermi_nocut_5[13];
-extern TH1F *h_pim_mis_fermi_nocut_sim_5[13];
-extern TH1F *h_pim_mis_fermi_momcut_5[3];
-extern TH1F *h_pim_mis_fermi_momcut_sim_5[3];
-extern TH1F *h_mis_mom_fermi_5[3];
-extern TH1F *h_mis_mom_fermi_sim_5[3];
-extern TH1F *h_mis_mom_fermi_mmas_cut_5[3];
-extern TH1F *h_mis_mom_fermi_mmas_cut_sim_5[3];
-
-extern TH1F *h_pim_mis_fermi_nocut_6[12];
-extern TH1F *h_pim_mis_fermi_nocut_sim_6[12];
-extern TH1F *h_pim_mis_fermi_momcut_6[3];
-extern TH1F *h_pim_mis_fermi_momcut_sim_6[3];
-extern TH1F *h_mis_mom_fermi_6[3];
-extern TH1F *h_mis_mom_fermi_sim_6[3];
-extern TH1F *h_mis_mom_fermi_mmas_cut_6[3];
-extern TH1F *h_mis_mom_fermi_mmas_cut_sim_6[3];
-
-
-extern TH1F *h_pim_mis_fermi_nocut_7[10];
-extern TH1F *h_pim_mis_fermi_nocut_sim_7[10];
-extern TH1F *h_pim_mis_fermi_momcut_7[3];
-extern TH1F *h_pim_mis_fermi_momcut_sim_7[3];
-extern TH1F *h_mis_mom_fermi_7[3];
-extern TH1F *h_mis_mom_fermi_sim_7[3];
-extern TH1F *h_mis_mom_fermi_mmas_cut_7[3];
-extern TH1F *h_mis_mom_fermi_mmas_cut_sim_7[3];
-
 extern TH1F *h_1d_rc_0425;
 extern TH1F *h_1d_rc_0475;
 extern TH1F *h_1d_rc_0525;
@@ -200,24 +95,29 @@ extern TH1F *h_1d_rc_0875;
 extern TH1F *h_1d_rc_0925;
 extern TH1F *h_1d_rc_0975;
 
+extern TH1F *h_z_P;
+extern TH1F *h_z_PIp;
+extern TH1F *h_z_PIm;
 
-extern TH1F *h_1d_rc_0425_evt;
-extern TH1F *h_1d_rc_0475_evt;
-extern TH1F *h_1d_rc_0525_evt;
-extern TH1F *h_1d_rc_0575_evt;
-extern TH1F *h_1d_rc_0625_evt;
-extern TH1F *h_1d_rc_0675_evt;
-extern TH1F *h_1d_rc_0725_evt;
-extern TH1F *h_1d_rc_0775_evt;
-extern TH1F *h_1d_rc_0825_evt;
-extern TH1F *h_1d_rc_0875_evt;
-extern TH1F *h_1d_rc_0925_evt;
-extern TH1F *h_1d_rc_0975_evt;
+extern TH1F *h_z_P_sim;
+extern TH1F *h_z_PIp_sim;
+extern TH1F *h_z_PIm_sim;
+
+extern TH1F *h_inv_NP[5];
+extern TH1F *h_inv_NPIp[5];
+extern TH1F *h_inv_NPIm[5];
+
 
 
 
 extern TH2F *hist_ectot_sector1_sim,*hist_ectot_sector2_sim,*hist_ectot_sector3_sim,*hist_ectot_sector4_sim,*hist_ectot_sector5_sim,*hist_ectot_sector6_sim;
+
+extern TH2F *th_cc_vs_seg_1_sim,*th_cc_vs_seg_2_sim,*th_cc_vs_seg_3_sim,*th_cc_vs_seg_4_sim,*th_cc_vs_seg_5_sim,*th_cc_vs_seg_6_sim;
+
 extern TH2F *hist_ectot_sector1,*hist_ectot_sector2,*hist_ectot_sector3,*hist_ectot_sector4,*hist_ectot_sector5,*hist_ectot_sector6;
+
+extern TH2F *th_cc_vs_seg_1,*th_cc_vs_seg_2,*th_cc_vs_seg_3,*th_cc_vs_seg_4,*th_cc_vs_seg_5,*th_cc_vs_seg_6;
+
 extern TH2F *W_2pi_selection,*W_2pi_selection_sim;
 
 extern TH1F *hist_PIm_miss,*hist_PIm_miss_en,*hist_PIp_miss,*hist_PIp_miss_d,*hist_PIp_miss_d_bef, *hist_PIp_miss_en,*hist_P_miss,*hist_P_miss_en, *h_miss_mass_0;

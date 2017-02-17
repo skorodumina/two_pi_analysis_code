@@ -231,3 +231,53 @@ Double_t mom_corr::correct_pel_e1_2039_2250_feb09(double pe,double theta,double 
 return correct_energy_theta_pf;
 
 };
+
+   Double_t mom_corr::corr_pr_mom_skor(double pf,double theta){
+      Double_t par_elos[18];
+       
+par_elos[0] = -0.0972074;
+par_elos[1] = 0.000387156;
+par_elos[2] = -4.32917e-06;
+par_elos[3] = 0.417262;
+par_elos[4] = -0.00140363;
+par_elos[5] = 2.31256e-05;
+par_elos[6] = -0.727778;
+par_elos[7] = 0.00222318;
+par_elos[8] = -5.09732e-05;
+par_elos[9] = 0.612924;
+par_elos[10] = -0.00163235;
+par_elos[11] = 5.28043e-05;
+par_elos[12] = -0.248523;
+par_elos[13] = 0.000526774;
+par_elos[14] = -2.57262e-05;
+par_elos[15] = 0.0388504;
+par_elos[16] = -5.50282e-05;
+par_elos[17] = 4.74466e-06;
+
+Double_t p0_elos = par_elos[0] + theta*par_elos[1] + theta*theta*par_elos[2];
+Double_t p1_elos = par_elos[3] + theta*par_elos[4] + theta*theta*par_elos[5];
+Double_t p2_elos = par_elos[6] + theta*par_elos[7] + theta*theta*par_elos[8];
+Double_t p3_elos = par_elos[9] + theta*par_elos[10] + theta*theta*par_elos[11]; 
+Double_t p4_elos = par_elos[12] + theta*par_elos[13] + theta*theta*par_elos[14];
+Double_t p5_elos = par_elos[15] + theta*par_elos[16] + theta*theta*par_elos[17];
+
+
+
+       double delta_p_skor;
+       delta_p_skor = -(p0_elos+p1_elos*pf+p2_elos*pf*pf+p3_elos*pf*pf*pf+p4_elos*pf*pf*pf*pf+p5_elos*pf*pf*pf*pf*pf);
+
+return delta_p_skor;
+
+};
+
+ Double_t mom_corr::corr_el_mom_sim(double pf,double theta){
+
+Double_t  p0_simomcor =  -0.00396949+theta*0.000171585+theta*theta*(-1.29413e-06);
+Double_t  p1_simomcor =  0.0168967+theta*(-0.000972667)+theta*theta*(1.04901e-05);
+Double_t  p2_simomcor =  -0.00858388+theta*0.000449132+theta*theta*(-4.86572e-06);
+
+Double_t delta_p_el_sim = -p0_simomcor-p1_simomcor*pf-p2_simomcor*pf*pf;
+
+return delta_p_el_sim;
+
+};

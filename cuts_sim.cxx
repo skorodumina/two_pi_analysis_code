@@ -26,60 +26,62 @@ using namespace std;
    bool cuts_sim;
    Float_t th_min,par1,par2,fid_a,fid_b,a,b;
    Short_t i;
-   /*Float_t ph_el_arr[3][6][18] = {{{1000.,1000.,22.,24.,25.,28.,35.,30.,30.,34.,26.,30.,32.,27.,36.,31.,28.,1000.},
-                             {1000.,1000.,25.,16.,17.,22.,23.,21.,22.,24.,21.,31.,31.,31.,32.,29.,29.,1000.},
-                             {1000.,1000.,20.,23.,24.,23.,19.,23.,31.,28.,27.,28.,32.,34.,35.,37.,37.,1000.},
-                             {1000.,1000.,24.,20.,24.,19.,28.,26.,24.,27.,25.,29.,22.,23.,34.,37.,27.,1000.},
-                             {1000.,1000.,31.,27.,25.,28.,29.,23.,22.,28.,35.,29.,51.,29.,39.,44.,36.,1000.},
-                             {1000.,1000.,28.,28.,22.,22.,30.,30.,28.,46.,27.,39.,38.,29.,41.,42.,36.,1000.}},
-			     {{0.,0.,0.,0.,0.,0.,0.,0.,0.,0.,0.,0.,0.,0.,0.,0.,0.,0.},
-                             {0.,0.,0.,0.,0.,0.,0.,0.,0.,0.,0.,0.,0.,0.,0.,0.,0.,0.},
-		             {0.,0.,0.,0.,0.,0.,0.,0.,0.,0.,0.,0.,0.,0.,0.,0.,0.,0.},
-	                     {0.,0.,0.,0.,0.,0.,0.,0.,0.,0.,0.,0.,0.,0.,0.,0.,0.,0.},
-		             {0.,0.,0.,0.,0.,0.,0.,0.,0.,0.,0.,0.,0.,0.,0.,0.,0.,0.},
-			     {0.,0.,0.,0.,0.,0.,0.,0.,0.,0.,0.,0.,0.,0.,0.,0.,0.,0.}},
+  
+  
+   Float_t ph_el_arr_sim[3][6][18] = {{{1000.,0.,0.,0.,0.,0.,0.,0.,0.,0.,0.,0.,0.,0.,0.,0.,0.,1000.},
+                             {1000.,0.,0.,0.,0.,0.,0.,0.,0.,0.,0.,0.,0.,0.,0.,0.,0.,1000.},
+		             {1000.,0.,0.,0.,0.,0.,0.,0.,0.,0.,0.,0.,0.,0.,0.,0.,0.,1000.},
+	                     {1000.,0.,0.,0.,0.,0.,0.,0.,0.,0.,0.,0.,0.,0.,0.,0.,0.,1000.},
+		             {1000.,0.,0.,0.,0.,0.,0.,0.,0.,0.,0.,0.,0.,0.,0.,0.,0.,1000.},
+			     {1000.,0.,0.,0.,0.,0.,0.,0.,0.,0.,0.,0.,0.,0.,0.,0.,0.,1000.}},
 			     
-			     {{1000.,1000.,18.,20.,24.,22.,22.,27.,26.,28.,32.,26.,23.,30.,28.,29.,25.,1000.},
-                             {1000.,1000.,31.,20.,22.,33.,27.,26.,35.,35.,23.,24.,30.,45.,40.,40.,46.,1000.},
-			     {1000.,1000.,23.,26.,28.,23.,23.,28.,24.,29.,25.,27.,29.,35.,37.,29.,36.,1000.},
-			     {1000.,1000.,20.,21.,22.,24.,25.,34.,26.,27.,24.,27.,20.,28.,32.,27.,34.,1000.},
-			     {1000.,1000.,27.,26.,27.,51.,40.,35.,31.,33.,33.,46.,40.,37.,48.,44.,31.,1000.},
-			     {1000.,1000.,31.,21.,28.,33.,31.,28.,32.,38.,38.,36.,29.,35.,90.,35.,36.,1000.}}};*/
+			     {{1000.,0.,0.,0.,0.,0.,0.,0.,0.,0.,0.,0.,0.,0.,0.,0.,0.,1000.},
+                             {1000.,0.,0.,0.,0.,0.,0.,0.,0.,0.,0.,0.,0.,0.,0.,0.,0.,1000.},
+		             {1000.,0.,0.,0.,0.,0.,0.,0.,0.,0.,0.,0.,0.,0.,0.,0.,0.,1000.},
+	                     {1000.,0.,0.,0.,0.,0.,0.,0.,0.,0.,0.,0.,0.,0.,0.,0.,0.,1000.},
+		             {1000.,0.,0.,0.,0.,0.,0.,0.,0.,0.,0.,0.,0.,0.,0.,0.,0.,1000.},
+			     {1000.,0.,0.,0.,0.,0.,0.,0.,0.,0.,0.,0.,0.,0.,0.,0.,0.,1000.}},
+			     
+			     {{1000.,0.,0.,0.,0.,0.,0.,0.,0.,0.,0.,0.,0.,0.,0.,0.,0.,1000.},
+                             {1000.,0.,0.,0.,0.,0.,0.,0.,0.,0.,0.,0.,0.,0.,0.,0.,0.,1000.},
+		             {1000.,0.,0.,0.,0.,0.,0.,0.,0.,0.,0.,0.,0.,0.,0.,0.,0.,1000.},
+	                     {1000.,0.,0.,0.,0.,0.,0.,0.,0.,0.,0.,0.,0.,0.,0.,0.,0.,1000.},
+		             {1000.,0.,0.,0.,0.,0.,0.,0.,0.,0.,0.,0.,0.,0.,0.,0.,0.,1000.},
+			     {1000.,0.,0.,0.,0.,0.,0.,0.,0.,0.,0.,0.,0.,0.,0.,0.,0.,1000.}}};
 
-Float_t th_vs_seg_cc_arr[2][6][18] = {{{0., 14.9943, 16.1178, 17.944, 19.7594, 21.7965, 24.0849, 25.7348, 27.287, 29.7387, 32.118, 34.554, 37.6616, 39.9555, 41.8899, 43.9917, 44.9401,0.},
-                             {0., 14.4619, 15.8294, 17.3894, 19.5803, 21.6848, 23.4877, 25.6689, 27.2811, 29.7402, 32.1088, 34.3413, 37.7965, 39.9164, 41.93, 43.8781, 44.9396,0.},
-                             {0., 14.6396, 15.8791, 17.681, 19.5967, 21.4913, 23.4704, 25.7742, 27.3183, 29.4058, 32.1693, 34.3859, 37.7187, 39.9258, 41.8853, 43.7546, 44.8999,0.},
-                             {0., 15.0222, 16.1285, 17.8297, 19.7349, 21.93, 24.0715, 25.7447, 27.4221, 29.2554, 31.7778, 34.6932, 37.5713, 39.6431, 41.9178, 43.9135, 44.9405,0.},
-                             {0., 15.1934, 17.3943, 18.4212, 19.8698, 21.9927, 24.0866, 25.9066, 28.4957, 30.6615, 33.2479, 35.3405, 37.4675, 38.6754, 41.6704, 44.0829, 44.9731,0.},
-                             {0., 14.7309, 16.1419, 17.8516, 19.5722, 21.5672, 23.7528, 25.4896, 27.317, 29.8693, 32.1174, 34.5841, 37.7443, 40.01, 42.0101, 44.3091, 45.0681,0.}},
+ Float_t th_vs_seg_cc_arr[2][6][18] = {{{0., 14.6443, 16.0725, 17.9887, 19.8438, 21.8559, 24.0962, 25.7115, 27.3194, 29.4738, 32.1473, 34.4818, 37.6353, 40.3543, 42.726, 45.3277, 45.4403, 0.},
+                             {0., 14.1306, 15.7974, 17.539, 19.6698, 21.751, 23.4988, 25.692, 27.3278, 29.6457, 32.138, 34.2722, 37.7139, 40.2945, 42.666, 45.0813, 45.5352, 0.},
+                             {0., 14.3257, 15.8933, 17.7586, 19.7038, 21.5607, 23.4988, 25.8161, 27.3858, 29.3724, 32.1998, 34.3168, 37.6387, 40.2826, 42.5966, 44.9048, 45.4617, 0.},
+                             {0., 14.6212, 16.0671, 17.8442, 19.7198, 21.9049, 24.0132, 25.6748, 27.4177, 29.1068, 31.7789, 34.4718, 37.4024, 39.9344, 42.6817, 45.2509, 45.6462, 0.},
+                             {0., 14.6693, 17.0764, 18.3016, 19.7753, 21.8377, 23.9542, 25.8572, 28.4107, 30.5323, 33.1446, 35.2059, 37.4483, 39.1344, 42.3635, 45.238, 45.4197, 0.},
+                             {0., 14.3506, 16.0391, 17.8922, 19.5839, 21.663, 23.8015, 25.4501, 27.3368, 29.6662, 32.0932, 34.436, 37.5931, 40.2924, 42.8242, 45.5393, 45.8316, 0.}},
 			     
 			     
-			     {{0., 9.70842, 11.6354, 13.4193, 15.059, 16.8693, 18.3642, 20.481, 22.5206, 23.9727, 25.4384, 27.9494, 29.6408, 33.1416, 35.9524, 38.0618, 40.6736,0.},
-                             {0., 10.0549, 11.7277, 13.3703, 14.522, 16.1756, 18.3656, 20.0143, 22.3117, 23.8772, 25.3239, 27.825, 29.4949, 32.6421, 35.7132, 38.164, 40.3459,0.},
-		             {0., 10.0805, 11.7872, 13.4138, 14.878, 16.6669, 18.492, 20.1909, 22.4518, 24.0873, 25.337, 27.7718, 29.7123, 33.1764, 36.0684, 38.3921, 40.5504,0.},
-	                     {0., 9.89467, 11.8022, 13.4676, 14.8875, 16.5666, 18.234, 20.494, 22.3551, 24.1051, 25.5014, 27.4897, 29.1652, 32.9201, 35.3268, 37.8445, 40.393,0.},
-		             {0., 10.2692, 11.1835, 13.4246, 14.8611, 16.5345, 18.2405, 20.3903, 22.0994, 23.9946, 26.2842, 28.3204, 31.0017, 32.6091, 36.7202, 38.2352, 40.8262,0.},
-			     {0., 10.084, 11.641, 13.3442, 14.8961, 16.6584, 18.0017, 20.4061, 22.2266, 23.8465, 25.3002, 27.8278, 29.4927, 32.6927, 35.9115, 38.1519, 40.59,0.}}};
+			    {{0., 10.054, 11.4847, 13.2483, 14.854, 16.7384, 18.3456, 20.5912, 22.6226, 24.1823, 25.4867, 28.0661, 29.7871, 33.066, 35.8994, 38.209, 41.2385, 0.},
+                             {0., 10.4103, 11.5865, 13.0199, 14.2593, 15.9883, 18.4077, 20.0705, 22.3853, 24.0439, 25.3731, 27.9493, 29.6573, 32.5285, 35.6867, 38.3033, 40.9372, 0.},
+		             {0., 10.36, 11.53, 13.1973, 14.583, 16.505, 18.5437, 20.2397, 22.5306, 24.2456, 25.3623, 27.9259, 29.9135, 33.098, 36.0244, 38.5221, 41.0999, 0.},
+	                     {0., 10.2087, 11.6431, 13.3227, 14.8077, 16.4797, 18.3064, 20.6596, 22.5267, 24.3291, 25.653, 27.7081, 29.4662, 32.9525, 35.4147, 38.0797, 40.7784, 0.},
+		             {0., 10.4149, 11.4033, 13.3655, 14.9656, 16.6926, 18.4285, 20.5829, 22.3409, 24.2592, 26.507, 28.5396, 31.1582, 32.6398, 36.7438, 38.4544, 41.3839, 0.},
+			     {0., 10.3843, 11.486, 13.1869, 14.8111, 16.5356, 17.894, 20.5821, 22.3433, 24.1164, 25.4934, 28.0616, 29.7482, 32.738, 35.9267, 38.5048, 40.8638, 0.}}};	
+	
+
 			     
  cuts_sim = false; 
-   
-   
-  
-     if (P_EL > 0.461) {
+
+//calorimeter threshold cut + manually remove the first and last cc segments
+if ((P_EL > 0.461)&&(segment!=0)&&(segment!=17)) {
      
-  th_min=(9.5+17./(P_EL+0.2));
-  par1=0.85+1.1*P_EL;
-  par2=-62.8-30.*P_EL;       
+   th_min=(9.5+17./(P_EL+0.2));
+   par1=0.85+1.1*P_EL;
+   par2=-62.8-30.*P_EL;       
    fid_a=37.3*pow((sin((th_EL-th_min)*0.01745)),(par1+par2/th_EL+1525./th_EL/th_EL));
      
    fid_b=-37.3*pow((sin((th_EL-th_min)*0.01745)),(par1+par2/th_EL+1525./th_EL/th_EL));  
    a = fid_a;
    b = fid_b; 
    
-//   P_EL = floor((P_EL*1000) + 0.5)/1000;
 
-
-       switch (sector) {
+	switch (sector) {
 case 1 : 
 if (indtype ==2) hist_z_el_1_sim_2->Fill(z_EL,1.);
 /*if ((ph_EL >= 330) && (ph_EL <= 360)){
@@ -93,93 +95,74 @@ if (indtype==2) ph_vs_th_el_sim[0][int((P_EL*100-40)/20)]->Fill(th_EL,ph_EL,1);
 };
 };*/
 
+// ectot vs p cut
+if ((ECT/P_EL > -0.0724295*P_EL*P_EL+0.213588*P_EL-0.0148421) && (ECT/P_EL < 0.0136346*P_EL*P_EL-0.0537425*P_EL+0.360596)){
 
- if ((ECT/P_EL > (-0.0142786*P_EL*P_EL+0.0622135*P_EL+0.0950293)) && (ECT/P_EL < (-0.0012121*P_EL*P_EL-0.015888*P_EL)+0.328383)) {
- if (indtype==1) hist_ectot_sector1_sim->Fill(P_EL,ECT/P_EL,1.);
-// if (nphe > 25.) {
-
-
-if ((ph_EL >= 330) && (ph_EL <= 360)){
-
-if ((P_EL < 1.79999) && (P_EL > 0.4)){
-if (indtype==1) ph_vs_th_el_sim[0][int((P_EL*100-40)/20)]->Fill(th_EL,ph_EL-360,1);
-};
-if ((th_EL > th_min) && (th_EL < 50) && (ph_EL > fid_b+360) && (ph_EL < fid_a+360)){
-if ((W>1.3)&&(indtype==1)) th_vs_p_e_1_sim[0]->Fill(P_EL,th_EL,1.);
-// hist_z_el_1_empty->Fill(z_EL,1.);
-//cout <<"segment = " << segment <<"\n";
-if ((theta_cc >th_vs_seg_cc_arr[1][0][segment])&&(theta_cc <th_vs_seg_cc_arr[0][0][segment])){
+	if (indtype==1) hist_ectot_sector1_sim->Fill(P_EL,ECT/P_EL,sigma); 
 
  //~fid cuts in Cherenkov plane
- if  (theta_cc > 7.0+0.0032*ph_cc+0.0499*ph_cc*ph_cc) {
-if ((pow((theta_cc-45.5)/34.5,2)+pow((ph_cc)/21.,2)) <= 1.) {
-if ((pow((theta_cc-45.5)/1.75,2)+pow((ph_cc)/21.,2)) > 1.) {
-if  (theta_cc < 45.) {
-//cut on average number of photoelectrons
-//if (avrg_nphe_sector1->GetBinContent(int((theta_cc+5.)*200./60.),int((ph_cc+30.)*200./60.)) > 70.) {
-//nphe_sector1_after->Fill(nphe,1.);
-//if ((theta_cc >1.64786+2.16008*segment-0.00433375*segment*segment)&&(theta_cc <11.3593+1.38551*segment+0.0451710*segment*segment)){
-
-//if (nphe > ph_el_arr[pmt_hit+1][0][segment]){
-//if (norm_nphe_s1->GetBinContent(int((theta_cc+5.)*200./60.),int((ph_cc+30.)*200./60.)) > 0.95) {
-//if (nphe > 60){
-   cuts_sim = true;
-//   };
-  // }; 
-  // };
-   };
-   };
-   };
-   };
-   };
-  
-   
-   }; //fiducial
-   }; //second part of sector 1
-   
-  if ((ph_EL >= 0) && (ph_EL <= 30)) {
-if ((P_EL < 1.75999) && (P_EL > 0.4)){
-if (indtype==1) ph_vs_th_el_sim[0][int((P_EL*100-40)/20)]->Fill(th_EL,ph_EL,1);
-};
-
-if ((th_EL > th_min) && (th_EL < 50) && (ph_EL > fid_b) && (ph_EL < fid_a)){
-
-if ((W>1.3)&&(indtype==1)) th_vs_p_e_1_sim[0]->Fill(P_EL,th_EL,1.); 
-//hist_z_el_1_empty->Fill(z_EL,1.);
-//cout <<"segment = " << segment <<"\n";
-if ((theta_cc >th_vs_seg_cc_arr[1][0][segment])&&(theta_cc <th_vs_seg_cc_arr[0][0][segment])){
-
-//~fid cuts in Cherenkov plane
 if  (theta_cc > 7.0+0.0032*ph_cc+0.0499*ph_cc*ph_cc) {
 if ((pow((theta_cc-45.5)/34.5,2)+pow((ph_cc)/21.,2)) <= 1.) {
 if ((pow((theta_cc-45.5)/1.75,2)+pow((ph_cc)/21.,2)) > 1.) {
 if  (theta_cc < 45.) {
-//cut on average number of photoelectrons
-//if (avrg_nphe_sector1->GetBinContent(int((theta_cc+5.)*200./60.),int((ph_cc+30.)*200./60.)) > 70.) {
-//nphe_sector1_after->Fill(nphe,1.);
-//if ((theta_cc >1.64786+2.16008*segment-0.00433375*segment*segment)&&(theta_cc <11.3593+1.38551*segment+0.0451710*segment*segment)){
-//if (norm_nphe_s1->GetBinContent(int((theta_cc+5.)*200./60.),int((ph_cc+30.)*200./60.)) > 0.95) {
-//if (nphe > ph_el_arr[pmt_hit+1][0][segment]){
-//if (nphe > 60){
+
+//phi_cc matching
+if (((ph_cc>0)&&(pmt_hit==1))||((ph_cc<0)&&(pmt_hit==-1))||(pmt_hit==0)){
+
+//th_cc vs seg cut
+if ((theta_cc >th_vs_seg_cc_arr[1][0][segment])&&(theta_cc <th_vs_seg_cc_arr[0][0][segment])){
+
+	if (indtype==1) th_cc_vs_seg_1_sim->Fill(segment+1,theta_cc,sigma);
+
+// geometrical cut on number of photoelectrons
+if (norm_nphe_s1->GetBinContent(norm_nphe_s1->GetXaxis()->FindBin(theta_cc),norm_nphe_s1->GetYaxis()->FindBin(ph_cc))>0.7){
+
+//nphe cut that removes the 1 and 18 segments
+if (nphe > ph_el_arr_sim[pmt_hit+1][0][segment]){
+
+
+	
+if ((ph_EL >= 330) && (ph_EL <= 360)){
+
+	if ((P_EL < 1.79999) && (P_EL > 0.4)){
+	if (indtype==1) ph_vs_th_el_sim[0][int((P_EL*100-40)/20)]->Fill(th_EL,ph_EL-360,1);
+	};
+	
+if ((th_EL > th_min) && (th_EL < 50) && (ph_EL > fid_b+360) && (ph_EL < fid_a+360)){
+
+	if ((W>1.3)&&(indtype==1)) th_vs_p_e_1_sim[0]->Fill(P_EL,th_EL,1.);
+// hist_z_el_1_empty->Fill(z_EL,1.);
+
+   cuts_sim = true;
+   
+ }; //fiducial
+ }; //second part of sector 1
+   
+if ((ph_EL >= 0) && (ph_EL <= 30)) {
+
+	if ((P_EL < 1.75999) && (P_EL > 0.4)){
+	if (indtype==1) ph_vs_th_el_sim[0][int((P_EL*100-40)/20)]->Fill(th_EL,ph_EL,1);
+	};
+
+if ((th_EL > th_min) && (th_EL < 50) && (ph_EL > fid_b) && (ph_EL < fid_a)){
+
+	if ((W>1.3)&&(indtype==1)) th_vs_p_e_1_sim[0]->Fill(P_EL,th_EL,1.); 
+//hist_z_el_1_empty->Fill(z_EL,1.);
+
    cuts_sim = true; 
-//   };
-  // };
- // };
- }; 
-   };
-   };
-   };
-   };
 
  }; //fiducial
-   }; //first part of sector 1
+ }; //first part of sector 1
 
-
-// }; //nphe cut
-//??? 
-
-     
- 
+   };//nphe cut that removes the 1 and 18 segments
+   };//geometrical cut on number of photoelectrons
+   };//th_cc vs seg cut   
+   };//phi_cc matching
+   };//~fid cuts in Cherenkov plane
+   };//~fid cuts in Cherenkov plane
+   };//~fid cuts in Cherenkov plane
+   };//~fid cuts in Cherenkov plane
+   
  }; // ectot vs p cut
  
  break;
@@ -190,47 +173,53 @@ if (indtype ==2) hist_z_el_2_sim_2->Fill(z_EL,1.);
 //if (indtype==2) ph_vs_th_el_sim[1][int((P_EL*100-40)/20)]->Fill(th_EL,ph_EL-60,1);
 //};
 
+// ectot vs p cut
+if ((ECT/P_EL > -0.0514781*P_EL*P_EL+0.170698*P_EL+0.00710391) && (ECT/P_EL < 0.012651*P_EL*P_EL-0.0528591*P_EL+0.35928)) {
 
- if (((ECT/P_EL) > (-0.0255814*P_EL*P_EL+0.0861128*P_EL+0.0854996)) && ((ECT/P_EL) < (0.00583913*P_EL*P_EL-0.0280389*P_EL)+ 0.332004)) {
-if (indtype==1) hist_ectot_sector2_sim->Fill(P_EL,ECT/P_EL,1.);  
-// if (nphe > 25.) {
-if ((P_EL < 1.75999) && (P_EL > 0.4)){
-if (indtype==1) ph_vs_th_el_sim[1][int((P_EL*100-40)/20)]->Fill(th_EL,ph_EL-60,1);
-};
- if ((th_EL > th_min) && (th_EL < 50) && (ph_EL > fid_b+60) && (ph_EL < fid_a+60)){
-if ((W>1.3)&&(indtype==1)) th_vs_p_e_1_sim[1]->Fill(P_EL,th_EL,1.);
-// hist_z_el_2_empty->Fill(z_EL,1.);
-if ((theta_cc >th_vs_seg_cc_arr[1][1][segment])&&(theta_cc <th_vs_seg_cc_arr[0][1][segment])){ 
-
- //~fid cuts in Cherenkov plane
-  if  (theta_cc > 7.0+0.0032*ph_cc+0.0499*ph_cc*ph_cc) {
+	if (indtype==1) hist_ectot_sector2_sim->Fill(P_EL,ECT/P_EL,sigma);
+	  
+//~fid cuts in Cherenkov plane
+if  (theta_cc > 7.0+0.0032*ph_cc+0.0499*ph_cc*ph_cc) {
 if ((pow((theta_cc-45.5)/34.5,2)+pow((ph_cc)/21.,2)) <= 1.) {
 if ((pow((theta_cc-45.5)/1.75,2)+pow((ph_cc)/21.,2)) > 1.) {
 if  (theta_cc < 45.) {
-//cut on average number of photoelectrons
-//if (avrg_nphe_sector2->GetBinContent(int((theta_cc+5.)*200./60.),int((ph_cc+30.)*200./60.)) > 70.) {
-//nphe_sector2_after->Fill(nphe,1.);
-//if ((theta_cc >1.95003+2.00182*segment+0.00390572*segment*segment)&&(theta_cc <11.1869+1.37368*segment+0.047233*segment*segment)){
-//if (norm_nphe_s2->GetBinContent(int((theta_cc+5.)*200./60.),int((ph_cc+30.)*200./60.)) > 0.95) {
-//if (nphe > ph_el_arr[pmt_hit+1][1][segment]){
-///if (nphe > 60){
-   cuts_sim = true; 
-//   };
- //  };
- //  };
-   };
-   };
-   };
-   };
-   }; 
-   
-   }; //fiducial 
 
- //}; //nphe cut
- 
- 
-  
- 
+//phi_cc matching
+if (((ph_cc>0)&&(pmt_hit==1))||((ph_cc<0)&&(pmt_hit==-1))||(pmt_hit==0)){
+
+//th_cc vs seg cut
+if ((theta_cc >th_vs_seg_cc_arr[1][1][segment])&&(theta_cc <th_vs_seg_cc_arr[0][1][segment])){	
+
+	if (indtype==1) th_cc_vs_seg_2_sim->Fill(segment+1,theta_cc,sigma);
+
+// geometrical cut on number of photoelectrons
+if (norm_nphe_s2->GetBinContent(norm_nphe_s2->GetXaxis()->FindBin(theta_cc),norm_nphe_s2->GetYaxis()->FindBin(ph_cc))>0.65){
+
+//nphe cut that removes the 1 and 18 segments
+if (nphe > ph_el_arr_sim[pmt_hit+1][1][segment]){
+
+
+	if ((P_EL < 1.75999) && (P_EL > 0.4)){
+	if (indtype==1) ph_vs_th_el_sim[1][int((P_EL*100-40)/20)]->Fill(th_EL,ph_EL-60,1);
+	};
+
+if ((th_EL > th_min) && (th_EL < 50) && (ph_EL > fid_b+60) && (ph_EL < fid_a+60)){
+
+	if ((W>1.3)&&(indtype==1)) th_vs_p_e_1_sim[1]->Fill(P_EL,th_EL,1.);
+// hist_z_el_2_empty->Fill(z_EL,1.);
+
+   cuts_sim = true; 
+
+   };//fiducial 
+   };//nphe cut that removes the 1 and 18 segments
+   };//geometrical cut on number of photoelectrons
+   };//th_cc vs seg cut   
+   };//phi_cc matching
+   };//~fid cuts in Cherenkov plane
+   };//~fid cuts in Cherenkov plane
+   };//~fid cuts in Cherenkov plane
+   };//~fid cuts in Cherenkov plane
+
  }; // ectot vs p cut
 
  break; 
@@ -242,50 +231,54 @@ if (indtype ==2) hist_z_el_3_sim_2->Fill(z_EL,1.);
 //if (indtype==2) ph_vs_th_el_sim[2][int((P_EL*100-40)/20)]->Fill(th_EL,ph_EL-120,1);
 //};
 
+// ectot vs p cut
+if ((ECT/P_EL > -0.0659335*P_EL*P_EL+0.199308*P_EL-0.00592097) && (ECT/P_EL < 0.0415148*P_EL*P_EL-0.111881*P_EL+0.387163)) { 
 
-if (((ECT/P_EL) > ( -0.0220529*P_EL*P_EL+0.0782505*P_EL+0.0891699)) && ((ECT/P_EL) < (0.00430305*P_EL*P_EL-0.0235676*P_EL)+ 0.328366)) { 
- if (indtype==1) hist_ectot_sector3_sim->Fill(P_EL,ECT/P_EL,1.); 
-// if (nphe > 25.) {
-
-if ((P_EL < 1.75999) && (P_EL > 0.4)){
-if (indtype==1) ph_vs_th_el_sim[2][int((P_EL*100-40)/20)]->Fill(th_EL,ph_EL-120,1);
-};
-
-if ((th_EL > th_min) && (th_EL < 50) && (ph_EL > fid_b+120) && (ph_EL < fid_a+120)){
-//hist_z_el_3_empty->Fill(z_EL,1.);
-if ((W>1.3)&&(indtype==1)) th_vs_p_e_1_sim[2]->Fill(P_EL,th_EL,1.);
- //~fid cuts in Cherenkov plane
- 
- if ((theta_cc >th_vs_seg_cc_arr[1][2][segment])&&(theta_cc <th_vs_seg_cc_arr[0][2][segment])){
- 
-  if  (theta_cc > 7.0+0.0032*ph_cc+0.0499*ph_cc*ph_cc) {
+	if (indtype==1) hist_ectot_sector3_sim->Fill(P_EL,ECT/P_EL,sigma);
+	
+//~fid cuts in Cherenkov plane 
+if  (theta_cc > 7.0+0.0032*ph_cc+0.0499*ph_cc*ph_cc) {
 if ((pow((theta_cc-45.5)/34.5,2)+pow((ph_cc)/21.,2)) <= 1.) {
 if ((pow((theta_cc-45.5)/1.75,2)+pow((ph_cc)/21.,2)) > 1.) {
-if  (theta_cc < 45.) {
-//cut on average number of photoelectrons
-//if (avrg_nphe_sector3->GetBinContent(int((theta_cc+5.)*200./60.),int((ph_cc+30.)*200./60.)) > 70.) {
-//nphe_sector3_after->Fill(nphe,1.);
-//if ((theta_cc >1.9837+2.0442*segment+0.0022649*segment*segment)&&(theta_cc <11.2718+1.35251*segment+0.047262*segment*segment)){
+if  (theta_cc < 45.) {  
 
-//if (nphe > ph_el_arr[pmt_hit+1][2][segment]){
-//if (norm_nphe_s3->GetBinContent(int((theta_cc+5.)*200./60.),int((ph_cc+30.)*200./60.)) > 0.95) {
-//if (nphe > 60){
+//phi_cc matching
+if (((ph_cc>0)&&(pmt_hit==1))||((ph_cc<0)&&(pmt_hit==-1))||(pmt_hit==0)){
+
+//th_cc vs seg cut
+if ((theta_cc >th_vs_seg_cc_arr[1][2][segment])&&(theta_cc <th_vs_seg_cc_arr[0][2][segment])){	
+
+	if (indtype==1) th_cc_vs_seg_3_sim->Fill(segment+1,theta_cc,sigma);
+
+// geometrical cut on number of photoelectrons
+if (norm_nphe_s3->GetBinContent(norm_nphe_s3->GetXaxis()->FindBin(theta_cc),norm_nphe_s3->GetYaxis()->FindBin(ph_cc))>0.7){
+
+//nphe cut that removes the 1 and 18 segments
+if (nphe > ph_el_arr_sim[pmt_hit+1][2][segment]){
+
+
+
+	if ((P_EL < 1.75999) && (P_EL > 0.4)){
+	if (indtype==1) ph_vs_th_el_sim[2][int((P_EL*100-40)/20)]->Fill(th_EL,ph_EL-120,1);
+	};
+
+if ((th_EL > th_min) && (th_EL < 50) && (ph_EL > fid_b+120) && (ph_EL < fid_a+120)){
+
+//hist_z_el_3_empty->Fill(z_EL,1.);
+	if ((W>1.3)&&(indtype==1)) th_vs_p_e_1_sim[2]->Fill(P_EL,th_EL,1.);
+ 
    cuts_sim = true; 
-//   };
-  // };
- //  };
-   };
-   };
-   };
-   };
-   }; 
-   
-   }; //fiducial  
 
-// }; //nphe cut
- 
- 
- 
+   };//fiducial 
+   };//nphe cut that removes the 1 and 18 segments
+   };//geometrical cut on number of photoelectrons
+   };//th_cc vs seg cut   
+   };//phi_cc matching
+   };//~fid cuts in Cherenkov plane 
+   };//~fid cuts in Cherenkov plane 
+   };//~fid cuts in Cherenkov plane 
+   };//~fid cuts in Cherenkov plane 
+   
  }; // ectot vs p cut
 
  break;  
@@ -297,50 +290,55 @@ case 4 :
 //};
 if (indtype ==2) hist_z_el_4_sim_2->Fill(z_EL,1.); 
 
- if (((ECT/P_EL) > (-0.00769439*P_EL*P_EL+ 0.050589*P_EL+ 0.0988211)) && ((ECT/P_EL) < ( -0.008573*P_EL*P_EL-0.00365415*P_EL)+0.323908)) {
-if (indtype==1) hist_ectot_sector4_sim->Fill(P_EL,ECT/P_EL,1.);   
-// if (nphe > 25.) {
+// ectot vs p cut  
+if ((ECT/P_EL > -0.00634486*P_EL*P_EL+0.0672081*P_EL+0.061873) && (ECT/P_EL < -0.0504573*P_EL*P_EL+0.0867658*P_EL+0.287867)) {
 
-if ((P_EL < 1.75999) && (P_EL > 0.4)){
-if (indtype==1) ph_vs_th_el_sim[3][int((P_EL*100-40)/20)]->Fill(th_EL,ph_EL-180,1);
-};
-
-if ((th_EL > th_min) && (th_EL < 50) && (ph_EL > fid_b+180) && (ph_EL < fid_a+180)){
-if ((W>1.3)&&(indtype==1)) th_vs_p_e_1_sim[3]->Fill(P_EL,th_EL,1.);
-//hist_z_el_4_empty->Fill(z_EL,1.);
-
-if ((theta_cc >th_vs_seg_cc_arr[1][3][segment])&&(theta_cc <th_vs_seg_cc_arr[0][3][segment])){
+	if (indtype==1) hist_ectot_sector4_sim->Fill(P_EL,ECT/P_EL,sigma); 
 
 //~fid cuts in Cherenkov plane
-  if  (theta_cc > 7.0+0.0032*ph_cc+0.0499*ph_cc*ph_cc) {
+if  (theta_cc > 7.0+0.0032*ph_cc+0.0499*ph_cc*ph_cc) {
 if ((pow((theta_cc-45.5)/34.5,2)+pow((ph_cc)/21.,2)) <= 1.) {
 if ((pow((theta_cc-45.5)/1.75,2)+pow((ph_cc)/21.,2)) > 1.) {
 if  (theta_cc < 45.) {
-//cut on average number of photoelectrons
-//if (avrg_nphe_sector4->GetBinContent(int((theta_cc+5.)*200./60.),int((ph_cc+30.)*200./60.)) > 70.) {
-//nphe_sector4_after->Fill(nphe,1.);
-//if ((theta_cc >1.36283+2.27581*segment-0.0137087*segment*segment)&&(theta_cc <11.7047+1.27222*segment+0.0517623*segment*segment)){
-//if (nphe > ph_el_arr[pmt_hit+1][3][segment]){
-//if (norm_nphe_s4->GetBinContent(int((theta_cc+5.)*200./60.),int((ph_cc+30.)*200./60.)) > 0.95) {
-//if (nphe > 60){
-   cuts_sim = true; 
- //  };
- // }; 
-   };
-  // };
-   };
-   };
-   };
-   };
-   
-   
-     }; //fiducial 
-     
-        
 
- //}; //nphe cut
- 
-  
+//phi_cc matching
+if (((ph_cc>0)&&(pmt_hit==1))||((ph_cc<0)&&(pmt_hit==-1))||(pmt_hit==0)){
+
+//th_cc vs seg cut
+if ((theta_cc >th_vs_seg_cc_arr[1][3][segment])&&(theta_cc <th_vs_seg_cc_arr[0][3][segment])){
+
+	if (indtype==1) th_cc_vs_seg_4_sim->Fill(segment+1,theta_cc,sigma);
+
+// geometrical cut on number of photoelectrons
+if (norm_nphe_s4->GetBinContent(norm_nphe_s4->GetXaxis()->FindBin(theta_cc),norm_nphe_s4->GetYaxis()->FindBin(ph_cc))>0.65){
+
+//nphe cut that removes the 1 and 18 segments
+if (nphe > ph_el_arr_sim[pmt_hit+1][3][segment]){
+
+
+
+	if ((P_EL < 1.75999) && (P_EL > 0.4)){
+	if (indtype==1) ph_vs_th_el_sim[3][int((P_EL*100-40)/20)]->Fill(th_EL,ph_EL-180,1);
+	};
+
+if ((th_EL > th_min) && (th_EL < 50) && (ph_EL > fid_b+180) && (ph_EL < fid_a+180)){
+
+	if ((W>1.3)&&(indtype==1)) th_vs_p_e_1_sim[3]->Fill(P_EL,th_EL,1.);
+//hist_z_el_4_empty->Fill(z_EL,1.);
+
+   cuts_sim = true; 
+
+   }; //fiducial 
+   };//nphe cut that removes the 1 and 18 segments
+   };//geometrical cut on number of photoelectrons
+   };//th_cc vs seg cut   
+   };//phi_cc matching
+   };//~fid cuts in Cherenkov plane
+   };//~fid cuts in Cherenkov plane
+   };//~fid cuts in Cherenkov plane
+   };//~fid cuts in Cherenkov plane
+      
+     
  }; // ectot vs p cut
 
  break;  
@@ -350,51 +348,61 @@ if (indtype ==2) hist_z_el_5_sim_2->Fill(z_EL,1.);
 //if ((P_EL < 1.75999) && (P_EL > 0.4)){
 //if (indtype==2) ph_vs_th_el_sim[4][int((P_EL*100-40)/20)]->Fill(th_EL,ph_EL-240,1);
 //}; 
- 
- if (((ECT/P_EL) > (-0.0313504 *P_EL*P_EL+ 0.0973497 *P_EL+ 0.0785652)) && ((ECT/P_EL) < ( 0.0170638*P_EL*P_EL-0.0500158*P_EL)+ 0.343076)) {
- if (indtype==1) hist_ectot_sector5_sim->Fill(P_EL,ECT/P_EL,1.);   
- //if (nphe > 25.) {
- 
-if ((P_EL < 1.75999) && (P_EL > 0.4)){
-if (indtype==1) ph_vs_th_el_sim[4][int((P_EL*100-40)/20)]->Fill(th_EL,ph_EL-240,1);
-};
 
-if ((th_EL > th_min) && (th_EL < 50) && (ph_EL > fid_b+240) && (ph_EL < fid_a+240)){
+// ectot vs p cut
+if ((ECT/P_EL > -0.0578053*P_EL*P_EL+0.182369*P_EL+0.00157396) && (ECT/P_EL < -0.000865715*P_EL*P_EL-0.0193174*P_EL+0.340688)){
 
-if ((th_EL > (9.5+17./((P_EL+0.32)+0.2))+25.)||(th_EL < (9.5+17./((P_EL+0.3)+0.2))+21.8)){
-
-if ((W>1.3)&&(indtype==1)) th_vs_p_e_1_sim[4]->Fill(P_EL,th_EL,1.);
-//hist_z_el_5_empty->Fill(z_EL,1.);
+	if (indtype==1) hist_ectot_sector5_sim->Fill(P_EL,ECT/P_EL,sigma);  
+   
 //~fid cuts in Cherenkov plane
-
-if ((theta_cc >th_vs_seg_cc_arr[1][4][segment])&&(theta_cc <th_vs_seg_cc_arr[0][4][segment])){
-
 if  (theta_cc > 7.0+0.0032*ph_cc+0.0499*ph_cc*ph_cc) {
 if ((pow((theta_cc-45.5)/34.5,2)+pow((ph_cc)/21.,2)) <= 1.) {
 if ((pow((theta_cc-45.5)/1.75,2)+pow((ph_cc)/21.,2)) > 1.) {
 if  (theta_cc < 45.) {
-//cut on average number of photoelectrons
-//if (avrg_nphe_sector5->GetBinContent(int((theta_cc+5.)*200./60.),int((ph_cc+30.)*200./60.)) > 70.) {
-//nphe_sector5_after->Fill(nphe,1.);
-//if ((theta_cc >2.17772+1.95055*segment+0.00993131*segment*segment)&&(theta_cc <11.9184+1.34684*segment+0.0471248*segment*segment)){
-//if (norm_nphe_s5->GetBinContent(int((theta_cc+5.)*200./60.),int((ph_cc+30.)*200./60.)) > 0.95) {
-//if (nphe > ph_el_arr[pmt_hit+1][4][segment]){
-//if (nphe > 60){
-   cuts_sim = true; 
-//   };
- //  };
- //  };
-   };
-   };
-   };
-   };
-   };
-   };//th_vs_p
-     }; //fiducial     
 
- //}; //nphe cuts
- 
- 
+//phi_cc matching
+if (((ph_cc>0)&&(pmt_hit==1))||((ph_cc<0)&&(pmt_hit==-1))||(pmt_hit==0)){
+
+//th_cc vs seg cut
+if ((theta_cc >th_vs_seg_cc_arr[1][4][segment])&&(theta_cc <th_vs_seg_cc_arr[0][4][segment])){	
+
+	if (indtype==1) th_cc_vs_seg_5_sim->Fill(segment+1,theta_cc,sigma);
+	
+ // geometrical cut on number of photoelectrons
+if (norm_nphe_s5->GetBinContent(norm_nphe_s5->GetXaxis()->FindBin(theta_cc),norm_nphe_s5->GetYaxis()->FindBin(ph_cc))>0.8){ 
+
+//nphe cut that removes the 1 and 18 segments
+if (nphe > ph_el_arr_sim[pmt_hit+1][4][segment]){ 
+
+
+
+	if ((P_EL < 1.75999) && (P_EL > 0.4)){
+	if (indtype==1) ph_vs_th_el_sim[4][int((P_EL*100-40)/20)]->Fill(th_EL,ph_EL-240,1);
+	};
+
+if ((th_EL > th_min) && (th_EL < 50) && (ph_EL > fid_b+240) && (ph_EL < fid_a+240)){
+
+//if ((th_EL > (9.5+17./((P_EL+0.32)+0.2))+25.)||(th_EL < (9.5+17./((P_EL+0.3)+0.2))+21.8)){
+
+	if ((W>1.3)&&(indtype==1)) th_vs_p_e_1_sim[4]->Fill(P_EL,th_EL,1.);
+//hist_z_el_5_empty->Fill(z_EL,1.);
+
+
+   cuts_sim = true; 
+
+}; //fiducial     
+// };//th_vs_p
+
+
+   };//nphe cut that removes the 1 and 18 segments
+   };//geometrical cut on number of photoelectrons
+   };//th_cc vs seg cut   
+   };//phi_cc matching
+   };//~fid cuts in Cherenkov plane
+   };//~fid cuts in Cherenkov plane
+   };//~fid cuts in Cherenkov plane
+   };//~fid cuts in Cherenkov plane
+
  }; // ectot vs p cut
 
  break;   
@@ -405,48 +413,53 @@ if (indtype ==2) hist_z_el_6_sim_2->Fill(z_EL,1.);
 //if (indtype==2) ph_vs_th_el_sim[5][int((P_EL*100-40)/20)]->Fill(th_EL,ph_EL-300,1);
 //}; 
  
- if (((ECT/P_EL) > (-0.0347159*P_EL*P_EL+ 0.102172*P_EL+ 0.0753431)) && ((ECT/P_EL) < (0.0150959*P_EL*P_EL-0.0458252*P_EL)+ 0.33942)) {
- if (indtype==1) hist_ectot_sector6_sim->Fill(P_EL,ECT/P_EL,1.); 
- //if (nphe > 25.) {
+// ectot vs p cut
+ if ((ECT/P_EL > -0.0514107*P_EL*P_EL+0.17164*P_EL+0.00253672) && (ECT/P_EL < 0.0123293*P_EL*P_EL-0.053898*P_EL+0.361742)) {
  
-if ((P_EL < 1.75999) && (P_EL > 0.4)){
-if (indtype==1) ph_vs_th_el_sim[5][int((P_EL*100-40)/20)]->Fill(th_EL,ph_EL-300,1);
-};
-
-if ((th_EL > th_min) && (th_EL < 50) && (ph_EL > fid_b+300) && (ph_EL < fid_a+300)){
-//hist_z_el_6_empty->Fill(z_EL,1.);
-if ((W>1.3)&&(indtype==1)) th_vs_p_e_1_sim[5]->Fill(P_EL,th_EL,1.);
-
-if ((theta_cc >th_vs_seg_cc_arr[1][5][segment])&&(theta_cc <th_vs_seg_cc_arr[0][5][segment])){
+	if (indtype==1) hist_ectot_sector6_sim->Fill(P_EL,ECT/P_EL,sigma);  
 
 //~fid cuts in Cherenkov plane
 if  (theta_cc > 7.0+0.0032*ph_cc+0.0499*ph_cc*ph_cc) {
 if ((pow((theta_cc-45.5)/34.5,2)+pow((ph_cc)/21.,2)) <= 1.) {
 if ((pow((theta_cc-45.5)/1.75,2)+pow((ph_cc)/21.,2)) > 1.) {
 if  (theta_cc < 45.) {
-//cut on average number of photoelectrons
-//if (avrg_nphe_sector6->GetBinContent(int((theta_cc+5.)*200./60.),int((ph_cc+30.)*200./60.)) > 70.) {
-//nphe_sector6_after->Fill(nphe,1.);
-//if ((theta_cc >2.18831+2.01682*segment+0.00288938*segment*segment)&&(theta_cc <11.5751+1.25302*segment+0.0536114*segment*segment)){
 
-//if (nphe > ph_el_arr[pmt_hit+1][5][segment]){
-//if (norm_nphe_s6->GetBinContent(int((theta_cc+5.)*200./60.),int((ph_cc+30.)*200./60.)) > 0.95) {
-//if (nphe > 60){
-   cuts_sim = true; 
-//   };
-//   };
-  // };
- };
-   };
-   };
-   };
-   };
-   
-      }; //fiducial   
+//phi_cc matching
+if (((ph_cc>0)&&(pmt_hit==1))||((ph_cc<0)&&(pmt_hit==-1))||(pmt_hit==0)){
 
- //}; //nphe cut
-     
+//th_cc vs seg cut 
+if ((theta_cc >th_vs_seg_cc_arr[1][5][segment])&&(theta_cc <th_vs_seg_cc_arr[0][5][segment])){ 	
+
+ 	if (indtype==1) th_cc_vs_seg_6_sim->Fill(segment+1,theta_cc,sigma);
+
+ // geometrical cut on number of photoelectrons
+if (norm_nphe_s6->GetBinContent(norm_nphe_s6->GetXaxis()->FindBin(theta_cc),norm_nphe_s6->GetYaxis()->FindBin(ph_cc))>0.8){ 
+
+//nphe cut that removes the 1 and 18 segments
+if (nphe > ph_el_arr_sim[pmt_hit+1][5][segment]){
+
+
  
+	if ((P_EL < 1.75999) && (P_EL > 0.4)){
+	if (indtype==1) ph_vs_th_el_sim[5][int((P_EL*100-40)/20)]->Fill(th_EL,ph_EL-300,1);
+	};
+
+if ((th_EL > th_min) && (th_EL < 50) && (ph_EL > fid_b+300) && (ph_EL < fid_a+300)){
+//hist_z_el_6_empty->Fill(z_EL,1.);
+	if ((W>1.3)&&(indtype==1)) th_vs_p_e_1_sim[5]->Fill(P_EL,th_EL,1.);
+
+   cuts_sim = true; 
+
+   }; //fiducial 
+   };//nphe cut that removes the 1 and 18 segments
+   };//geometrical cut on number of photoelectrons  
+   };//th_cc vs seg cut   
+   };//phi_cc matching
+   };//~fid cuts in Cherenkov plane
+   };//~fid cuts in Cherenkov plane
+   };//~fid cuts in Cherenkov plane
+   };//~fid cuts in Cherenkov plane
+
  }; // ectot vs p cut
  break;      
  
@@ -454,9 +467,6 @@ if  (theta_cc < 45.) {
    }; // end of switch
    };  // end of calorimeter threshold cut
   
-   
-
-   
    
    return cuts_sim;
    
