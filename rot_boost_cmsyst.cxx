@@ -70,9 +70,6 @@ P4_PP_rot_1[3] = P4_PP_rot[3];
  P4_PIp_reg.Transform(rot);
  P4_gamma.Transform(rot);
  
- P4_EL.Transform(rot);
- P4_ELP_reg.Transform(rot);
- P4_P.Transform(rot);
  
  
  //BOOST
@@ -97,9 +94,7 @@ P4_PIp_reg.Boost(0,0,-beta);
 P4_gamma.Boost(0,0,-beta);
 
 
-P4_EL.Boost(0,0,-beta);
- P4_ELP_reg.Boost(0,0,-beta);
- P4_P.Boost(0,0,-beta);
+
 //cout<<"1"<< P4_PP_rot_2_boost[0]<< " " << P4_PP_rot_2_boost[1] << " " <<P4_PP_rot_2_boost[2]<< " "<< P4_PP_rot_2_boost[3]<< "\n";
 
 //cout<<"2"<< P4_PP_reg[0]<< " " << P4_PP_reg[1] << " " <<P4_PP_reg[2]<< " "<< P4_PP_reg[3]<< "\n";

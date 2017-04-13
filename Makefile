@@ -14,10 +14,10 @@ ROOTINCLUDE  := -I$(shell root-config --incdir)
 
 all:
 	make Dictationarys
-	make h10tot21_2
+	make h10tot21_3
 
-h10tot21_2: h10tot21.$(ObjSuf) MyMainFrame.$(ObjSuf) MyMainFrameDict.$(ObjSuf) macro.$(ObjSuf)  global.$(ObjSuf)  output.$(ObjSuf) macroDict.$(ObjSuf) cuts_data.$(ObjSuf) cuts_dataDict.$(ObjSuf) cuts_empty.$(ObjSuf) cuts_emptyDict.$(ObjSuf) cuts_sim.$(ObjSuf) cuts_simDict.$(ObjSuf) mom_corr.$(ObjSuf)  mom_corr.$(ObjSuf) mom_corrDict.$(ObjSuf) data_hist.$(ObjSuf) rot_boost_cmsyst.$(ObjSuf) fermi_bonn.$(ObjSuf) beta_func_data.$(ObjSuf) beta_func_empty.$(ObjSuf)
-	$(CXX) -g -o h10tot21_2 $^ $(ROOTGLIBS)  -lMathMore
+h10tot21_3: h10tot21.$(ObjSuf) MyMainFrame.$(ObjSuf) MyMainFrameDict.$(ObjSuf) macro.$(ObjSuf)  global.$(ObjSuf)  output.$(ObjSuf) macroDict.$(ObjSuf) cuts_data.$(ObjSuf) cuts_dataDict.$(ObjSuf) cuts_empty.$(ObjSuf) cuts_emptyDict.$(ObjSuf) cuts_sim.$(ObjSuf) cuts_simDict.$(ObjSuf) mom_corr.$(ObjSuf)  mom_corr.$(ObjSuf) mom_corrDict.$(ObjSuf) data_hist.$(ObjSuf) sim_hist.$(ObjSuf) rot_boost_cmsyst.$(ObjSuf) fermi_bonn.$(ObjSuf) beta_func_data.$(ObjSuf) beta_func_empty.$(ObjSuf)
+	$(CXX) -g -o h10tot21_3 $^ $(ROOTGLIBS)  
 
 
 	
@@ -38,6 +38,6 @@ clean:
 	rm -f *.o
 	rm -f *Dict.*
 	rm -f G__*
-	rm h10tot21_2
+	rm h10tot21_3
 	
 

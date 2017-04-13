@@ -50,7 +50,7 @@ Short_t pmt_hit;
 Int_t PdHit_EL,PdHit_PIp,PdHit_P,PdHit_PIm; 
  
  Float_t m_proton,m_pip,beta;
- 
+   Float_t delta_mom_p_skor; 
  Float_t LiveTime,inclusive,elastic,P_EL,th_EL,z_EL,z_P,z_PIp,z_PIm,ph_EL,ECT,nphe,theta_cc,ph_cc;
  Float_t sigma;
 
@@ -111,131 +111,41 @@ TH2F  *norm_nphe_s1,*norm_nphe_s2,*norm_nphe_s3,*norm_nphe_s4,*norm_nphe_s5,*nor
 
 
 
-//TH1F *h_pim_mis_fermi_nocut[22];
-//TH1F *h_pim_mis_fermi_nocut_sim[22];
-//TH1F *h_pim_mis_fermi_momcut[22];
-//TH1F *h_pim_mis_fermi_momcut_sim[22];
-//TH1F *h_mis_mom_fermi[22];
-//TH1F *h_mis_mom_fermi_sim[22];
-//TH1F *h_mis_mom_fermi_mmas_cut[22];
-//TH1F *h_mis_mom_fermi_mmas_cut_sim[22];
-
 TH1F *h_inv_NP[5];
 TH1F *h_inv_NPIp[5];
 TH1F *h_inv_NPIm[5];
 
-/*TH1F *h_pim_mis_fermi_nocut_1[4][21];
-TH1F *h_pim_mis_fermi_nocut_sim_1[4][21];
-TH1F *h_pim_mis_fermi_momcut_1[4][5];
-TH1F *h_pim_mis_fermi_momcut_sim_1[4][5];
-TH1F *h_mis_mom_fermi_1[4][5];
-TH1F *h_mis_mom_fermi_sim_1[4][5];
-TH1F *h_mis_mom_fermi_mmas_cut_1[4][5];
-TH1F *h_mis_mom_fermi_mmas_cut_sim_1[4][5];
+/*TH1F *h_excltop_pimismas_1[4][21];
+TH1F *h_excltop_pimismas_sim_1[4][21];
 
+TH1F *h_excltop_pimismas_2[2][19];
+TH1F *h_excltop_pimismas_sim_2[2][19];
 
+TH1F *h_excltop_pimismas_3[2][17];
+TH1F *h_excltop_pimismas_sim_3[2][17];
 
-TH1F *h_pim_mis_fermi_nocut_2[2][19];
-TH1F *h_pim_mis_fermi_nocut_sim_2[2][19];
-TH1F *h_pim_mis_fermi_momcut_2[2][5];
-TH1F *h_pim_mis_fermi_momcut_sim_2[2][5];
-TH1F *h_mis_mom_fermi_2[2][5];
-TH1F *h_mis_mom_fermi_sim_2[2][5];
-TH1F *h_mis_mom_fermi_mmas_cut_2[2][5];
-TH1F *h_mis_mom_fermi_mmas_cut_sim_2[2][5];
+TH1F *h_excltop_pimismas_4[14];
+TH1F *h_excltop_pimismas_sim_4[14];
 
+TH1F *h_excltop_pimismas_5[13];
+TH1F *h_excltop_pimismas_sim_5[13];
 
+TH1F *h_excltop_pimismas_6[12];
+TH1F *h_excltop_pimismas_sim_6[12];
 
-TH1F *h_pim_mis_fermi_nocut_3[2][17];
-TH1F *h_pim_mis_fermi_nocut_sim_3[2][17];
-TH1F *h_pim_mis_fermi_momcut_3[2][4];
-TH1F *h_pim_mis_fermi_momcut_sim_3[2][4];
-TH1F *h_mis_mom_fermi_3[2][4];
-TH1F *h_mis_mom_fermi_sim_3[2][4];
-TH1F *h_mis_mom_fermi_mmas_cut_3[2][4];
-TH1F *h_mis_mom_fermi_mmas_cut_sim_3[2][4];
-
-
-TH1F *h_pim_mis_fermi_nocut_4[14];
-TH1F *h_pim_mis_fermi_nocut_sim_4[14];
-TH1F *h_pim_mis_fermi_momcut_4[4];
-TH1F *h_pim_mis_fermi_momcut_sim_4[4];
-TH1F *h_mis_mom_fermi_4[4];
-TH1F *h_mis_mom_fermi_sim_4[4];
-TH1F *h_mis_mom_fermi_mmas_cut_4[4];
-TH1F *h_mis_mom_fermi_mmas_cut_sim_4[4];
-
-
-TH1F *h_pim_mis_fermi_nocut_5[13];
-TH1F *h_pim_mis_fermi_nocut_sim_5[13];
-TH1F *h_pim_mis_fermi_momcut_5[3];
-TH1F *h_pim_mis_fermi_momcut_sim_5[3];
-TH1F *h_mis_mom_fermi_5[3];
-TH1F *h_mis_mom_fermi_sim_5[3];
-TH1F *h_mis_mom_fermi_mmas_cut_5[3];
-TH1F *h_mis_mom_fermi_mmas_cut_sim_5[3];
-
-
-TH1F *h_pim_mis_fermi_nocut_6[12];
-TH1F *h_pim_mis_fermi_nocut_sim_6[12];
-TH1F *h_pim_mis_fermi_momcut_6[3];
-TH1F *h_pim_mis_fermi_momcut_sim_6[3];
-TH1F *h_mis_mom_fermi_6[3];
-TH1F *h_mis_mom_fermi_sim_6[3];
-TH1F *h_mis_mom_fermi_mmas_cut_6[3];
-TH1F *h_mis_mom_fermi_mmas_cut_sim_6[3];
-
-
-TH1F *h_pim_mis_fermi_nocut_7[10];
-TH1F *h_pim_mis_fermi_nocut_sim_7[10];
-TH1F *h_pim_mis_fermi_momcut_7[3];
-TH1F *h_pim_mis_fermi_momcut_sim_7[3];
-TH1F *h_mis_mom_fermi_7[3];
-TH1F *h_mis_mom_fermi_sim_7[3];
-TH1F *h_mis_mom_fermi_mmas_cut_7[3];
-TH1F *h_mis_mom_fermi_mmas_cut_sim_7[3];
+TH1F *h_excltop_pimismas_7[10];
+TH1F *h_excltop_pimismas_sim_7[10];
 */
 
-
-//TH1F *h_pim_mis_all_reg_th_dep_pim[5][12];
-//TH1F *h_pim_mis_all_reg_th_dep_pim_sim[5][12];
-
-//TH1F *h_mom_all_reg_th_dep_pim[5][12];
-//TH1F *h_mom_all_reg_th_dep_pim_sim[5][12];
-
-
-//TH1F *h_pim_mis_all_reg_th_dep_pip[5][12];
-//TH1F *h_pim_mis_all_reg_th_dep_pip_sim[5][12];
-
-//TH1F *h_mom_all_reg_th_dep_pip[5][12];
-//TH1F *h_mom_all_reg_th_dep_pip_sim[5][12];
-
-
-//TH1F *h_pim_mis_all_reg_th_dep_pr[5][12];
-//TH1F *h_pim_mis_all_reg_th_dep_pr_sim[5][12];
-
-//TH1F *h_pim_mis_th_dep_pr[5][12];
-//TH1F *h_pim_mis_th_dep_pr_sim[5][12];
-
-
-//TH1F *h_pim_mis_th_dep[5][12][8];
-//TH1F *h_pim_mis_th_dep_sim[5][12][8];
-
-
-
-//TH1F *h_mom_all_reg_th_dep_pr[5][12];
-//TH1F *h_mom_all_reg_th_dep_pr_sim[5][12];
+TH1F *h_pim_mis_main_top[5];
+TH1F *h_pim_mis_main_top_sim[5];
 
 TH1F *h_pim_mis_all_reg[5];
 TH1F *h_pim_mis_all_reg_sim[5];
 
-TH1F *h_pip_mis_all_reg[5];
-TH1F *h_pip_mis_all_reg_sim[5];
 
-TH1F *h_pr_mis_all_reg[5];
-TH1F *h_pr_mis_all_reg_sim[5];
-
-
+TH1F *h_0_mis_all_reg[5];
+TH1F *h_0_mis_all_reg_sim[5];
 
 TH1F *h_mom_all_reg[5];
 TH1F *h_mom_all_reg_sim[5];
@@ -259,12 +169,12 @@ TH1F *h_z_PIm_sim = new TH1F ("h_z_pim_sim","h_z_pim_sim",200,-5.,5.);
 
 
 
+TH2F *h_dc_y_vs_x_el= new TH2F("h_dc_y_vs_x_el","h_dc_y_vs_x_el",500, -0.5, 0.5,500., -0.5, 0.5);
 
-
-
-
-
-
+TH1F *h_z_corr1_data = new TH1F("h_z_corr1_data","h_z_corr1_data",600, -10., 10);
+TH1F *h_z_corr2_data = new TH1F("h_z_corr2_data","h_z_corr2_data",600, -10., 10);
+TH1F *h_z_corr1_sim = new TH1F("h_z_corr1_sim","h_z_corr1_sim",600, -10., 10);
+TH1F *h_z_corr2_sim = new TH1F("h_z_corr2_sim","h_z_corr2_sim",600, -10., 10);
 
 TH2F *h_cc_nphe_total_s1 = new TH2F("h_cc_nphe_total_s1","h_cc_nphe_total_s1",200, -5., 55.,200., -25., 25.);
 TH2F *h_cc_nphe_total_s2 = new TH2F("h_cc_nphe_total_s2","h_cc_nphe_total_s2",200, -5., 55.,200., -25., 25.);
@@ -349,20 +259,12 @@ TH1F *h_1d_rc_0875_evt = new TH1F("h_1d_rc_0875_evt","h_1d_rc_0875_evt",13, 1.3,
 TH1F *h_1d_rc_0925_evt = new TH1F("h_1d_rc_0925_evt","h_1d_rc_0925_evt",12, 1.3,1.6);
 TH1F *h_1d_rc_0975_evt = new TH1F("h_1d_rc_0975_evt","h_1d_rc_0975_evt",10, 1.3,1.55);*/
 
-TH1F *h_inprot_miss = new TH1F("h_inprot_miss","h_inprot_miss",800, -2., 2.);
-TH1F *h_inprot_miss_en = new TH1F("h_inprot_miss_en","h_inprot_miss_en",800, -2., 2.);
-
-TH1F *h_inprot_miss_sim = new TH1F("h_inprot_miss_sim","h_inprot_miss_sim",800, -2., 2.);
-TH1F *h_inprot_miss_en_sim = new TH1F("h_inprot_miss_en_sim","h_inprot_miss_en_sim",800, -2., 2.);
 
 TH1F *hist_PIm_miss = new TH1F("hist_PIm_miss","hist_PIm_miss",400, -0.5, 0.5);
 TH1F *h_PIm_miss_sim = new TH1F("h_PIm_miss_sim","h_PIm_miss_sim",400, -0.5, 0.5);
 
 TH1F *hist_w_hadr_all_reg = new TH1F("hist_w_hadr_all_reg","hist_w_hadr_all_reg",210., 1.2, 1.9);
 TH1F *hist_w_el_all_reg = new TH1F("hist_w_el_all_reg","hist_w_el_all_reg",210., 1.2, 1.9);
-TH1F *hist_w_sim_old_1dim = new TH1F("hist_w_sim_old_1dim","hist_w_sim_old_1dim",210., 1.2, 1.9);
-TH1F *hist_w_sim_new_1dim = new TH1F("hist_w_sim_new_1dim","hist_w_sim_new_1dim",210., 1.2, 1.9);
-
 
 TH1F *hist_PIm_miss_all_reg_1 = new TH1F("hist_PIm_miss_all_reg_1","hist_PIm_miss_all_reg_1",400, -0.2, 0.2);
 TH1F *hist_PIm_miss_all_reg_2 = new TH1F("hist_PIm_miss_all_reg_2","hist_PIm_miss_all_reg_2",400, -0.2, 0.2);
@@ -382,13 +284,6 @@ TH1F *h_PIp_miss_en_sim = new TH1F("h_PIp_miss_en_sim","h_PIp_miss_en_sim",400, 
 
 TH1F *hist_PIm_miss_en = new TH1F("hist_PIm_miss_en","hist_PIm_miss_en",400, -2, 2);
 
-TH1F *h_miss_mass_0_d = new TH1F("h_miss_mass_0_d","h_miss_mass_0_d",2000, -0., 2.);
-TH1F *h_miss_mass_0_d_sim = new TH1F("h_miss_mass_0_d_sim","h_miss_mass_0_d_sim",2000, -0., 2.);
-
-
-TH1F *h_miss_mass_0_d_mmcut = new TH1F("h_miss_mass_0_d_mmcut","h_miss_mass_0_d_mmcut",2000, -0., 2.);
-TH1F *h_miss_mass_0_d_sim_mmcut = new TH1F("h_miss_mass_0_d_sim_mmcut","h_miss_mass_0_d_sim_mmcut",2000, -0., 2.);
-
 TH1F *h_miss_mom_0 = new TH1F("h_miss_mom_0","h_miss_mom_0",400, -0.1, 0.9);
 TH1F *h_miss_mom_0_sim = new TH1F("h_miss_mom_0_sim","h_miss_mom_0_sim",400, -0.1, 0.9);
 
@@ -402,11 +297,6 @@ TH1F *h_miss_mom_0_cut_on0_sim = new TH1F("h_miss_mom_0_cut_on0_sim","h_miss_mom
 TH1F *h_miss_mom_0_cut_onpim_sim = new TH1F("h_miss_mom_0_cut_onpim_sim","h_miss_mom_0_cut_onpim_sim",400, -0.1, 0.9);
 
 
-TH1F *h_miss_mom_0_d = new TH1F("h_miss_mom_0_d","h_miss_mom_0_d",400, -0.1, 0.9);
-TH1F *h_miss_mom_0_d_sim = new TH1F("h_miss_mom_0_d_sim","h_miss_mom_0_d_sim",400, -0.1, 0.9);
-
-TH1F *h_miss_mom_0_d_mmcut = new TH1F("h_miss_mom_0_d_mmcut","h_miss_mom_0_d_mmcut",400, -0.1, 0.9);
-TH1F *h_miss_mom_0_d_sim_mmcut = new TH1F("h_miss_mom_0_d_sim_mmcut","h_miss_mom_0_d_sim_mmcut",400, -0.1, 0.9);
 //extern 
 
 
@@ -432,35 +322,35 @@ TH2F *h_mm_pip_vs_npart_sim = new TH2F("mm_pip_vs_npart_sim","mm_pip_vs_npart_si
 
 
 
-TH1F *hist_z_el_1 = new TH1F("hist_z_el_1","hist_z_el_1",400, -10.,10.);
-TH1F *hist_z_el_2 = new TH1F("hist_z_el_2","hist_z_el_2",400, -10.,10.);
-TH1F *hist_z_el_3 = new TH1F("hist_z_el_3","hist_z_el_3",400, -10.,10.);
-TH1F *hist_z_el_4 = new TH1F("hist_z_el_4","hist_z_el_4",400, -10.,10.);
-TH1F *hist_z_el_5 = new TH1F("hist_z_el_5","hist_z_el_5",400, -10.,10.);
-TH1F *hist_z_el_6 = new TH1F("hist_z_el_6","hist_z_el_6",400, -10.,10.);
+TH1F *hist_z_el_1 = new TH1F("hist_z_el_1","hist_z_el_1",480, -10.,10.);
+TH1F *hist_z_el_2 = new TH1F("hist_z_el_2","hist_z_el_2",480, -10.,10.);
+TH1F *hist_z_el_3 = new TH1F("hist_z_el_3","hist_z_el_3",480, -10.,10.);
+TH1F *hist_z_el_4 = new TH1F("hist_z_el_4","hist_z_el_4",480, -10.,10.);
+TH1F *hist_z_el_5 = new TH1F("hist_z_el_5","hist_z_el_5",480, -10.,10.);
+TH1F *hist_z_el_6 = new TH1F("hist_z_el_6","hist_z_el_6",480, -10.,10.);
 
 
-TH1F *hist_z_el_1_empty = new TH1F("hist_z_el_1_empty","hist_z_el_1_empty",400, -10.,10.);
-TH1F *hist_z_el_2_empty = new TH1F("hist_z_el_2_empty","hist_z_el_2_empty",400, -10.,10.);
-TH1F *hist_z_el_3_empty = new TH1F("hist_z_el_3_empty","hist_z_el_3_empty",400, -10.,10.);
-TH1F *hist_z_el_4_empty = new TH1F("hist_z_el_4_empty","hist_z_el_4_empty",400, -10.,10.);
-TH1F *hist_z_el_5_empty = new TH1F("hist_z_el_5_empty","hist_z_el_5_empty",400, -10.,10.);
-TH1F *hist_z_el_6_empty = new TH1F("hist_z_el_6_empty","hist_z_el_6_empty",400, -10.,10.);
+TH1F *hist_z_el_1_empty = new TH1F("hist_z_el_1_empty","hist_z_el_1_empty",480, -10.,10.);
+TH1F *hist_z_el_2_empty = new TH1F("hist_z_el_2_empty","hist_z_el_2_empty",480, -10.,10.);
+TH1F *hist_z_el_3_empty = new TH1F("hist_z_el_3_empty","hist_z_el_3_empty",480, -10.,10.);
+TH1F *hist_z_el_4_empty = new TH1F("hist_z_el_4_empty","hist_z_el_4_empty",480, -10.,10.);
+TH1F *hist_z_el_5_empty = new TH1F("hist_z_el_5_empty","hist_z_el_5_empty",480, -10.,10.);
+TH1F *hist_z_el_6_empty = new TH1F("hist_z_el_6_empty","hist_z_el_6_empty",480, -10.,10.);
 
 
-TH1F *hist_z_el_1_sim_1 = new TH1F("hist_z_el_1_sim_1","hist_z_el_1_sim_1",400, -10.,10.);
-TH1F *hist_z_el_2_sim_1 = new TH1F("hist_z_el_2_sim_1","hist_z_el_2_sim_1",400, -10.,10.);
-TH1F *hist_z_el_3_sim_1 = new TH1F("hist_z_el_3_sim_1","hist_z_el_3_sim_1",400, -10.,10.);
-TH1F *hist_z_el_4_sim_1 = new TH1F("hist_z_el_4_sim_1","hist_z_el_4_sim_1",400, -10.,10.);
-TH1F *hist_z_el_5_sim_1 = new TH1F("hist_z_el_5_sim_1","hist_z_el_5_sim_1",400, -10.,10.);
-TH1F *hist_z_el_6_sim_1 = new TH1F("hist_z_el_6_sim_1","hist_z_el_6_sim_1",400, -10.,10.);
+TH1F *hist_z_el_1_sim_1 = new TH1F("hist_z_el_1_sim_1","hist_z_el_1_sim_1",480, -10.,10.);
+TH1F *hist_z_el_2_sim_1 = new TH1F("hist_z_el_2_sim_1","hist_z_el_2_sim_1",480, -10.,10.);
+TH1F *hist_z_el_3_sim_1 = new TH1F("hist_z_el_3_sim_1","hist_z_el_3_sim_1",480, -10.,10.);
+TH1F *hist_z_el_4_sim_1 = new TH1F("hist_z_el_4_sim_1","hist_z_el_4_sim_1",480, -10.,10.);
+TH1F *hist_z_el_5_sim_1 = new TH1F("hist_z_el_5_sim_1","hist_z_el_5_sim_1",480, -10.,10.);
+TH1F *hist_z_el_6_sim_1 = new TH1F("hist_z_el_6_sim_1","hist_z_el_6_sim_1",480, -10.,10.);
 
-TH1F *hist_z_el_1_sim_2 = new TH1F("hist_z_el_1_sim_2","hist_z_el_1_sim_2",400, -10.,10.);
-TH1F *hist_z_el_2_sim_2 = new TH1F("hist_z_el_2_sim_2","hist_z_el_2_sim_2",400, -10.,10.);
-TH1F *hist_z_el_3_sim_2 = new TH1F("hist_z_el_3_sim_2","hist_z_el_3_sim_2",400, -10.,10.);
-TH1F *hist_z_el_4_sim_2 = new TH1F("hist_z_el_4_sim_2","hist_z_el_4_sim_2",400, -10.,10.);
-TH1F *hist_z_el_5_sim_2 = new TH1F("hist_z_el_5_sim_2","hist_z_el_5_sim_2",400, -10.,10.);
-TH1F *hist_z_el_6_sim_2 = new TH1F("hist_z_el_6_sim_2","hist_z_el_6_sim_2",400, -10.,10.);
+TH1F *hist_z_el_1_sim_2 = new TH1F("hist_z_el_1_sim_2","hist_z_el_1_sim_2",480, -10.,10.);
+TH1F *hist_z_el_2_sim_2 = new TH1F("hist_z_el_2_sim_2","hist_z_el_2_sim_2",480, -10.,10.);
+TH1F *hist_z_el_3_sim_2 = new TH1F("hist_z_el_3_sim_2","hist_z_el_3_sim_2",480, -10.,10.);
+TH1F *hist_z_el_4_sim_2 = new TH1F("hist_z_el_4_sim_2","hist_z_el_4_sim_2",480, -10.,10.);
+TH1F *hist_z_el_5_sim_2 = new TH1F("hist_z_el_5_sim_2","hist_z_el_5_sim_2",480, -10.,10.);
+TH1F *hist_z_el_6_sim_2 = new TH1F("hist_z_el_6_sim_2","hist_z_el_6_sim_2",480, -10.,10.);
 
 
 
@@ -528,7 +418,7 @@ TH2F *beta_vs_p_pip_sim[6][48];
 TH2F *beta_vs_p_pim_sim[6][48]; 
 
 
-TH2F *ph_vs_th_pim[6][10];
+TH2F *ph_vs_th_pim[6][15];
 TH2F *ph_th_pim_all_p[6]; 
 
 TH2F *time_pip[6][48];
@@ -619,27 +509,23 @@ TH2F *ph_vs_th_p_4 = new TH2F("ph_vs_th_p_4","ph_vs_th_p_4",220, 0., 110.,150., 
 TH2F *ph_vs_th_p_5 = new TH2F("ph_vs_th_p_5","ph_vs_th_p_5",220, 0., 110.,150., -35., 35.);
 TH2F *ph_vs_th_p_6 = new TH2F("ph_vs_th_p_6","ph_vs_th_p_6",220, 0., 110.,150., -35., 35.);
 
-TH2F *ph_vs_th_p_1_w = new TH2F("ph_vs_th_p_1_w","ph_vs_th_p_1_w",220, 0., 110.,150., -35., 35.);
-TH2F *ph_vs_th_p_2_w = new TH2F("ph_vs_th_p_2_w","ph_vs_th_p_2_w",220, 0., 110.,150., -35., 35.);
-TH2F *ph_vs_th_p_3_w = new TH2F("ph_vs_th_p_3_w","ph_vs_th_p_3_w",220, 0., 110.,150., -35., 35.);
-TH2F *ph_vs_th_p_4_w = new TH2F("ph_vs_th_p_4_w","ph_vs_th_p_4_w",220, 0., 110.,150., -35., 35.);
-TH2F *ph_vs_th_p_5_w = new TH2F("ph_vs_th_p_5_w","ph_vs_th_p_5_w",220, 0., 110.,150., -35., 35.);
-TH2F *ph_vs_th_p_6_w = new TH2F("ph_vs_th_p_6_w","ph_vs_th_p_6_w",220, 0., 110.,150., -35., 35.);
+TH2F *ph_vs_th_p_1_w = new TH2F("ph_vs_th_p_1_w","ph_vs_th_p_1_w",220, 0., 130.,150., -35., 35.);
+TH2F *ph_vs_th_p_2_w = new TH2F("ph_vs_th_p_2_w","ph_vs_th_p_2_w",220, 0., 130.,150., -35., 35.);
+TH2F *ph_vs_th_p_3_w = new TH2F("ph_vs_th_p_3_w","ph_vs_th_p_3_w",220, 0., 130.,150., -35., 35.);
+TH2F *ph_vs_th_p_4_w = new TH2F("ph_vs_th_p_4_w","ph_vs_th_p_4_w",220, 0., 130.,150., -35., 35.);
+TH2F *ph_vs_th_p_5_w = new TH2F("ph_vs_th_p_5_w","ph_vs_th_p_5_w",220, 0., 130.,150., -35., 35.);
+TH2F *ph_vs_th_p_6_w = new TH2F("ph_vs_th_p_6_w","ph_vs_th_p_6_w",220, 0., 130.,150., -35., 35.);
 
 
-TH2F *ph_vs_th_pip_1 = new TH2F("ph_vs_th_pip_1","ph_vs_th_pip_1",220, 0., 110.,150., -35., 35.);
-TH2F *ph_vs_th_pip_2 = new TH2F("ph_vs_th_pip_2","ph_vs_th_pip_2",220, 0., 110.,150., -35., 35.);
-TH2F *ph_vs_th_pip_3 = new TH2F("ph_vs_th_pip_3","ph_vs_th_pip_3",220, 0., 110.,150., -35., 35.);
-TH2F *ph_vs_th_pip_4 = new TH2F("ph_vs_th_pip_4","ph_vs_th_pip_4",220, 0., 110.,150., -35., 35.);
-TH2F *ph_vs_th_pip_5 = new TH2F("ph_vs_th_pip_5","ph_vs_th_pip_5",220, 0., 110.,150., -35., 35.);
-TH2F *ph_vs_th_pip_6 = new TH2F("ph_vs_th_pip_6","ph_vs_th_pip_6",220, 0., 110.,150., -35., 35.);
+TH2F *ph_vs_th_pip_1 = new TH2F("ph_vs_th_pip_1","ph_vs_th_pip_1",220, 0., 130.,150., -35., 35.);
+TH2F *ph_vs_th_pip_2 = new TH2F("ph_vs_th_pip_2","ph_vs_th_pip_2",220, 0., 130.,150., -35., 35.);
+TH2F *ph_vs_th_pip_3 = new TH2F("ph_vs_th_pip_3","ph_vs_th_pip_3",220, 0., 130.,150., -35., 35.);
+TH2F *ph_vs_th_pip_4 = new TH2F("ph_vs_th_pip_4","ph_vs_th_pip_4",220, 0., 130.,150., -35., 35.);
+TH2F *ph_vs_th_pip_5 = new TH2F("ph_vs_th_pip_5","ph_vs_th_pip_5",220, 0., 130.,150., -35., 35.);
+TH2F *ph_vs_th_pip_6 = new TH2F("ph_vs_th_pip_6","ph_vs_th_pip_6",220, 0., 130.,150., -35., 35.);
 
-TH2F  *h_delta_w_vs_w_old_data = new TH2F("h_delta_w_vs_w_old_data","h_delta_w_vs_w_old_data",180, 1.3, 1.9,300., -0.3,0.3);
-TH2F  *h_delta_w_vs_w_old_data_mmcut = new TH2F("h_delta_w_vs_w_old_data_mmcut","h_delta_w_vs_w_old_data_mmcut",180, 1.3, 1.9,300., -0.3,0.3);
-TH2F  *h_delta_w_vs_w_old_gen = new TH2F("h_delta_w_vs_w_old_gen","h_delta_w_vs_w_old_gen",180, 1.3, 1.9,300., -0.3,0.3);
-TH2F  *h_delta_w_vs_w_old_rec = new TH2F("h_delta_w_vs_w_old_rec","h_delta_w_vs_w_old_rec",180, 1.3, 1.9,300., -0.3,0.3);
 
-TH2F  *ph_th_p_1[5],*ph_th_p_2[5],*ph_th_p_3[5],*ph_th_p_4[5],*ph_th_p_5[5],*ph_th_p_6[5];
+TH2F  *ph_th_p_1[6],*ph_th_p_2[6],*ph_th_p_3[6],*ph_th_p_4[6],*ph_th_p_5[6],*ph_th_p_6[6];
 
 TH2F  *ph_th_pip_1[6],*ph_th_pip_2[6],*ph_th_pip_3[6],*ph_th_pip_4[6],*ph_th_pip_5[6],*ph_th_pip_6[6];
 
@@ -675,173 +561,58 @@ h_inv_NPIm[i] = new TH1F(qqq.str().c_str(),qqq.str().c_str(),400,  0.140+0.939-0
 qqq.str("");
 
 
+qqq << "h_pim_mis_main_top_" <<i;
+h_pim_mis_main_top[i] = new TH1F(qqq.str().c_str(),qqq.str().c_str(),600, -0.4, 0.4);
+qqq.str("");
+
+qqq << "h_pim_mis_main_top_sim_" <<i;
+h_pim_mis_main_top_sim[i] = new TH1F(qqq.str().c_str(),qqq.str().c_str(),600, -0.4, 0.4);
+qqq.str("");
+
+
 qqq << "h_pim_mis_all_reg_" <<i;
-h_pim_mis_all_reg[i] = new TH1F(qqq.str().c_str(),qqq.str().c_str(),400, -0.4, 0.4);
+h_pim_mis_all_reg[i] = new TH1F(qqq.str().c_str(),qqq.str().c_str(),600, -0.4, 0.4);
 qqq.str("");
 
 qqq << "h_pim_mis_all_reg_sim_" <<i;
-h_pim_mis_all_reg_sim[i] = new TH1F(qqq.str().c_str(),qqq.str().c_str(),400, -0.4, 0.4);
+h_pim_mis_all_reg_sim[i] = new TH1F(qqq.str().c_str(),qqq.str().c_str(),600, -0.4, 0.4);
 qqq.str("");
 
-qqq << "h_pip_mis_all_reg_" <<i;
-h_pip_mis_all_reg[i] = new TH1F(qqq.str().c_str(),qqq.str().c_str(),400, -0.4, 0.4);
+
+qqq << "h_0_mis_all_reg_" <<i;
+h_0_mis_all_reg[i] = new TH1F(qqq.str().c_str(),qqq.str().c_str(),600, -0.1, 0.05);
 qqq.str("");
 
-qqq << "h_pip_mis_all_reg_sim_" <<i;
-h_pip_mis_all_reg_sim[i] = new TH1F(qqq.str().c_str(),qqq.str().c_str(),400, -0.4, 0.4);
+qqq << "h_0_mis_all_reg_sim_" <<i;
+h_0_mis_all_reg_sim[i] = new TH1F(qqq.str().c_str(),qqq.str().c_str(),600, -0.1, 0.05);
 qqq.str("");
-
-qqq << "h_pr_mis_all_reg_" <<i;
-h_pr_mis_all_reg[i] = new TH1F(qqq.str().c_str(),qqq.str().c_str(),400, 0.5, 1.3);
-qqq.str("");
-
-qqq << "h_pr_mis_all_reg_sim_" <<i;
-h_pr_mis_all_reg_sim[i] = new TH1F(qqq.str().c_str(),qqq.str().c_str(),400, 0.5, 1.3);
-qqq.str("");
-
 
 
 qqq << "h_mom_all_reg_" <<i;
-h_mom_all_reg[i] = new TH1F(qqq.str().c_str(),qqq.str().c_str(),400, -0.1, 1.9);
+h_mom_all_reg[i] = new TH1F(qqq.str().c_str(),qqq.str().c_str(),600, -0.1, 1.5);
 qqq.str("");
 
 qqq << "h_mom_all_reg_sim_" <<i;
-h_mom_all_reg_sim[i] = new TH1F(qqq.str().c_str(),qqq.str().c_str(),400, -0.1, 1.9);
+h_mom_all_reg_sim[i] = new TH1F(qqq.str().c_str(),qqq.str().c_str(),600, -0.1, 1.5);
 qqq.str("");
 };
 
-/*
-for (j=0; j<12; j++) {
 
-
-for (k=0; k<8; k++) {
-
-qqq << "h_pim_mis_th_dep_arr_" <<i<<"_"<<j<<"_"<<k;
-h_pim_mis_th_dep[i][j][k] = new TH1F(qqq.str().c_str(),qqq.str().c_str(),400, -0.05, 0.65);
-qqq.str("");
-
-qqq << "h_pim_mis_th_dep_arr_sim_" <<i<<"_"<<j<<"_"<<k;
-h_pim_mis_th_dep_sim[i][j][k] = new TH1F(qqq.str().c_str(),qqq.str().c_str(),400, -0.05, 0.65);
-qqq.str("");
-
-
-};
-};
-for (j=0; j<12; j++) {
-
-qqq << "h_pim_mis_all_reg_th_dep_pim_" <<i<<"_"<<j;
-h_pim_mis_all_reg_th_dep_pim[i][j] = new TH1F(qqq.str().c_str(),qqq.str().c_str(),400, -1., 1.);
-qqq.str("");
-
-qqq << "h_pim_mis_all_reg_th_dep_pim_sim_" <<i<<"_"<<j;
-h_pim_mis_all_reg_th_dep_pim_sim[i][j] = new TH1F(qqq.str().c_str(),qqq.str().c_str(),400, -1., 1.);
-qqq.str("");
-
-qqq << "h_mom_all_reg_th_dep_pim_" <<i<<"_"<<j;
-h_mom_all_reg_th_dep_pim[i][j] = new TH1F(qqq.str().c_str(),qqq.str().c_str(),400, -0.1, 1.9);
-qqq.str("");
-
-qqq << "h_mom_all_reg_th_dep_pim_sim_" <<i<<"_"<<j;
-h_mom_all_reg_th_dep_pim_sim[i][j] = new TH1F(qqq.str().c_str(),qqq.str().c_str(),400, -0.1, 1.9);
-qqq.str("");
-
-
-qqq << "h_pim_mis_all_reg_th_dep_pip_" <<i<<"_"<<j;
-h_pim_mis_all_reg_th_dep_pip[i][j] = new TH1F(qqq.str().c_str(),qqq.str().c_str(),400, -0.5, 1.1);
-qqq.str("");
-
-qqq << "h_pim_mis_all_reg_th_dep_pip_sim_" <<i<<"_"<<j;
-h_pim_mis_all_reg_th_dep_pip_sim[i][j] = new TH1F(qqq.str().c_str(),qqq.str().c_str(),400, -0.5, 1.1);
-qqq.str("");
-
-qqq << "h_mom_all_reg_th_dep_pip_" <<i<<"_"<<j;
-h_mom_all_reg_th_dep_pip[i][j] = new TH1F(qqq.str().c_str(),qqq.str().c_str(),400, -0.1, 1.9);
-qqq.str("");
-
-qqq << "h_mom_all_reg_th_dep_pip_sim_" <<i<<"_"<<j;
-h_mom_all_reg_th_dep_pip_sim[i][j] = new TH1F(qqq.str().c_str(),qqq.str().c_str(),400, -0.1, 1.9);
-qqq.str("");
-
-
-
-
-
-qqq << "h_mom_all_reg_th_dep_pr_" <<i<<"_"<<j;
-h_mom_all_reg_th_dep_pr[i][j] = new TH1F(qqq.str().c_str(),qqq.str().c_str(),400, -0.1, 1.9);
-qqq.str("");
-
-qqq << "h_mom_all_reg_th_dep_pr_sim_" <<i<<"_"<<j;
-h_mom_all_reg_th_dep_pr_sim[i][j] = new TH1F(qqq.str().c_str(),qqq.str().c_str(),400, -0.1, 1.9);
-qqq.str("");
-
-
-
-};
-for (j=0; j<12; j++) {
-
-qqq << "h_pim_mis_all_reg_th_dep_pr_" <<i<<"_"<<j;
-h_pim_mis_all_reg_th_dep_pr[i][j] = new TH1F(qqq.str().c_str(),qqq.str().c_str(),400, -0.5, 1.1);
-qqq.str("");
-
-qqq << "h_pim_mis_all_reg_th_dep_pr_sim_" <<i<<"_"<<j;
-h_pim_mis_all_reg_th_dep_pr_sim[i][j] = new TH1F(qqq.str().c_str(),qqq.str().c_str(),400, -0.5,1.1);
-qqq.str("");
-
-
-qqq << "h_pim_mis_th_dep_pr_" <<i<<"_"<<j;
-h_pim_mis_th_dep_pr[i][j] = new TH1F(qqq.str().c_str(),qqq.str().c_str(),400, -1., 1.);
-qqq.str("");
-
-qqq << "h_pim_mis_th_dep_pr_sim_" <<i<<"_"<<j;
-h_pim_mis_th_dep_pr_sim[i][j] = new TH1F(qqq.str().c_str(),qqq.str().c_str(),400, -1.,1.);
-qqq.str("");
-
-
-};
-};*/
 
 
 /*
 for (j=0; j<4; j++) {
 for (i=0; i<21; i++) {
 
-qqq << "h_pim_mis_fermi_nocut_1_" <<j<<"_"<< i;
-h_pim_mis_fermi_nocut_1[j][i] = new TH1F(qqq.str().c_str(),qqq.str().c_str(),400, -0.05, 0.65);
+qqq << "h_excltop_pimismas_1_" <<j<<"_"<< i;
+h_excltop_pimismas_1[j][i] = new TH1F(qqq.str().c_str(),qqq.str().c_str(),400, -0.05, 0.65);
 qqq.str("");
 
 
-qqq << "h_pim_mis_fermi_nocut_sim_1_" <<j<<"_"<< i;
-h_pim_mis_fermi_nocut_sim_1[j][i] = new TH1F(qqq.str().c_str(),qqq.str().c_str(),400, -0.05, 0.65);
-qqq.str("");
-};
-for (i=0; i<5; i++) {
-qqq << "h_pim_mis_fermi_momcut_1_" <<j<<"_"<< i;
-h_pim_mis_fermi_momcut_1[j][i] = new TH1F(qqq.str().c_str(),qqq.str().c_str(),400, -0.5, 0.5);
+qqq << "h_excltop_pimismas_sim_1_" <<j<<"_"<< i;
+h_excltop_pimismas_sim_1[j][i] = new TH1F(qqq.str().c_str(),qqq.str().c_str(),400, -0.05, 0.65);
 qqq.str("");
 
-
-qqq << "h_pim_mis_fermi_momcut_sim_1_" <<j<<"_"<< i;
-h_pim_mis_fermi_momcut_sim_1[j][i] = new TH1F(qqq.str().c_str(),qqq.str().c_str(),400, -0.5, 0.5);
-qqq.str("");
-
-
-qqq << "h_mis_mom_fermi_1_" <<j<<"_"<< i;
-h_mis_mom_fermi_1[j][i] = new TH1F(qqq.str().c_str(),qqq.str().c_str(),400, -0.1, 1.9);
-qqq.str("");
-
-
-qqq << "h_mis_mom_fermi_sim_1_" <<j<<"_"<< i;
-h_mis_mom_fermi_sim_1[j][i] = new TH1F(qqq.str().c_str(),qqq.str().c_str(),400, -0.1, 1.9);
-qqq.str("");
-
-
-qqq << "h_mis_mom_fermi_mmas_cut_1_" <<j<<"_"<< i;
-h_mis_mom_fermi_mmas_cut_1[j][i] = new TH1F(qqq.str().c_str(),qqq.str().c_str(),400, -0.1, 1.9);
-qqq.str("");
-
-qqq << "h_mis_mom_fermi_mmas_cut_sim_1_" <<j<<"_"<< i;
-h_mis_mom_fermi_mmas_cut_sim_1[j][i] = new TH1F(qqq.str().c_str(),qqq.str().c_str(),400, -0.1, 1.9);
-qqq.str("");
 
 };
 };
@@ -850,42 +621,13 @@ qqq.str("");
 for (j=0; j<2; j++) {
 for (i=0; i<19; i++) {
 
-qqq << "h_pim_mis_fermi_nocut_2_" <<j<<"_"<< i;
-h_pim_mis_fermi_nocut_2[j][i] = new TH1F(qqq.str().c_str(),qqq.str().c_str(),400, -0.05, 0.65);
+qqq << "h_excltop_pimismas_2_" <<j<<"_"<< i;
+h_excltop_pimismas_2[j][i] = new TH1F(qqq.str().c_str(),qqq.str().c_str(),400, -0.05, 0.65);
 qqq.str("");
 
 
-qqq << "h_pim_mis_fermi_nocut_sim_2_" <<j<<"_"<< i;
-h_pim_mis_fermi_nocut_sim_2[j][i] = new TH1F(qqq.str().c_str(),qqq.str().c_str(),400, -0.05, 0.65);
-qqq.str("");
-
-
-qqq << "h_pim_mis_fermi_momcut_2_" <<j<<"_"<< i;
-h_pim_mis_fermi_momcut_2[j][i] = new TH1F(qqq.str().c_str(),qqq.str().c_str(),400, -2.1, 0.5);
-qqq.str("");
-
-
-qqq << "h_pim_mis_fermi_momcut_sim_2_" <<j<<"_"<< i;
-h_pim_mis_fermi_momcut_sim_2[j][i] = new TH1F(qqq.str().c_str(),qqq.str().c_str(),400, -2.1, 0.5);
-qqq.str("");
-
-
-qqq << "h_mis_mom_fermi_2_" <<j<<"_"<< i;
-h_mis_mom_fermi_2[j][i] = new TH1F(qqq.str().c_str(),qqq.str().c_str(),400, -0.1, 1.9);
-qqq.str("");
-
-
-qqq << "h_mis_mom_fermi_sim_2_" <<j<<"_"<< i;
-h_mis_mom_fermi_sim_2[j][i] = new TH1F(qqq.str().c_str(),qqq.str().c_str(),400, -0.1, 1.9);
-qqq.str("");
-
-
-qqq << "h_mis_mom_fermi_mmas_cut_2_" <<j<<"_"<< i;
-h_mis_mom_fermi_mmas_cut_2[j][i] = new TH1F(qqq.str().c_str(),qqq.str().c_str(),400, -0.1, 1.9);
-qqq.str("");
-
-qqq << "h_mis_mom_fermi_mmas_cut_sim_2_" <<j<<"_"<< i;
-h_mis_mom_fermi_mmas_cut_sim_2[j][i] = new TH1F(qqq.str().c_str(),qqq.str().c_str(),400, -0.1, 1.9);
+qqq << "h_excltop_pimismas_sim_2_" <<j<<"_"<< i;
+h_excltop_pimismas_sim_2[j][i] = new TH1F(qqq.str().c_str(),qqq.str().c_str(),400, -0.05, 0.65);
 qqq.str("");
 
 };
@@ -896,43 +638,15 @@ qqq.str("");
 for (j=0; j<2; j++) {
 for (i=0; i<17; i++) {
 
-qqq << "h_pim_mis_fermi_nocut_3_" <<j<<"_"<< i;
-h_pim_mis_fermi_nocut_3[j][i] = new TH1F(qqq.str().c_str(),qqq.str().c_str(),400, -0.05, 0.65);
+qqq << "h_excltop_pimismas_3_" <<j<<"_"<< i;
+h_excltop_pimismas_3[j][i] = new TH1F(qqq.str().c_str(),qqq.str().c_str(),400, -0.05, 0.65);
 qqq.str("");
 
 
-qqq << "h_pim_mis_fermi_nocut_sim_3_" <<j<<"_"<< i;
-h_pim_mis_fermi_nocut_sim_3[j][i] = new TH1F(qqq.str().c_str(),qqq.str().c_str(),400, -0.05, 0.65);
+qqq << "h_excltop_pimismas_sim_3_" <<j<<"_"<< i;
+h_excltop_pimismas_sim_3[j][i] = new TH1F(qqq.str().c_str(),qqq.str().c_str(),400, -0.05, 0.65);
 qqq.str("");
 
-
-qqq << "h_pim_mis_fermi_momcut_3_" <<j<<"_"<< i;
-h_pim_mis_fermi_momcut_3[j][i] = new TH1F(qqq.str().c_str(),qqq.str().c_str(),400, -2.1, 0.5);
-qqq.str("");
-
-
-qqq << "h_pim_mis_fermi_momcut_sim_3_" <<j<<"_"<< i;
-h_pim_mis_fermi_momcut_sim_3[j][i] = new TH1F(qqq.str().c_str(),qqq.str().c_str(),400, -2.1, 0.5);
-qqq.str("");
-
-
-qqq << "h_mis_mom_fermi_3_" <<j<<"_"<< i;
-h_mis_mom_fermi_3[j][i] = new TH1F(qqq.str().c_str(),qqq.str().c_str(),400, -0.1, 1.9);
-qqq.str("");
-
-
-qqq << "h_mis_mom_fermi_sim_3_" <<j<<"_"<< i;
-h_mis_mom_fermi_sim_3[j][i] = new TH1F(qqq.str().c_str(),qqq.str().c_str(),400, -0.1, 1.9);
-qqq.str("");
-
-
-qqq << "h_mis_mom_fermi_mmas_cut_3_" <<j<<"_"<< i;
-h_mis_mom_fermi_mmas_cut_3[j][i] = new TH1F(qqq.str().c_str(),qqq.str().c_str(),400, -0.1, 1.9);
-qqq.str("");
-
-qqq << "h_mis_mom_fermi_mmas_cut_sim_3_" <<j<<"_"<< i;
-h_mis_mom_fermi_mmas_cut_sim_3[j][i] = new TH1F(qqq.str().c_str(),qqq.str().c_str(),400, -0.1, 1.9);
-qqq.str("");
 
 };
 };
@@ -942,89 +656,29 @@ qqq.str("");
 
 for (i=0; i<14; i++) {
 
-qqq << "h_pim_mis_fermi_nocut_4_" << i;
-h_pim_mis_fermi_nocut_4[i] = new TH1F(qqq.str().c_str(),qqq.str().c_str(),400, -0.05, 0.65);
+qqq << "h_excltop_pimismas_4_" << i;
+h_excltop_pimismas_4[i] = new TH1F(qqq.str().c_str(),qqq.str().c_str(),400, -0.05, 0.65);
 qqq.str("");
 
 
-qqq << "h_pim_mis_fermi_nocut_sim_4_" << i;
-h_pim_mis_fermi_nocut_sim_4[i] = new TH1F(qqq.str().c_str(),qqq.str().c_str(),400, -0.05, 0.65);
+qqq << "h_excltop_pimismas_sim_4_" << i;
+h_excltop_pimismas_sim_4[i] = new TH1F(qqq.str().c_str(),qqq.str().c_str(),400, -0.05, 0.65);
 qqq.str("");
 
-
-qqq << "h_pim_mis_fermi_momcut_4_" << i;
-h_pim_mis_fermi_momcut_4[i] = new TH1F(qqq.str().c_str(),qqq.str().c_str(),400, -2.1, 0.5);
-qqq.str("");
-
-
-qqq << "h_pim_mis_fermi_momcut_sim_4_" << i;
-h_pim_mis_fermi_momcut_sim_4[i] = new TH1F(qqq.str().c_str(),qqq.str().c_str(),400, -2.1, 0.5);
-qqq.str("");
-
-
-qqq << "h_mis_mom_fermi_4_"<< i;
-h_mis_mom_fermi_4[i] = new TH1F(qqq.str().c_str(),qqq.str().c_str(),400, -0.1, 1.9);
-qqq.str("");
-
-
-qqq << "h_mis_mom_fermi_sim_4_"<< i;
-h_mis_mom_fermi_sim_4[i] = new TH1F(qqq.str().c_str(),qqq.str().c_str(),400, -0.1, 1.9);
-qqq.str("");
-
-
-qqq << "h_mis_mom_fermi_mmas_cut_4_"<< i;
-h_mis_mom_fermi_mmas_cut_4[i] = new TH1F(qqq.str().c_str(),qqq.str().c_str(),400, -0.1, 1.9);
-qqq.str("");
-
-qqq << "h_mis_mom_fermi_mmas_cut_sim_4_" << i;
-h_mis_mom_fermi_mmas_cut_sim_4[i] = new TH1F(qqq.str().c_str(),qqq.str().c_str(),400, -0.1, 1.9);
-qqq.str("");
 
 };
 
 
 for (i=0; i<13; i++) {
 
-qqq << "h_pim_mis_fermi_nocut_5_" << i;
-h_pim_mis_fermi_nocut_5[i] = new TH1F(qqq.str().c_str(),qqq.str().c_str(),400, -0.05, 0.65);
+qqq << "h_excltop_pimismas_5_" << i;
+h_excltop_pimismas_5[i] = new TH1F(qqq.str().c_str(),qqq.str().c_str(),400, -0.05, 0.65);
 qqq.str("");
 
 
-qqq << "h_pim_mis_fermi_nocut_sim_5_" << i;
-h_pim_mis_fermi_nocut_sim_5[i] = new TH1F(qqq.str().c_str(),qqq.str().c_str(),400, -0.05, 0.65);
+qqq << "h_excltop_pimismas_sim_5_" << i;
+h_excltop_pimismas_sim_5[i] = new TH1F(qqq.str().c_str(),qqq.str().c_str(),400, -0.05, 0.65);
 qqq.str("");
-
-
-qqq << "h_pim_mis_fermi_momcut_5_" << i;
-h_pim_mis_fermi_momcut_5[i] = new TH1F(qqq.str().c_str(),qqq.str().c_str(),400, -2.1, 0.5);
-qqq.str("");
-
-
-qqq << "h_pim_mis_fermi_momcut_sim_5_" << i;
-h_pim_mis_fermi_momcut_sim_5[i] = new TH1F(qqq.str().c_str(),qqq.str().c_str(),400, -2.1, 0.5);
-qqq.str("");
-
-
-qqq << "h_mis_mom_fermi_5_"<< i;
-h_mis_mom_fermi_5[i] = new TH1F(qqq.str().c_str(),qqq.str().c_str(),400, -0.1, 1.9);
-qqq.str("");
-
-
-qqq << "h_mis_mom_fermi_sim_5_"<< i;
-h_mis_mom_fermi_sim_5[i] = new TH1F(qqq.str().c_str(),qqq.str().c_str(),400, -0.1, 1.9);
-qqq.str("");
-
-
-qqq << "h_mis_mom_fermi_mmas_cut_5_"<< i;
-h_mis_mom_fermi_mmas_cut_5[i] = new TH1F(qqq.str().c_str(),qqq.str().c_str(),400, -0.1, 1.9);
-qqq.str("");
-
-qqq << "h_mis_mom_fermi_mmas_cut_sim_5_" << i;
-h_mis_mom_fermi_mmas_cut_sim_5[i] = new TH1F(qqq.str().c_str(),qqq.str().c_str(),400, -0.1, 1.9);
-qqq.str("");
-
-
-
 
 
 };
@@ -1032,88 +686,31 @@ qqq.str("");
 
 for (i=0; i<12; i++) {
 
-qqq << "h_pim_mis_fermi_nocut_6_" << i;
-h_pim_mis_fermi_nocut_6[i] = new TH1F(qqq.str().c_str(),qqq.str().c_str(),400, -0.05, 0.65);
+qqq << "h_excltop_pimismas_6_" << i;
+h_excltop_pimismas_6[i] = new TH1F(qqq.str().c_str(),qqq.str().c_str(),400, -0.05, 0.65);
 qqq.str("");
 
 
-qqq << "h_pim_mis_fermi_nocut_sim_6_" << i;
-h_pim_mis_fermi_nocut_sim_6[i] = new TH1F(qqq.str().c_str(),qqq.str().c_str(),400, -0.05, 0.65);
+qqq << "h_excltop_pimismas_sim_6_" << i;
+h_excltop_pimismas_sim_6[i] = new TH1F(qqq.str().c_str(),qqq.str().c_str(),400, -0.05, 0.65);
 qqq.str("");
 
-
-qqq << "h_pim_mis_fermi_momcut_6_" << i;
-h_pim_mis_fermi_momcut_6[i] = new TH1F(qqq.str().c_str(),qqq.str().c_str(),400, -2.1, 0.5);
-qqq.str("");
-
-
-qqq << "h_pim_mis_fermi_momcut_sim_6_" << i;
-h_pim_mis_fermi_momcut_sim_6[i] = new TH1F(qqq.str().c_str(),qqq.str().c_str(),400, -2.1, 0.5);
-qqq.str("");
-
-
-qqq << "h_mis_mom_fermi_6_"<< i;
-h_mis_mom_fermi_6[i] = new TH1F(qqq.str().c_str(),qqq.str().c_str(),400, -0.1, 1.9);
-qqq.str("");
-
-
-qqq << "h_mis_mom_fermi_sim_6_"<< i;
-h_mis_mom_fermi_sim_6[i] = new TH1F(qqq.str().c_str(),qqq.str().c_str(),400, -0.1, 1.9);
-qqq.str("");
-
-
-qqq << "h_mis_mom_fermi_mmas_cut_6_"<< i;
-h_mis_mom_fermi_mmas_cut_6[i] = new TH1F(qqq.str().c_str(),qqq.str().c_str(),400, -0.1, 1.9);
-qqq.str("");
-
-qqq << "h_mis_mom_fermi_mmas_cut_sim_6_" << i;
-h_mis_mom_fermi_mmas_cut_sim_6[i] = new TH1F(qqq.str().c_str(),qqq.str().c_str(),400, -0.1, 1.9);
-qqq.str("");
 
 };
 
 for (i=0; i<10; i++) {
 
-qqq << "h_pim_mis_fermi_nocut_7_" << i;
-h_pim_mis_fermi_nocut_7[i] = new TH1F(qqq.str().c_str(),qqq.str().c_str(),400, -0.05, 0.65);
+qqq << "h_excltop_pimismas_7_" << i;
+h_excltop_pimismas_7[i] = new TH1F(qqq.str().c_str(),qqq.str().c_str(),400, -0.05, 0.65);
 qqq.str("");
 
 
-qqq << "h_pim_mis_fermi_nocut_sim_7_" << i;
-h_pim_mis_fermi_nocut_sim_7[i] = new TH1F(qqq.str().c_str(),qqq.str().c_str(),400, -0.05, 0.65);
+qqq << "h_excltop_pimismas_sim_7_" << i;
+h_excltop_pimismas_sim_7[i] = new TH1F(qqq.str().c_str(),qqq.str().c_str(),400, -0.05, 0.65);
 qqq.str("");
 
-
-qqq << "h_pim_mis_fermi_momcut_7_" << i;
-h_pim_mis_fermi_momcut_7[i] = new TH1F(qqq.str().c_str(),qqq.str().c_str(),400, -2.1, 0.5);
-qqq.str("");
-
-
-qqq << "h_pim_mis_fermi_momcut_sim_7_" << i;
-h_pim_mis_fermi_momcut_sim_7[i] = new TH1F(qqq.str().c_str(),qqq.str().c_str(),400, -2.1, 0.5);
-qqq.str("");
-
-
-qqq << "h_mis_mom_fermi_7_"<< i;
-h_mis_mom_fermi_7[i] = new TH1F(qqq.str().c_str(),qqq.str().c_str(),400, -0.1, 1.9);
-qqq.str("");
-
-
-qqq << "h_mis_mom_fermi_sim_7_"<< i;
-h_mis_mom_fermi_sim_7[i] = new TH1F(qqq.str().c_str(),qqq.str().c_str(),400, -0.1, 1.9);
-qqq.str("");
-
-
-qqq << "h_mis_mom_fermi_mmas_cut_7_"<< i;
-h_mis_mom_fermi_mmas_cut_7[i] = new TH1F(qqq.str().c_str(),qqq.str().c_str(),400, -0.1, 1.9);
-qqq.str("");
-
-qqq << "h_mis_mom_fermi_mmas_cut_sim_7_" << i;
-h_mis_mom_fermi_mmas_cut_sim_7[i] = new TH1F(qqq.str().c_str(),qqq.str().c_str(),400, -0.1, 1.9);
-qqq.str("");
-
-};*/
-
+};
+*/
 
 // loops for electron histograms
 
@@ -1203,39 +800,39 @@ qqq.str("");
 //loops for proton histograms
 
 
-for (i=0; i<5; i++) {
+for (i=0; i<6; i++) {
 qqq << "ph_th_p_1[" << i << "]";
-ph_th_p_1[i] = new TH2F(qqq.str().c_str(),qqq.str().c_str(),220, 0., 110.,150., -35., 35.);
+ph_th_p_1[i] = new TH2F(qqq.str().c_str(),qqq.str().c_str(),220, 0., 130.,150., -35., 35.);
 qqq.str("");
 };
 
-for (i=0; i<5; i++) {
+for (i=0; i<6; i++) {
 qqq << "ph_th_p_2[" << i << "]";
-ph_th_p_2[i] = new TH2F(qqq.str().c_str(),qqq.str().c_str(),220, 0., 110.,150., -35., 35.);
+ph_th_p_2[i] = new TH2F(qqq.str().c_str(),qqq.str().c_str(),220, 0., 130.,150., -35., 35.);
 qqq.str("");
 };
 
-for (i=0; i<5; i++) {
+for (i=0; i<6; i++) {
 qqq << "ph_th_p_3[" << i << "]";
-ph_th_p_3[i] = new TH2F(qqq.str().c_str(),qqq.str().c_str(),220, 0., 110.,150., -35., 35.);
+ph_th_p_3[i] = new TH2F(qqq.str().c_str(),qqq.str().c_str(),220, 0., 130.,150., -35., 35.);
 qqq.str("");
 };
 
-for (i=0; i<5; i++) {
+for (i=0; i<6; i++) {
 qqq << "ph_th_p_4[" << i << "]";
-ph_th_p_4[i] = new TH2F(qqq.str().c_str(),qqq.str().c_str(),220, 0., 110.,150., -35., 35.);
+ph_th_p_4[i] = new TH2F(qqq.str().c_str(),qqq.str().c_str(),220, 0., 130.,150., -35., 35.);
 qqq.str("");
 };
 
-for (i=0; i<5; i++) {
+for (i=0; i<6; i++) {
 qqq << "ph_th_p_5[" << i << "]";
-ph_th_p_5[i] = new TH2F(qqq.str().c_str(),qqq.str().c_str(),220, 0., 110.,150., -35., 35.);
+ph_th_p_5[i] = new TH2F(qqq.str().c_str(),qqq.str().c_str(),220, 0., 130.,150., -35., 35.);
 qqq.str("");
 };
 
-for (i=0; i<5; i++) {
+for (i=0; i<6; i++) {
 qqq << "ph_th_p_6[" << i << "]";
-ph_th_p_6[i] = new TH2F(qqq.str().c_str(),qqq.str().c_str(),220, 0., 110.,150., -35., 35.);
+ph_th_p_6[i] = new TH2F(qqq.str().c_str(),qqq.str().c_str(),220, 0., 130.,150., -35., 35.);
 qqq.str("");
 };
 
@@ -1243,37 +840,37 @@ qqq.str("");
 
 for (i=0; i<6; i++) {
 qqq << "ph_th_pip_1[" << i << "]";
-ph_th_pip_1[i] = new TH2F(qqq.str().c_str(),qqq.str().c_str(),220, 0., 110.,150., -35., 35.);
+ph_th_pip_1[i] = new TH2F(qqq.str().c_str(),qqq.str().c_str(),220, 0., 130.,150., -35., 35.);
 qqq.str("");
 };
 
 for (i=0; i<6; i++) {
 qqq << "ph_th_pip_2[" << i << "]";
-ph_th_pip_2[i] = new TH2F(qqq.str().c_str(),qqq.str().c_str(),220, 0., 110.,150., -35., 35.);
+ph_th_pip_2[i] = new TH2F(qqq.str().c_str(),qqq.str().c_str(),220, 0., 130.,150., -35., 35.);
 qqq.str("");
 };
 
 for (i=0; i<6; i++) {
 qqq << "ph_th_pip_3[" << i << "]";
-ph_th_pip_3[i] = new TH2F(qqq.str().c_str(),qqq.str().c_str(),220, 0., 110.,150., -35., 35.);
+ph_th_pip_3[i] = new TH2F(qqq.str().c_str(),qqq.str().c_str(),220, 0., 130.,150., -35., 35.);
 qqq.str("");
 };
 
 for (i=0; i<6; i++) {
 qqq << "ph_th_pip_4[" << i << "]";
-ph_th_pip_4[i] = new TH2F(qqq.str().c_str(),qqq.str().c_str(),220, 0., 110.,150., -35., 35.);
+ph_th_pip_4[i] = new TH2F(qqq.str().c_str(),qqq.str().c_str(),220, 0., 130.,150., -35., 35.);
 qqq.str("");
 };
 
 for (i=0; i<6; i++) {
 qqq << "ph_th_pip_5[" << i << "]";
-ph_th_pip_5[i] = new TH2F(qqq.str().c_str(),qqq.str().c_str(),220, 0., 110.,150., -35., 35.);
+ph_th_pip_5[i] = new TH2F(qqq.str().c_str(),qqq.str().c_str(),220, 0., 130.,150., -35., 35.);
 qqq.str("");
 };
 
 for (i=0; i<6; i++) {
 qqq << "ph_th_pip_6[" << i << "]";
-ph_th_pip_6[i] = new TH2F(qqq.str().c_str(),qqq.str().c_str(),220, 0., 110.,150., -35., 35.);
+ph_th_pip_6[i] = new TH2F(qqq.str().c_str(),qqq.str().c_str(),220, 0., 130.,150., -35., 35.);
 qqq.str("");
 };
 
@@ -1368,11 +965,11 @@ qqq.str("");
 //TH2F *ph_th_pim_all_p[6];
 for (i=0; i<6; i++) {
 qqq << "ph_th_pim_all_p[" << i+1;
-ph_th_pim_all_p[i]=new TH2F(qqq.str().c_str(),qqq.str().c_str(),400, 0., 120.,150., -35., 35.);
+ph_th_pim_all_p[i]=new TH2F(qqq.str().c_str(),qqq.str().c_str(),400, 0., 150.,150., -35., 35.);
 qqq.str("");
-for(j=0; j<10; j++){
+for(j=0; j<15; j++){
 qqq << "ph_vs_th_pim[" << i+1 << "][" << j+1 <<"]" ;
-ph_vs_th_pim[i][j] = new TH2F(qqq.str().c_str(),qqq.str().c_str(),400, 0., 120.,150., -35., 35.);
+ph_vs_th_pim[i][j] = new TH2F(qqq.str().c_str(),qqq.str().c_str(),400, 0., 150.,150., -35., 35.);
 qqq.str("");
 };
 };
@@ -1693,53 +1290,53 @@ qqq.str("");
 
 for (i=0; i<6; i++) {
 qqq << "th_vs_p_e_1_" << i+1;
-th_vs_p_e_1[i] = new TH2F(qqq.str().c_str(),qqq.str().c_str(),440, 0.,2.2,180,0.,60.);
+th_vs_p_e_1[i] = new TH2F(qqq.str().c_str(),qqq.str().c_str(),300, 0.4,1.5,300,20.,60.);
 qqq.str("");
 qqq << "th_vs_p_e_2_" << i+1;
-th_vs_p_e_2[i] = new TH2F(qqq.str().c_str(),qqq.str().c_str(),440, 0.,2.2,180,0.,60.);
+th_vs_p_e_2[i] = new TH2F(qqq.str().c_str(),qqq.str().c_str(),300, 0.4,1.5,300,20.,60.);
 qqq.str("");
 qqq << "th_vs_p_p_1_" << i+1;
-th_vs_p_p_1[i] = new TH2F(qqq.str().c_str(),qqq.str().c_str(),400, 0.,2.,360,0.,180.);
+th_vs_p_p_1[i] = new TH2F(qqq.str().c_str(),qqq.str().c_str(),360, 0.2,2.,300,10.,70.);
 qqq.str("");
 qqq << "th_vs_p_p_2_" << i+1;
-th_vs_p_p_2[i] = new TH2F(qqq.str().c_str(),qqq.str().c_str(),400, 0.,2.,360,0.,180.);
+th_vs_p_p_2[i] = new TH2F(qqq.str().c_str(),qqq.str().c_str(),360, 0.2,2.,300,10.,70.);
 qqq.str("");
 qqq << "th_vs_p_pip_1_" << i+1;
-th_vs_p_pip_1[i] = new TH2F(qqq.str().c_str(),qqq.str().c_str(),400, 0.,2.,360,0.,180.);
+th_vs_p_pip_1[i] = new TH2F(qqq.str().c_str(),qqq.str().c_str(),300, 0.,1.5,300,0.,130.);
 qqq.str("");
 qqq << "th_vs_p_pip_2_" << i+1;
-th_vs_p_pip_2[i] = new TH2F(qqq.str().c_str(),qqq.str().c_str(),400, 0.,2.,360,0.,180.);
+th_vs_p_pip_2[i] = new TH2F(qqq.str().c_str(),qqq.str().c_str(),300, 0.,1.5,300,0.,130.);
 qqq.str("");
 qqq << "th_vs_p_pim_1_" << i+1;
-th_vs_p_pim_1[i] = new TH2F(qqq.str().c_str(),qqq.str().c_str(),400, 0.,2.,360,0.,180.);
+th_vs_p_pim_1[i] = new TH2F(qqq.str().c_str(),qqq.str().c_str(),300, 0.,1.5,300,0.,150.);
 qqq.str("");
 qqq << "th_vs_p_pim_2_" << i+1;
-th_vs_p_pim_2[i] = new TH2F(qqq.str().c_str(),qqq.str().c_str(),400, 0.,2.,360,0.,180.);
+th_vs_p_pim_2[i] = new TH2F(qqq.str().c_str(),qqq.str().c_str(),300, 0.,1.5,300,0.,150.);
 qqq.str("");
 
 qqq << "th_vs_p_e_1_sim_" << i+1;
-th_vs_p_e_1_sim[i] = new TH2F(qqq.str().c_str(),qqq.str().c_str(),440, 0.,2.2,180,0.,60.);
+th_vs_p_e_1_sim[i] = new TH2F(qqq.str().c_str(),qqq.str().c_str(),300, 0.4,1.5,300,20.,60.);
 qqq.str("");
 qqq << "th_vs_p_e_2_sim_" << i+1;
-th_vs_p_e_2_sim[i] = new TH2F(qqq.str().c_str(),qqq.str().c_str(),440, 0.,2.2,180,0.,60.);
+th_vs_p_e_2_sim[i] = new TH2F(qqq.str().c_str(),qqq.str().c_str(),300, 0.4,1.5,300,20.,60.);
 qqq.str("");
 qqq << "th_vs_p_p_1_sim_" << i+1;
-th_vs_p_p_1_sim[i] = new TH2F(qqq.str().c_str(),qqq.str().c_str(),400, 0.,2.,360,0.,180.);
+th_vs_p_p_1_sim[i] = new TH2F(qqq.str().c_str(),qqq.str().c_str(),360, 0.2,2.,300,10.,70.);
 qqq.str("");
 qqq << "th_vs_p_p_2_sim_" << i+1;
-th_vs_p_p_2_sim[i] = new TH2F(qqq.str().c_str(),qqq.str().c_str(),400, 0.,2.,360,0.,180.);
+th_vs_p_p_2_sim[i] = new TH2F(qqq.str().c_str(),qqq.str().c_str(),360, 0.2,2.,300,10.,70.);
 qqq.str("");
 qqq << "th_vs_p_pip_1_sim_" << i+1;
-th_vs_p_pip_1_sim[i] = new TH2F(qqq.str().c_str(),qqq.str().c_str(),400, 0.,2.,360,0.,180.);
+th_vs_p_pip_1_sim[i] = new TH2F(qqq.str().c_str(),qqq.str().c_str(),300, 0.,1.5,300,0.,130.);
 qqq.str("");
 qqq << "th_vs_p_pip_2_sim_" << i+1;
-th_vs_p_pip_2_sim[i] = new TH2F(qqq.str().c_str(),qqq.str().c_str(),400, 0.,2.,360,0.,180.);
+th_vs_p_pip_2_sim[i] = new TH2F(qqq.str().c_str(),qqq.str().c_str(),300, 0.,1.5,300,0.,130.);
 qqq.str("");
 qqq << "th_vs_p_pim_1_sim_" << i+1;
-th_vs_p_pim_1_sim[i] = new TH2F(qqq.str().c_str(),qqq.str().c_str(),400, 0.,2.,360,0.,180.);
+th_vs_p_pim_1_sim[i] = new TH2F(qqq.str().c_str(),qqq.str().c_str(),300, 0.,1.5,300,0.,150.);
 qqq.str("");
 qqq << "th_vs_p_pim_2_sim_" << i+1;
-th_vs_p_pim_2_sim[i] = new TH2F(qqq.str().c_str(),qqq.str().c_str(),400, 0.,2.,360,0.,180.);
+th_vs_p_pim_2_sim[i] = new TH2F(qqq.str().c_str(),qqq.str().c_str(),300, 0.,1.5,300,0.,150.);
 qqq.str("");
 
 

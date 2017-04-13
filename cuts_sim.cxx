@@ -24,7 +24,7 @@ using namespace std;
 
    
    bool cuts_sim;
-   Float_t th_min,par1,par2,fid_a,fid_b,a,b;
+   Float_t th_min,th_max,par1,par2,par3,fid_a,fid_b;
    Short_t i;
   
   
@@ -71,14 +71,16 @@ using namespace std;
 //calorimeter threshold cut + manually remove the first and last cc segments
 if ((P_EL > 0.461)&&(segment!=0)&&(segment!=17)) {
      
-   th_min=(9.5+17./(P_EL+0.2));
+   th_min= (11.7398+8.21504/(0.433327*P_EL+0.158076));
    par1=0.85+1.1*P_EL;
-   par2=-62.8-30.*P_EL;       
-   fid_a=37.3*pow((sin((th_EL-th_min)*0.01745)),(par1+par2/th_EL+1525./th_EL/th_EL));
+   par2=-62.8-30.*P_EL; 
+   par3 = 0.0047*P_EL + 0.0079;
+
+   fid_a = 41.3*pow((sin((th_EL-th_min)*par3)),(par1+par2/th_EL+1485./th_EL/th_EL)); 
+   fid_b = -41.3*pow((sin((th_EL-th_min)*par3)),(par1+par2/th_EL+1485./th_EL/th_EL)); 
      
-   fid_b=-37.3*pow((sin((th_EL-th_min)*0.01745)),(par1+par2/th_EL+1525./th_EL/th_EL));  
-   a = fid_a;
-   b = fid_b; 
+   th_max = 76.8617 -76.537*P_EL + 77.9387*P_EL*P_EL-28.389*P_EL*P_EL*P_EL;
+  
    
 
 	switch (sector) {
@@ -120,18 +122,20 @@ if (norm_nphe_s1->GetBinContent(norm_nphe_s1->GetXaxis()->FindBin(theta_cc),norm
 //nphe cut that removes the 1 and 18 segments
 if (nphe > ph_el_arr_sim[pmt_hit+1][0][segment]){
 
-
+//vertex cut
+if ((z_EL>-2.65) && (z_EL<1.85)){
 	
 if ((ph_EL >= 330) && (ph_EL <= 360)){
+
+//fiducial cut		
+if ((th_EL > th_min) && (th_EL < th_max) && (ph_EL > fid_b+360) && (ph_EL < fid_a+360)){
 
 	if ((P_EL < 1.79999) && (P_EL > 0.4)){
 	if (indtype==1) ph_vs_th_el_sim[0][int((P_EL*100-40)/20)]->Fill(th_EL,ph_EL-360,1);
 	};
-	
-if ((th_EL > th_min) && (th_EL < 50) && (ph_EL > fid_b+360) && (ph_EL < fid_a+360)){
 
-	if ((W>1.3)&&(indtype==1)) th_vs_p_e_1_sim[0]->Fill(P_EL,th_EL,1.);
-// hist_z_el_1_empty->Fill(z_EL,1.);
+	if ((W>1.3)&&(W<1.825)&&(Q2>0.4)&&(Q2<1.)&&(n_PIp==1)&&(indtype==1)) th_vs_p_e_2_sim[0]->Fill(P_EL,th_EL,sigma);
+//	 hist_z_el_1_sim_1->Fill(z_EL,sigma);
 
    cuts_sim = true;
    
@@ -140,20 +144,22 @@ if ((th_EL > th_min) && (th_EL < 50) && (ph_EL > fid_b+360) && (ph_EL < fid_a+36
    
 if ((ph_EL >= 0) && (ph_EL <= 30)) {
 
+//fiducial cut
+if ((th_EL > th_min) && (th_EL < th_max) && (ph_EL > fid_b) && (ph_EL < fid_a)){
+
 	if ((P_EL < 1.75999) && (P_EL > 0.4)){
 	if (indtype==1) ph_vs_th_el_sim[0][int((P_EL*100-40)/20)]->Fill(th_EL,ph_EL,1);
 	};
 
-if ((th_EL > th_min) && (th_EL < 50) && (ph_EL > fid_b) && (ph_EL < fid_a)){
-
-	if ((W>1.3)&&(indtype==1)) th_vs_p_e_1_sim[0]->Fill(P_EL,th_EL,1.); 
-//hist_z_el_1_empty->Fill(z_EL,1.);
-
+	if ((W>1.3)&&(W<1.825)&&(Q2>0.4)&&(Q2<1.)&&(n_PIp==1)&&(indtype==1)) th_vs_p_e_2_sim[0]->Fill(P_EL,th_EL,sigma); 
+//	if ((indtype==1)) hist_z_el_1_sim_1->Fill(z_EL,sigma);
+	
    cuts_sim = true; 
 
  }; //fiducial
  }; //first part of sector 1
 
+ };//vertex cut
    };//nphe cut that removes the 1 and 18 segments
    };//geometrical cut on number of photoelectrons
    };//th_cc vs seg cut   
@@ -199,17 +205,28 @@ if (norm_nphe_s2->GetBinContent(norm_nphe_s2->GetXaxis()->FindBin(theta_cc),norm
 if (nphe > ph_el_arr_sim[pmt_hit+1][1][segment]){
 
 
+//fiducial cut
+if ((th_EL > th_min) && (th_EL < th_max) && (ph_EL > fid_b+60) && (ph_EL < fid_a+60)&&(PdHit_EL!=16)){
+
 	if ((P_EL < 1.75999) && (P_EL > 0.4)){
 	if (indtype==1) ph_vs_th_el_sim[1][int((P_EL*100-40)/20)]->Fill(th_EL,ph_EL-60,1);
 	};
 
-if ((th_EL > th_min) && (th_EL < 50) && (ph_EL > fid_b+60) && (ph_EL < fid_a+60)){
+	if ((W>1.3)&&(W<1.825)&&(Q2>0.4)&&(Q2<1.)&&(n_PIp==1)&&(indtype==1)) th_vs_p_e_2_sim[1]->Fill(P_EL,th_EL,sigma);
 
-	if ((W>1.3)&&(indtype==1)) th_vs_p_e_1_sim[1]->Fill(P_EL,th_EL,1.);
-// hist_z_el_2_empty->Fill(z_EL,1.);
+//th_vs_p
+if ((th_EL > (11.7398+8.21504/(0.433327*(P_EL+0.1)+0.158076))+18.3)||(th_EL < (11.7398+8.21504/(0.433327*(P_EL+0.1)+0.158076))+16.)){
+
+
+//vertex cut
+if ((z_EL>-2.35) && (z_EL<2.15)){
+
+//	if ((indtype==1)) hist_z_el_2_sim_1->Fill(z_EL,sigma);
 
    cuts_sim = true; 
-
+   
+   };//vertex cut
+   };//th_vs_p
    };//fiducial 
    };//nphe cut that removes the 1 and 18 segments
    };//geometrical cut on number of photoelectrons
@@ -256,19 +273,24 @@ if (norm_nphe_s3->GetBinContent(norm_nphe_s3->GetXaxis()->FindBin(theta_cc),norm
 //nphe cut that removes the 1 and 18 segments
 if (nphe > ph_el_arr_sim[pmt_hit+1][2][segment]){
 
-
+//fiducial cut
+if ((th_EL > th_min) && (th_EL < th_max) && (ph_EL > fid_b+120) && (ph_EL < fid_a+120)&&(PdHit_EL!=44)){
 
 	if ((P_EL < 1.75999) && (P_EL > 0.4)){
 	if (indtype==1) ph_vs_th_el_sim[2][int((P_EL*100-40)/20)]->Fill(th_EL,ph_EL-120,1);
 	};
 
-if ((th_EL > th_min) && (th_EL < 50) && (ph_EL > fid_b+120) && (ph_EL < fid_a+120)){
+	if ((W>1.3)&&(W<1.825)&&(Q2>0.4)&&(Q2<1.)&&(n_PIp==1)&&(indtype==1)) th_vs_p_e_2_sim[2]->Fill(P_EL,th_EL,sigma);
+ 
+ 
+//vertex cut
+if ((z_EL>-2.25) && (z_EL< 2.25)){ 
 
-//hist_z_el_3_empty->Fill(z_EL,1.);
-	if ((W>1.3)&&(indtype==1)) th_vs_p_e_1_sim[2]->Fill(P_EL,th_EL,1.);
+//	if ((indtype==1)) hist_z_el_3_sim_1->Fill(z_EL,sigma); 
  
    cuts_sim = true; 
 
+   };//vertex cut
    };//fiducial 
    };//nphe cut that removes the 1 and 18 segments
    };//geometrical cut on number of photoelectrons
@@ -315,19 +337,24 @@ if (norm_nphe_s4->GetBinContent(norm_nphe_s4->GetXaxis()->FindBin(theta_cc),norm
 //nphe cut that removes the 1 and 18 segments
 if (nphe > ph_el_arr_sim[pmt_hit+1][3][segment]){
 
+//fiducial cut
+if ((th_EL > th_min) && (th_EL < th_max) && (ph_EL > fid_b+180) && (ph_EL < fid_a+180)){
 
+	if ((W>1.3)&&(W<1.825)&&(Q2>0.4)&&(Q2<1.)&&(n_PIp==1)&&(indtype==1)) th_vs_p_e_2_sim[3]->Fill(P_EL,th_EL,sigma);
 
 	if ((P_EL < 1.75999) && (P_EL > 0.4)){
 	if (indtype==1) ph_vs_th_el_sim[3][int((P_EL*100-40)/20)]->Fill(th_EL,ph_EL-180,1);
-	};
+	};  
+	 
 
-if ((th_EL > th_min) && (th_EL < 50) && (ph_EL > fid_b+180) && (ph_EL < fid_a+180)){
+//vertex cut
+if ((z_EL>-2.45) && (z_EL< 2.05)){
+	
+//	if ((indtype==1)) hist_z_el_4_sim_1->Fill(z_EL,sigma);	
+	
+cuts_sim = true; 
 
-	if ((W>1.3)&&(indtype==1)) th_vs_p_e_1_sim[3]->Fill(P_EL,th_EL,1.);
-//hist_z_el_4_empty->Fill(z_EL,1.);
-
-   cuts_sim = true; 
-
+   };//vertex cut
    }; //fiducial 
    };//nphe cut that removes the 1 and 18 segments
    };//geometrical cut on number of photoelectrons
@@ -344,7 +371,7 @@ if ((th_EL > th_min) && (th_EL < 50) && (ph_EL > fid_b+180) && (ph_EL < fid_a+18
  break;  
  
 case 5 : 
-if (indtype ==2) hist_z_el_5_sim_2->Fill(z_EL,1.); 
+if (indtype ==2)  hist_z_el_5_sim_2->Fill(z_EL,1.); 
 //if ((P_EL < 1.75999) && (P_EL > 0.4)){
 //if (indtype==2) ph_vs_th_el_sim[4][int((P_EL*100-40)/20)]->Fill(th_EL,ph_EL-240,1);
 //}; 
@@ -374,24 +401,30 @@ if (norm_nphe_s5->GetBinContent(norm_nphe_s5->GetXaxis()->FindBin(theta_cc),norm
 //nphe cut that removes the 1 and 18 segments
 if (nphe > ph_el_arr_sim[pmt_hit+1][4][segment]){ 
 
-
+//fiducial cut
+if ((th_EL > th_min) && (th_EL < th_max) && (ph_EL > fid_b+240) && (ph_EL < fid_a+240)&&(PdHit_EL!=17)){
 
 	if ((P_EL < 1.75999) && (P_EL > 0.4)){
 	if (indtype==1) ph_vs_th_el_sim[4][int((P_EL*100-40)/20)]->Fill(th_EL,ph_EL-240,1);
 	};
 
-if ((th_EL > th_min) && (th_EL < 50) && (ph_EL > fid_b+240) && (ph_EL < fid_a+240)){
+	if ((W>1.3)&&(W<1.825)&&(Q2>0.4)&&(Q2<1.)&&(n_PIp==1)&&(indtype==1)) th_vs_p_e_2_sim[4]->Fill(P_EL,th_EL,sigma);
 
-//if ((th_EL > (9.5+17./((P_EL+0.32)+0.2))+25.)||(th_EL < (9.5+17./((P_EL+0.3)+0.2))+21.8)){
+//th_vs_p
+if ((th_EL > (11.7398+8.21504/(0.433327*(P_EL+0.1)+0.158076))+19.9)||(th_EL < (11.7398+8.21504/(0.433327*(P_EL+0.1)+0.158076))+17.6)){
 
-	if ((W>1.3)&&(indtype==1)) th_vs_p_e_1_sim[4]->Fill(P_EL,th_EL,1.);
-//hist_z_el_5_empty->Fill(z_EL,1.);
 
+//vertex cut
+if ((z_EL>-2.9) && (z_EL< 1.6)){
+
+//	if ((indtype==1)) hist_z_el_5_sim_1->Fill(z_EL,sigma);
 
    cuts_sim = true; 
-
+  
+}; //vertex cut  
+};//th_vs_p
 }; //fiducial     
-// };//th_vs_p
+ 
 
 
    };//nphe cut that removes the 1 and 18 segments
@@ -438,18 +471,24 @@ if (norm_nphe_s6->GetBinContent(norm_nphe_s6->GetXaxis()->FindBin(theta_cc),norm
 //nphe cut that removes the 1 and 18 segments
 if (nphe > ph_el_arr_sim[pmt_hit+1][5][segment]){
 
+//fiducial cut
+if ((th_EL > th_min) && (th_EL < th_max) && (ph_EL > fid_b+300) && (ph_EL < fid_a+300)){
 
- 
 	if ((P_EL < 1.75999) && (P_EL > 0.4)){
 	if (indtype==1) ph_vs_th_el_sim[5][int((P_EL*100-40)/20)]->Fill(th_EL,ph_EL-300,1);
 	};
 
-if ((th_EL > th_min) && (th_EL < 50) && (ph_EL > fid_b+300) && (ph_EL < fid_a+300)){
-//hist_z_el_6_empty->Fill(z_EL,1.);
-	if ((W>1.3)&&(indtype==1)) th_vs_p_e_1_sim[5]->Fill(P_EL,th_EL,1.);
+	if ((W>1.3)&&(W<1.825)&&(Q2>0.4)&&(Q2<1.)&&(n_PIp==1)&&(indtype==1)) th_vs_p_e_2_sim[5]->Fill(P_EL,th_EL,sigma);
+
+
+//vertex cut
+if ((z_EL>-3.) && (z_EL<1.5)){
+
+//	if ((indtype==1)) hist_z_el_6_sim_1->Fill(z_EL,sigma);
 
    cuts_sim = true; 
 
+   }; //vertex cut
    }; //fiducial 
    };//nphe cut that removes the 1 and 18 segments
    };//geometrical cut on number of photoelectrons  
@@ -478,160 +517,209 @@ if ((th_EL > th_min) && (th_EL < 50) && (ph_EL > fid_b+300) && (ph_EL < fid_a+30
       bool cuts_sim::Proton_cuts_sim(){
        
    bool cuts_sim;
-   Float_t m_p,p_fid_a,p_fid_b, beta_nom_p;
-   m_p=0.938272;   
-   p_fid_a = 24.*(1-exp(-1.*0.08*(th_P-9.)));
-   p_fid_b = -1.*25.*(1-exp(-1.*0.1*(th_P-10.)));
-   beta_nom_p = P_P/sqrt(m_p*m_p+P_P*P_P);
+   Float_t m_p,p_fid_a,p_fid_b, th_min, th_max;
+   m_p=0.938272; 
+   
+   th_min = 12.;
+   th_max = 60.;
+  p_fid_a = 25.*(1-exp(-1.*0.12*(th_P-10.)))-2.5;
+  p_fid_b = -25.*(1-exp(-1.*0.12*(th_P-10.)))+2.5; 
+  
    cuts_sim = false; 
    
+//Proton id beta_vs_p cut
+if((n_P == 1)&& (beta_P < 0.958174*P_P/sqrt(m_p*m_p+0.921203*P_P*P_P-0.0289732)+ 0.0383292) && (beta_P > 0.97261*P_P/sqrt(m_p*m_p +0.89435*P_P*P_P -0.199588) -0.0775468)&&(PdHit_P !=48)){
 
+//----------PROTON ENERGY LOSS----------------------------
+P_P = P_P + delta_mom_p_skor;
+//--------------------------------------------------------
 
+//minimum proton momentum & mimimum proton beta cuts
+if ((P_P > 0.235)&&(beta_P > 0.19)){
 
-if ((n_P == 1)&& (beta_P < 0.9496*P_P/sqrt(m_p*m_p+0.9497*P_P*P_P-0.06649) + 0.04136) && (beta_P > 1.045*P_P/sqrt(m_p*m_p+0.896*P_P*P_P - 0.2) - 0.139)){
+//vertex cut
+if ((z_P > -4.8) && (z_P < 4.)){
 
-//&& (beta_P < 0.9675*P_P/sqrt(m_p*m_p+0.9386*P_P*P_P-0.1723) + 0.0063) && (beta_P > 0.9408*P_P/sqrt(m_p*m_p+0.7455*P_P*P_P - 0.2544) - 0.1126)
+if ((ph_P >= 330)&& (ph_P <= 360)) {
 
-if ((ph_P >= 330)&& (ph_P <= 360)&&(PdHit_P !=48) ) {
+//fiducial sector1
+if ((th_P > th_min)&&(th_P < th_max)&&(ph_P > p_fid_b+360) && (ph_P < p_fid_a+360)){
 
-//&&( PdHit_P != 42)&&(PdHit_P != 45)&&(PdHit_P != 47)&&(PdHit_P !=48)
-// &&( PdHit_P != 42)&&(PdHit_P != 45)&&(PdHit_P != 47)&&(PdHit_P !=48)
-//if ((W >= 1.2) && (npart >= 3) && (npart <=4)) {
+	if ((P_P > 0.2) && (P_P < 1.2)&&(indtype==1)) ph_vs_th_p_sim[0]->Fill(th_P,ph_P-360,1);
 
-if ((P_P > 0.2) && (P_P < 1.2)&&(indtype==2)) ph_vs_th_p_sim[0]->Fill(th_P,ph_P-360,1);
+	if ((W>1.3)&&(n_PIp==1)&&(indtype==1)) th_vs_p_p_2_sim[0]->Fill(P_P,th_P,sigma);	
+//th_vs_p1 
+if (!((th_P<pow((P_P-0.03-0.304992),(0.0758186))*91.5643-48.2057 + 2. )&&!(th_P<pow((P_P-0.08-0.304992),(0.0758186))*91.5643-48.2057 +1.5))){
+//th_vs_p2 
+if (!((th_P <(304.23*(P_P+0.2)*(P_P+0.2)*(P_P+0.2) -255.798*(P_P+0.2)*(P_P+0.2)+497.462*(P_P+0.2) +38.0385)*exp(-1.6*(P_P+0.2))-104.)&&(th_P>(304.23*(P_P-0.12)*(P_P-0.12)*(P_P-0.12) -255.798*(P_P-0.12)*(P_P-0.12)+497.462*(P_P-0.12) +38.0385)*exp(-1.6*(P_P-0.12))-103.))){
+	
+//	if ((indtype==1)) hist_z_el_1_sim_1->Fill(z_P,sigma);
 
-  if ((ph_P > p_fid_b+360) && (ph_P < p_fid_a+360)){
-if (indtype==1) beta_vs_p_p_sim[0][PdHit_P-1]->Fill(P_P,beta_P,1);
-if (indtype==1) time_p_sim[0][PdHit_P-1]->Fill(P_P,P_dist/30.*(1./beta_nom_p-1./beta_P),1.);
-if (indtype==1) th_vs_p_p_1_sim[0] -> Fill(P_P,th_P,1);
 cuts_sim = true;
+
+};//th_vs_p2
+};//th_vs_p1
 };//end of fiducial cut for the first part of the first sector
-  
- //};//end of W-cut
- 
- };//end of the first part of the first sector
- 
- if ((ph_P >= 0) && (ph_P <= 30)&&(PdHit_P !=48)) {
- 
- if ((P_P > 0.2) && (P_P < 1.2)&&(indtype==2)) ph_vs_th_p_sim[0]->Fill(th_P,ph_P,1);
- 
- //&&( PdHit_P != 42)&&(PdHit_P != 45)&&(PdHit_P != 47)&&(PdHit_P !=48)
- //&&( PdHit_P != 42)&&(PdHit_P != 45)&&(PdHit_P != 47)&&(PdHit_P !=48)
-//if ((W >= 1.2) && (npart >= 3) && (npart <=4)) {
-if ((ph_P > p_fid_b) && (ph_P < p_fid_a)){
 
-if (indtype==1) beta_vs_p_p_sim[0][PdHit_P-1]->Fill(P_P,beta_P,1);
-if (indtype==1) time_p_sim[0][PdHit_P-1]->Fill(P_P,P_dist/30.*(1./beta_nom_p-1./beta_P),1.);
-if (indtype==1) th_vs_p_p_1_sim[0] -> Fill(P_P,th_P,1);
+ 
+};//end of the first part of the first sector
+ 
+if ((ph_P >= 0) && (ph_P <= 30)) {
+
+//fiducial sector1 
+if ((th_P > th_min)&&(th_P < th_max)&&(ph_P > p_fid_b) && (ph_P < p_fid_a)){
+
+	if ((P_P > 0.2) && (P_P < 1.2)&&(indtype==1)) ph_vs_th_p_sim[0]->Fill(th_P,ph_P,1);
+	
+	if ((W>1.3)&&(n_PIp==1)&&(indtype==1)) th_vs_p_p_2_sim[0]->Fill(P_P,th_P,sigma);	
+//th_vs_p1 
+if (!((th_P<pow((P_P-0.03-0.304992),(0.0758186))*91.5643-48.2057 + 2. )&&!(th_P<pow((P_P-0.08-0.304992),(0.0758186))*91.5643-48.2057 +1.5))){
+//th_vs_p2 
+if (!((th_P <(304.23*(P_P+0.2)*(P_P+0.2)*(P_P+0.2) -255.798*(P_P+0.2)*(P_P+0.2)+497.462*(P_P+0.2) +38.0385)*exp(-1.6*(P_P+0.2))-104.)&&(th_P>(304.23*(P_P-0.12)*(P_P-0.12)*(P_P-0.12) -255.798*(P_P-0.12)*(P_P-0.12)+497.462*(P_P-0.12) +38.0385)*exp(-1.6*(P_P-0.12))-103.))){
+
+//	if ((indtype==1)) hist_z_el_1_sim_1->Fill(z_P,sigma);
+
 cuts_sim = true;
+
+};//th_vs_p2
+};//th_vs_p1
 };//end of fiducial cut for the second part of the first sector
-//};//end of W-cut
-  };//end of the second part of the first sector
- 
- 
- 
- if ((ph_P >= 30) && (ph_P <=90)&&(PdHit_P !=48)){ 
- //&&(PdHit_P!=24)&&(PdHit_P!=41)&&(PdHit_P!=42)&&(PdHit_P!=43)&&(PdHit_P!=44)&&(PdHit_P!=45)&&(PdHit_P!=46)&&(PdHit_P!=48)
- //&&(PdHit_P!=45)&&(PdHit_P!=46)&&(PdHit_P!=47)&&(PdHit_P!=41)&&(PdHit_P!=42)&&(PdHit_P!=43)&&(PdHit_P!=44)&&(PdHit_P!=48)
-//if ((W >= 1.2) && (npart >= 3) && (npart <=4)) { 
 
-if ((P_P > 0.2) && (P_P < 1.2)&&(indtype==2)) ph_vs_th_p_sim[1]->Fill(th_P,ph_P-60,1);
+};//end of the second part of the first sector
+ 
+ 
+if ((ph_P >= 30) && (ph_P <=90)&&(PdHit_P !=16)){ 
 
- if ((ph_P > p_fid_b+60) && (ph_P < p_fid_a+60)){
+//fiducial sector2
+if ((th_P > th_min)&&(th_P < th_max)&&(ph_P > p_fid_b+60) && (ph_P < p_fid_a+60)){
+
+	if ((P_P > 0.2) && (P_P < 1.2)&&(indtype==1)) ph_vs_th_p_sim[1]->Fill(th_P,ph_P-60,1); 
+
+	if ((W>1.3)&&(n_PIp==1)&&(indtype==1)) th_vs_p_p_2_sim[1]->Fill(P_P,th_P,sigma); 
+	
+//th_vs_p1
+if (!((th_P<pow((P_P-0.03-0.304992),(0.0758186))*91.5643-48.2057 + 2. )&&!(th_P<pow((P_P-0.08-0.304992),(0.0758186))*91.5643-48.2057 +1.5))){
+//th_vs_p2
+if (!((th_P <pow((P_P-0.12-0.304992),(0.0758186))*91.5643-48.2057 +1.1)&&!(th_P<pow((P_P-0.16-0.304992),(0.0758186))*91.5643-48.2057))){
+//th_vs_p3
+if (!((th_P <26.5087*(P_P+0.04)*(P_P+0.04)*(P_P+0.04) -116.557*(P_P+0.04)*(P_P+0.04)+ 175.167*(P_P+0.04)-61.7717+1.5)&&(th_P>26.5087*(P_P-0.03)*(P_P-0.03)*(P_P-0.03) -116.557*(P_P-0.03)*(P_P-0.03)+ 175.167*(P_P-0.03)-61.7717-1.8))){
  
- if ((th_P >26.5087*P_P*P_P*P_P -116.557*P_P*P_P+ 175.167*P_P-61.7717+2.7 ) || (th_P <26.5087*P_P*P_P*P_P -116.557*P_P*P_P+ 175.167*P_P-61.7717-2.8)){
- 
-if (indtype==1) beta_vs_p_p_sim[1][PdHit_P-1]->Fill(P_P,beta_P,1);
-if (indtype==1) time_p_sim[1][PdHit_P-1]->Fill(P_P,P_dist/30.*(1./beta_nom_p-1./beta_P),1.);
-if (indtype==1) th_vs_p_p_1_sim[1] -> Fill(P_P,th_P,1);
+//	if ((indtype==1)) hist_z_el_2_sim_1->Fill(z_P,sigma);
+
 cuts_sim = true;
-};//th_vs_p
+
+};//th_vs_p3
+};//th_vs_p2
+};//th_vs_p1
 };//end of the fiducial cut for sector2
-//};//end of W-cut
- 
- };//end of the sector2
- 
- if ((ph_P >=90) && (ph_P <=150)&&(PdHit_P !=44)&&(PdHit_P !=48)) {
- 
- //&&(PdHit_P!=25)&&(PdHit_P!=40)&&(PdHit_P!=42)&&(PdHit_P!=44)&&(PdHit_P!=46)&&(PdHit_P!=48)
- //&&(PdHit_P!=40)&&(PdHit_P!=41)&&(PdHit_P!=42)&&(PdHit_P!=43)&&(PdHit_P!=46)&&(PdHit_P!=47)&&(PdHit_P!=44)&&(PdHit_P!=25)&&(PdHit_P!=48)
-//if ((W >= 1.2) && (npart >= 3) && (npart <=4)){
+};//end of the sector2
 
-if ((P_P > 0.2) && (P_P < 1.2)&&(indtype==2)) ph_vs_th_p_sim[2]->Fill(th_P,ph_P-120,1);
+ 
+if ((ph_P >=90) && (ph_P <=150)&&(PdHit_P !=44)) {
 
-if ((ph_P > p_fid_b+120) && (ph_P < p_fid_a+120)){
-if (indtype==1) beta_vs_p_p_sim[2][PdHit_P-1]->Fill(P_P,beta_P,1);
-if (indtype==1) time_p_sim[2][PdHit_P-1]->Fill(P_P,P_dist/30.*(1./beta_nom_p-1./beta_P),1.);
-if (indtype==1) th_vs_p_p_1_sim[2] -> Fill(P_P,th_P,1);
+//fiducial sector3
+if ((th_P > th_min)&&(th_P < th_max)&&(ph_P > p_fid_b+120) && (ph_P < p_fid_a+120)){
+
+	if ((P_P > 0.2) && (P_P < 1.2)&&(indtype==1)) ph_vs_th_p_sim[2]->Fill(th_P,ph_P-120,1);
+
+	if ((W>1.3)&&(n_PIp==1)&&(indtype==1)) th_vs_p_p_2_sim[2]->Fill(P_P,th_P,sigma);
+		
+//th_vs_p1	
+if (!((th_P<pow((P_P-0.03-0.304992),(0.0758186))*91.5643-48.2057 + 2. )&&!(th_P<pow((P_P-0.08-0.304992),(0.0758186))*91.5643-48.2057 +1.5))){
+//th_vs_p2
+if (!((th_P <pow((P_P-0.12-0.304992),(0.0758186))*91.5643-48.2057 +1.1)&&!(th_P<pow((P_P-0.16-0.304992),(0.0758186))*91.5643-48.2057))){	
+
+//	if ((indtype==1)) hist_z_el_3_sim_1->Fill(z_P,sigma);
+
 cuts_sim = true;
+
+};//th_vs_p2
+};//th_vs_p1
 };//end of the fiducial cut for sector3
-//}; //end of W-cut
-  };//end of the sector3
- 
- if ((ph_P >= 150) && (ph_P <= 210)&&(PdHit_P !=48)) {
- 
-//&&(PdHit_P!=42)&&(PdHit_P!=39)&&(PdHit_P!=48) 
- //&&(PdHit_P!=42)&&(PdHit_P!=43)&&(PdHit_P!=46)&&(PdHit_P!=39)&&(PdHit_P!=48)
-//if ((W >= 1.2) && (npart >= 3) && (npart <=4)){
+};//end of the sector3
 
-if ((P_P > 0.2) && (P_P < 1.2)&&(indtype==2)) ph_vs_th_p_sim[3]->Fill(th_P,ph_P-180,1);
+ 
+if ((ph_P >= 150) && (ph_P <= 210)) {
 
-if ((ph_P > p_fid_b+180) && (ph_P < p_fid_a+180)){
-if (indtype==1) beta_vs_p_p_sim[3][PdHit_P-1]->Fill(P_P,beta_P,1);
-if (indtype==1) time_p_sim[3][PdHit_P-1]->Fill(P_P,P_dist/30.*(1./beta_nom_p-1./beta_P),1.);
-if (indtype==1) th_vs_p_p_1_sim[3] -> Fill(P_P,th_P,1);
+//fiducial sector4
+if ((th_P > th_min)&&(th_P < th_max)&&(ph_P > p_fid_b+180) && (ph_P < p_fid_a+180)){
+
+	if ((P_P > 0.2) && (P_P < 1.2)&&(indtype==1)) ph_vs_th_p_sim[3]->Fill(th_P,ph_P-180,1);
+
+	if ((W>1.3)&&(n_PIp==1)&&(indtype==1)) th_vs_p_p_2_sim[3]->Fill(P_P,th_P,sigma);
+	
+//th_vs_p1	
+if (!((th_P<pow((P_P-0.03-0.304992),(0.0758186))*91.5643-48.2057 + 2. )&&!(th_P<pow((P_P-0.08-0.304992),(0.0758186))*91.5643-48.2057 +1.5))){
+//th_vs_p2
+if (!((th_P <pow((P_P-0.12-0.304992),(0.0758186))*91.5643-48.2057 +1.1)&&!(th_P<pow((P_P-0.16-0.304992),(0.0758186))*91.5643-48.2057))){	
+
+//	if ((indtype==1)) hist_z_el_4_sim_1->Fill(z_P,sigma);
+
 cuts_sim = true;
-};//end of the fiducial cut for sector4
-//}; //end of W-cut
 
+};//th_vs_p2
+};//th_vs_p1
+};//end of the fiducial cut for sector4
 };//end of the sector4
 
-if ((ph_P >= 210) && (ph_P <=270)&&(PdHit_P !=17)&&(PdHit_P !=48)) {
 
-//&&(PdHit_P!=40)&&(PdHit_P!=42)&&(PdHit_P!=43)&&(PdHit_P!=17)&&(PdHit_P!=48)
-//&&(PdHit_P!=40)&&(PdHit_P!=42)&&(PdHit_P!=44)&&(PdHit_P!=46)&&(PdHit_P!=47)&&(PdHit_P!=17)&&(PdHit_P!=48)
-//if ((W >= 1.2) && (npart >= 3) && (npart <=4)) {
+if ((ph_P >= 210) && (ph_P <=270)&&(PdHit_P !=17)) {
 
-if ((P_P > 0.2) && (P_P < 1.2)&&(indtype==2)) ph_vs_th_p_sim[4]->Fill(th_P,ph_P-240,1);
+//fiducial sector5
+if ((th_P > th_min)&&(th_P < th_max)&&(ph_P > p_fid_b+240) && (ph_P < p_fid_a+240)){
 
- if ((P_P<=0.321436)||(th_P > pow((P_P -0.321436),(0.0704348))*88.0419-46.9342) || (th_P < 31.2482*(P_P-0.01)*(P_P-0.01)*(P_P-0.01) -135.817*(P_P-0.01)*(P_P-0.01)+ 198.038*(P_P-0.01)-66.968-2.5)||((th_P > 31.2482*(P_P+0.045)*(P_P+0.045)*(P_P+0.045) -135.817*(P_P+0.045)*(P_P+0.045)+ 198.038*(P_P+0.045)-66.968+1.8)&&(th_P < pow((P_P-0.371051),(  0.0649747))*87.0943  -49.9895 -1.))){
- 
- if ((ph_P > p_fid_b+240) && (ph_P < p_fid_a+240)){
-if (indtype==1) beta_vs_p_p_sim[4][PdHit_P-1]->Fill(P_P,beta_P,1);
-if (indtype==1) time_p_sim[4][PdHit_P-1]->Fill(P_P,P_dist/30.*(1./beta_nom_p-1./beta_P),1.);
-if (indtype==1) th_vs_p_p_1_sim[4] -> Fill(P_P,th_P,1);
- cuts_sim = true;
+	if ((P_P > 0.2) && (P_P < 1.2)&&(indtype==1)) ph_vs_th_p_sim[4]->Fill(th_P,ph_P-240,1);
 
- };//end of the fiducial cut for sector5
-  };//th_vs_p
-// };//end of W-cut
- 
- };//end of the sector5
- 
- if ((ph_P >= 270) && (ph_P <=330)&&(PdHit_P !=48)) {
- 
- //&&(PdHit_P!=40)&&(PdHit_P!=45)&&(PdHit_P!=31)&&(PdHit_P!=48)&&(PdHit_P!=47)
- //&&(PdHit_P!=40)&&(PdHit_P!=43)&&(PdHit_P!=44)&&(PdHit_P!=45)&&(PdHit_P!=31)&&(PdHit_P!=48)&&(PdHit_P!=47)
-//if ((W >= 1.2) && (npart >= 3) && (npart <=4)){
+	if ((W>1.3)&&(n_PIp==1)&&(indtype==1)) th_vs_p_p_2_sim[4]->Fill(P_P,th_P,sigma);
+	
+//th_vs_p1
+if (!((th_P<pow((P_P-0.03-0.304992),(0.0758186))*91.5643-48.2057 + 2. )&&!(th_P<pow((P_P-0.08-0.304992),(0.0758186))*91.5643-48.2057 +1.5))){
+//th_vs_p2
+if (!((th_P <pow((P_P -0.321436),(0.0704348))*88.0419-46.9342-0.5)&&!(th_P<pow((P_P -0.12 -0.321436),(0.0704348))*88.0419-46.9342-2.5))){
+//th_vs_p3
+if (!((th_P <31.2482*(P_P+0.045)*(P_P+0.045)*(P_P+0.045) -135.817*(P_P+0.045)*(P_P+0.045)+ 198.038*(P_P+0.045)-66.968+1.5)&&(th_P>31.2482*(P_P-0.01)*(P_P-0.01)*(P_P-0.01) -135.817*(P_P-0.01)*(P_P-0.01)+ 198.038*(P_P-0.01)-66.968-2.5))){
 
-if ((P_P > 0.2) && (P_P < 1.2)&&(indtype==2)) ph_vs_th_p_sim[5]->Fill(th_P,ph_P-300,1);
+//	if ((indtype==1)) hist_z_el_5_sim_1->Fill(z_P,sigma);
 
-if ((ph_P > p_fid_b+300) && (ph_P < p_fid_a+300)){
-if (indtype==1) beta_vs_p_p_sim[5][PdHit_P-1]->Fill(P_P,beta_P,1);
-if (indtype==1) time_p_sim[5][PdHit_P-1]->Fill(P_P,P_dist/30.*(1./beta_nom_p-1./beta_P),1.);
-if (indtype==1) th_vs_p_p_1_sim[5] -> Fill(P_P,th_P,1);
 cuts_sim = true;
- };//end of the fiducial cut for sector6
-// };//end of W-cut
- };//end of the sector6
+
+};//th_vs_p3
+};//th_vs_p2
+};//th_vs_p1
+};//end of the fiducial cut for sector5
+};//end of the sector5
+
  
+if ((ph_P >= 270) && (ph_P <=330)) {
+
+//fiducial sector6
+if ((th_P > th_min)&&(th_P < th_max)&&(ph_P > p_fid_b+300) && (ph_P < p_fid_a+300)){
+
+	if ((P_P > 0.2) && (P_P < 1.2)&&(indtype==1)) ph_vs_th_p_sim[5]->Fill(th_P,ph_P-300,1);
+
+	if ((W>1.3)&&(n_PIp==1)&&(indtype==1)) th_vs_p_p_2_sim[5]->Fill(P_P,th_P,sigma);
+
+//th_vs_p1
+if (!((th_P<pow((P_P-0.03-0.304992),(0.0758186))*91.5643-48.2057 + 2. )&&!(th_P<pow((P_P-0.08-0.304992),(0.0758186))*91.5643-48.2057 +1.5))){
+//th_vs_p2
+if (!((th_P <pow((P_P-0.12-0.304992),(0.0758186))*91.5643-48.2057 +1.1)&&!(th_P<pow((P_P-0.16-0.304992),(0.0758186))*91.5643-48.2057))){
+
+//	if ((indtype==1)) hist_z_el_6_sim_1->Fill(z_P,sigma);
+
+cuts_sim = true;
+
+};//th_vs_p2
+};//th_vs_p1
+};//end of the fiducial cut for sector6
+};//end of the sector6
  
- 
-};
+};//vertex cut 
+};// end of minimum proton momentum & mimimum proton beta cuts 
+};//end proton id beta vs p cut
  
 
-    return cuts_sim;
-    };  
+return cuts_sim;
+};  
     
     
     ///////////////////////////////
@@ -639,150 +727,190 @@ cuts_sim = true;
     bool cuts_sim::PIp_cuts_sim(){
        
    bool cuts_sim;
-   Float_t m_pip,pip_fid_a,pip_fid_b,beta_nom_pip;
+   Float_t m_pip,pip_fid_a,pip_fid_b,th_min,th_max;
    m_pip = 0.13957;
-  pip_fid_a = 24.*(1-exp(-1.*0.08*(th_PIp-9.)));
-  pip_fid_b = -1.*25.*(1-exp(-1.*0.1*(th_PIp-10.)));
-  beta_nom_pip = P_PIp/sqrt(m_pip*m_pip+P_PIp*P_PIp);
+
+   th_min = 12.;
+   th_max = 120.;
+  pip_fid_a = 25.*(1-exp(-1.*0.12*(th_PIp-10.)))-2.5;
+  pip_fid_b = -25.*(1-exp(-1.*0.12*(th_PIp-10.)))+2.5;
+  
    cuts_sim = false; 
-     //cout << th_PIp<< " rgdgdf "<<ph_PIp<<" iiiiii "<<beta_PIp<<" riuthy "<<P_PIp<<"\n";
-   if ((n_PIp == 1)&& (PIp_dist*(1./beta_nom_pip-1/beta_PIp)/30. < 0.0001769/(P_PIp*P_PIp*P_PIp*P_PIp+0.0001471)+0.8465)&&(PIp_dist*(1./beta_nom_pip-1/beta_PIp)/30. > -0.0002121/(P_PIp*P_PIp*P_PIp*P_PIp+5.685e-05)-0.8411)) {
-   
-   
-   //(beta_PIp < 0.8*P_PIp/sqrt(m_pip*m_pip+0.9108*P_PIp*P_PIp-0.001768) + 0.2) && (beta_PIp > 1.054*P_PIp/sqrt(m_pip*m_pip+0.7001*P_PIp*P_PIp - 0.006497) - 0.2999)
-   //&& (beta_PIp < 0.8*P_PIp/sqrt(m_pip*m_pip+0.91*P_PIp*P_PIp-0.0034) + 0.2) && (beta_PIp > 1.05*P_PIp/sqrt(m_pip*m_pip+0.7*P_PIp*P_PIp - 0.0056) - 0.297)
-   
-   //&& (beta_PIp < 0.8*P_PIp/sqrt(m_pip*m_pip+0.91*P_PIp*P_PIp-0.0034) + 0.2) && (beta_PIp > 1.05*P_PIp/sqrt(m_pip*m_pip+0.7*P_PIp*P_PIp - 0.0056) - 0.297)
-   
+ 
      
-   if ((ph_PIp >= 330) && (ph_PIp <=360)&&(PdHit_PIp !=48)){
-    if ((th_PIp > (304.23*(P_PIp+0.1)*(P_PIp+0.1)*(P_PIp+0.1) -255.798*(P_PIp+0.1)*(P_PIp+0.1)+497.462*(P_PIp+0.1) +38.0385)*exp(-1.85*(P_PIp+0.1)) +9.5) || (th_PIp < pow((P_PIp -0.454098),(0.0912936))*58.2946-20.4843+0.9)||((th_PIp < (pow((P_PIp-0.103718),(0.0703664))*252.822-133.024)*exp(-0.5*P_PIp)+0.1)&&((th_PIp > pow((P_PIp-0.416536),(0.108376))*67.4593-21.4374)||(P_PIp<=0.416536)))||((th_PIp < (304.23*(P_PIp+0.15)*(P_PIp+0.15)*(P_PIp+0.15) -255.798*(P_PIp+0.15)*(P_PIp+0.15)+497.462*(P_PIp+0.15) +38.0385)*exp(-1.85*(P_PIp+0.15)) -3)&&(th_PIp > (pow((P_PIp-0.0575818),( 0.075643))*238.248-115.039)*exp(-0.5*P_PIp)-0.1))){
-   
-   //&&(PdHit_PIp != 42)&&(PdHit_PIp != 45)&&(PdHit_PIp != 46)&&(PdHit_PIp != 47)&&(PdHit_PIp !=48)
-   //&&(PdHit_PIp != 42)&&(PdHit_PIp != 45)&&(PdHit_PIp != 47)&&(PdHit_PIp !=48)
+if((n_PIp == 1)&&(beta_PIp < 0.838148*P_PIp/sqrt(m_pip*m_pip+0.793572*P_PIp*P_PIp -0.00291347)+ 0.105962) && (beta_PIp > 0.819388*P_PIp/sqrt(m_pip*m_pip +0.600785*P_PIp*P_PIp -0.00885673) -0.107038)&&(PdHit_PIp !=48)){ 
  
-  if ((P_PIp > 0) && (P_PIp < 1.2)&&(indtype==2)) ph_vs_th_pip_sim[0]->Fill(th_PIp,ph_PIp-360,1); 
-  
-   if ((ph_PIp > pip_fid_b+360) && (ph_PIp < pip_fid_a+360)){
-  if (indtype==1) beta_vs_p_pip_sim[0][PdHit_PIp-1]->Fill(P_PIp,beta_PIp,1); 
-  if (indtype==1) time_pip_sim[0][PdHit_PIp-1]->Fill(P_PIp,PIp_dist*(1./beta_nom_pip-1/beta_PIp)/30.,1.);
-  if (indtype==1) th_vs_p_pip_1_sim[0]->Fill(P_PIp,th_PIp,1.);
-   cuts_sim = true;
+//vertex cut
+if ((z_PIp>-4.8) && (z_PIp<4.)){
+     
+if ((ph_PIp >= 330) && (ph_PIp <=360)){
+
+
+//fiducial sector1  
+if ((th_PIp > th_min)&&(th_PIp < th_max)&&(ph_PIp > pip_fid_b+360) && (ph_PIp < pip_fid_a+360)){
+
+	if ((P_PIp > 0) && (P_PIp < 1.2)&&(indtype==1)) ph_vs_th_pip_sim[0]->Fill(th_PIp,ph_PIp-360,1); 
+	if (indtype==1) th_vs_p_pip_2_sim[0]->Fill(P_PIp,th_PIp,sigma);
+
+//th_vs_p1
+if (!((th_PIp<(304.23*(P_PIp+0.15)*(P_PIp+0.15)*(P_PIp+0.15) -255.798*(P_PIp+0.15)*(P_PIp+0.15)+497.462*(P_PIp+0.15) +38.0385)*exp(-1.85*(P_PIp+0.15)) +5.5 )&&!(th_PIp<(304.23*(P_PIp+0.15)*(P_PIp+0.15)*(P_PIp+0.15) -255.798*(P_PIp+0.15)*(P_PIp+0.15)+497.462*(P_PIp+0.15) +38.0385)*exp(-1.85*(P_PIp+0.15)) -3))){
+//th_vs_p2
+if (!((th_PIp<(pow((P_PIp-0.0575818),( 0.075643))*238.248-115.039)*exp(-0.5*P_PIp)-0.1)&&!(th_PIp<(pow((P_PIp-0.103718),(0.0703664))*252.822-133.024)*exp(-0.5*P_PIp)+0.1))){
+//th_vs_p3
+if (!((th_PIp<(304.23*(P_PIp+0.25)*(P_PIp+0.25)*(P_PIp+0.25) -255.798*(P_PIp+0.25)*(P_PIp+0.25)+497.462*(P_PIp+0.25) +38.0385)*exp(-1.6*(P_PIp+0.25))-104)&&!(th_PIp<(304.23*(P_PIp-0.12)*(P_PIp-0.12)*(P_PIp-0.12) -255.798*(P_PIp-0.12)*(P_PIp-0.12)+497.462*(P_PIp-0.12) +38.0385)*exp(-1.6*(P_PIp-0.12))-103))){
+
+//	if ((indtype==1)) hist_z_el_1_sim_1->Fill(z_PIp,sigma);
+
+cuts_sim = true;
    
-   };//th_vs_p
-   };//end of the fiducial cut for first part of sector1
-  }; //end of the first part of sector1
+};//th_vs_p3
+};//th_vs_p2
+};//th_vs_p1
+};//end of the fiducial cut for first part of sector1
+}; //end of the first part of sector1
   
-  if ((ph_PIp >= 0) && (ph_PIp <=30)&&(PdHit_PIp !=48)){
+if ((ph_PIp >= 0) && (ph_PIp <=30)){
   
-  if ((th_PIp > (304.23*(P_PIp+0.1)*(P_PIp+0.1)*(P_PIp+0.1) -255.798*(P_PIp+0.1)*(P_PIp+0.1)+497.462*(P_PIp+0.1) +38.0385)*exp(-1.85*(P_PIp+0.1)) +9.5) || (th_PIp < pow((P_PIp -0.454098),(0.0912936))*58.2946-20.4843+0.9)||((th_PIp < (pow((P_PIp-0.103718),(0.0703664))*252.822-133.024)*exp(-0.5*P_PIp)+0.1)&&((th_PIp > pow((P_PIp-0.416536),(0.108376))*67.4593-21.4374)||(P_PIp<=0.416536)))||((th_PIp < (304.23*(P_PIp+0.15)*(P_PIp+0.15)*(P_PIp+0.15) -255.798*(P_PIp+0.15)*(P_PIp+0.15)+497.462*(P_PIp+0.15) +38.0385)*exp(-1.85*(P_PIp+0.15)) -3)&&(th_PIp > (pow((P_PIp-0.0575818),( 0.075643))*238.248-115.039)*exp(-0.5*P_PIp)-0.1))){
-  
-  //&&(PdHit_PIp != 42)&&(PdHit_PIp != 45)&&(PdHit_PIp != 46)&&(PdHit_PIp != 47)&&(PdHit_PIp !=48)
-  //&&( PdHit_PIp != 42)&&(PdHit_PIp != 45)&&(PdHit_PIp != 47)&&(PdHit_PIp !=48)
- 
-if ((P_PIp > 0) && (P_PIp < 1.2)&&(indtype==2)) ph_vs_th_pip_sim[0]->Fill(th_PIp,ph_PIp,1);
+//fiducial sector1  
+if ((th_PIp > th_min)&&(th_PIp < th_max)&&(ph_PIp > pip_fid_b) && (ph_PIp < pip_fid_a)){
 
- if ((ph_PIp > pip_fid_b) && (ph_PIp < pip_fid_a)){
-  
-  
- if (indtype==1) beta_vs_p_pip_sim[0][PdHit_PIp-1]->Fill(P_PIp,beta_PIp,1); 
- if (indtype==1) time_pip_sim[0][PdHit_PIp-1]->Fill(P_PIp,PIp_dist*(1./beta_nom_pip-1/beta_PIp)/30.,1.);
- if (indtype==1) th_vs_p_pip_1_sim[0]->Fill(P_PIp,th_PIp,1.);
-cuts_sim = true;
-};//th_vs_p
-   };//end of the fiducial cut for second part of sector1
-   }; //end of the second part of sector1
-  
-  
-  if ((ph_PIp >= 30) && (ph_PIp <=90)&&(PdHit_PIp !=48)) {
-  
- //&&(PdHit_PIp!=24)&&(PdHit_PIp!=45)&&(PdHit_PIp!=46)&&(PdHit_PIp!=47)&&(PdHit_PIp!=41)&&(PdHit_PIp!=42)&&(PdHit_PIp!=43)&&(PdHit_PIp!=44)&&(PdHit_PIp!=48) //&&(PdHit_PIp!=45)&&(PdHit_PIp!=46)&&(PdHit_PIp!=47)&&(PdHit_PIp!=41)&&(PdHit_PIp!=42)&&(PdHit_PIp!=43)&&(PdHit_PIp!=44)&&(PdHit_PIp!=48)
-if ((P_PIp > 0) && (P_PIp < 1.2)&&(indtype==2)) ph_vs_th_pip_sim[1]->Fill(th_PIp,ph_PIp-60,1);
-if ((ph_PIp > pip_fid_b+60) && (ph_PIp < pip_fid_a+60)){
+	if ((P_PIp > 0) && (P_PIp < 1.2)&&(indtype==1)) ph_vs_th_pip_sim[0]->Fill(th_PIp,ph_PIp,1);
+	if (indtype==1) th_vs_p_pip_2_sim[0]->Fill(P_PIp,th_PIp,sigma);
+	
+//th_vs_p1
+if (!((th_PIp<(304.23*(P_PIp+0.15)*(P_PIp+0.15)*(P_PIp+0.15) -255.798*(P_PIp+0.15)*(P_PIp+0.15)+497.462*(P_PIp+0.15) +38.0385)*exp(-1.85*(P_PIp+0.15)) +5.5 )&&!(th_PIp<(304.23*(P_PIp+0.15)*(P_PIp+0.15)*(P_PIp+0.15) -255.798*(P_PIp+0.15)*(P_PIp+0.15)+497.462*(P_PIp+0.15) +38.0385)*exp(-1.85*(P_PIp+0.15)) -3))){
+//th_vs_p2
+if (!((th_PIp<(pow((P_PIp-0.0575818),( 0.075643))*238.248-115.039)*exp(-0.5*P_PIp)-0.1)&&!(th_PIp<(pow((P_PIp-0.103718),(0.0703664))*252.822-133.024)*exp(-0.5*P_PIp)+0.1))){
+//th_vs_p3
+if (!((th_PIp<(304.23*(P_PIp+0.25)*(P_PIp+0.25)*(P_PIp+0.25) -255.798*(P_PIp+0.25)*(P_PIp+0.25)+497.462*(P_PIp+0.25) +38.0385)*exp(-1.6*(P_PIp+0.25))-104)&&!(th_PIp<(304.23*(P_PIp-0.12)*(P_PIp-0.12)*(P_PIp-0.12) -255.798*(P_PIp-0.12)*(P_PIp-0.12)+497.462*(P_PIp-0.12) +38.0385)*exp(-1.6*(P_PIp-0.12))-103))){
 
-if ((P_PIp<=0.415068)||(th_PIp >  pow((P_PIp-0.415068),(0.226449))*48.7564 + 2.79478-1.) || (th_PIp < (387.289*P_PIp*P_PIp*P_PIp -758.466*P_PIp*P_PIp+ 842.881*P_PIp-299.953-15.)*exp(-2*P_PIp))||((th_PIp > (387.289*P_PIp*P_PIp*P_PIp -758.466*P_PIp*P_PIp+ 842.881*P_PIp-299.953+15.)*exp(-2*P_PIp) )&&(th_PIp < pow((P_PIp-0.449975),( 0.315164 ))*36.608 +  9.74262-1.))){
- if (indtype==1) beta_vs_p_pip_sim[1][PdHit_PIp-1]->Fill(P_PIp,beta_PIp,1);
-  if (indtype==1) time_pip_sim[1][PdHit_PIp-1]->Fill(P_PIp,PIp_dist*(1./beta_nom_pip-1/beta_PIp)/30.,1.);
-  if (indtype==1) th_vs_p_pip_1_sim[1]->Fill(P_PIp,th_PIp,1.);
+// 	if ((indtype==1)) hist_z_el_1_sim_1->Fill(z_PIp,sigma);
+  
 cuts_sim = true;
-};//th_vs_p
- };//end of the fiducial cut for sector2
+};//th_vs_p3
+};//th_vs_p2
+};//th_vs_p1
+};//end of the fiducial cut for second part of sector1
+}; //end of the second part of sector1
+  
+  
+if ((ph_PIp >= 30) && (ph_PIp <=90)&&(PdHit_PIp !=16)) {
+  
+//fiducial sector2
+if ((th_PIp > th_min)&&(th_PIp < th_max)&&(ph_PIp > pip_fid_b+60) && (ph_PIp < pip_fid_a+60)){
+
+	if ((P_PIp > 0) && (P_PIp < 1.2)&&(indtype==1)) ph_vs_th_pip_sim[1]->Fill(th_PIp,ph_PIp-60,1);
+	if (indtype==1) th_vs_p_pip_2_sim[1]->Fill(P_PIp,th_PIp,sigma);  
+	
+//th_vs_p1
+if (!((th_PIp<pow((P_PIp-0.415068),(0.226449))*48.7564 + 2.79478-1.)&&!(th_PIp<pow((P_PIp-0.449975),( 0.315164 ))*36.608 +  9.74262-1.))){
+//th_vs_p2
+if (!((th_PIp<(387.289*P_PIp*P_PIp*P_PIp -758.466*P_PIp*P_PIp+ 842.881*P_PIp-299.953+15.)*exp(-2*P_PIp))&&!(th_PIp<(387.289*(P_PIp+0.03)*(P_PIp+0.03)*(P_PIp+0.03) -758.466*(P_PIp+0.03)*(P_PIp+0.03)+ 842.881*(P_PIp+0.03)-299.953-15.)*exp(-2*(P_PIp+0.03))-1.5))){
+
+// 	if ((indtype==1)) hist_z_el_2_sim_1->Fill(z_PIp,sigma);
+
+cuts_sim = true;
+};//th_vs_p2
+};//th_vs_p1
+};//end of the fiducial cut for sector2
 };//end of the sector2
   
   
-if ((ph_PIp >= 90) && (ph_PIp <=150)&&(PdHit_PIp !=44)&&(PdHit_PIp !=48)) {
+if ((ph_PIp >= 90) && (ph_PIp <=150)&&(PdHit_PIp !=44)) {
 
-//&&(PdHit_PIp!=40)&&(PdHit_PIp!=41)&&(PdHit_PIp!=42)&&(PdHit_PIp!=43)&&(PdHit_PIp!=46)&&(PdHit_PIp!=47)&&(PdHit_PIp!=44)&&(PdHit_PIp!=25)&&(PdHit_PIp!=48)
-//&&(PdHit_PIp!=40)&&(PdHit_PIp!=41)&&(PdHit_PIp!=42)&&(PdHit_PIp!=43)&&(PdHit_PIp!=46)&&(PdHit_PIp!=47)&&(PdHit_PIp!=44)&&(PdHit_PIp!=25)&&(PdHit_PIp!=48)
-if ((P_PIp > 0) && (P_PIp < 1.2)&&(indtype==2)) ph_vs_th_pip_sim[2]->Fill(th_PIp,ph_PIp-120,1);
-if ((ph_PIp > pip_fid_b+120) && (ph_PIp < pip_fid_a+120)){
+//fiducial sector3
+if ((th_PIp > th_min)&&(th_PIp < th_max)&&(ph_PIp > pip_fid_b+120) && (ph_PIp < pip_fid_a+120)){
 
-if ((th_PIp < pow((P_PIp -0.454898),( 0.289291))* 35.7267+6.65908+1.5) || (th_PIp > (10000*P_PIp*P_PIp*P_PIp-3607.41*P_PIp*P_PIp+ 1725.72*P_PIp-10.6776)*exp(-4.7*P_PIp))||((th_PIp < (10000*P_PIp*P_PIp*P_PIp-4505.62*P_PIp*P_PIp+  2056.24  *P_PIp -77.4077 +5.)*exp(-4.7*P_PIp))&&((th_PIp > pow((P_PIp-0.416536),(0.108376))*67.4593-21.4374)||(P_PIp <= 0.416536)))){
- if (indtype==1) beta_vs_p_pip_sim[2][PdHit_PIp-1]->Fill(P_PIp,beta_PIp,1);
-   if (indtype==1) time_pip_sim[2][PdHit_PIp-1]->Fill(P_PIp,PIp_dist*(1./beta_nom_pip-1/beta_PIp)/30.,1.);
-   if (indtype==1) th_vs_p_pip_1_sim[2]->Fill(P_PIp,th_PIp,1.);
+	if ((P_PIp > 0) && (P_PIp < 1.2)&&(indtype==1)) ph_vs_th_pip_sim[2]->Fill(th_PIp,ph_PIp-120,1);
+ 	if (indtype==1) th_vs_p_pip_2_sim[2]->Fill(P_PIp,th_PIp,sigma);
+	
+//th_vs_p1
+if (!((th_PIp<(10000*P_PIp*P_PIp*P_PIp-3607.41*P_PIp*P_PIp+ 1725.72*P_PIp-10.6776)*exp(-4.7*P_PIp))&&!(th_PIp<(10000*P_PIp*P_PIp*P_PIp-4505.62*P_PIp*P_PIp+  2056.24  *P_PIp -77.4077 +5.)*exp(-4.7*P_PIp)))){
+//th_vs_p2
+if (!((th_PIp<pow((P_PIp-0.416536),(0.108376))*67.4593-21.4374)&&!(th_PIp<pow((P_PIp -0.454898),( 0.289291))* 35.7267+6.65908+1.5))){
+
+// 	if ((indtype==1)) hist_z_el_3_sim_1->Fill(z_PIp,sigma);
+
 cuts_sim = true;
-};//th_vs_p
- };//end of the fiducial cut for sector3
-};  //end of the sector3
+};//th_vs_p2
+};//th_vs_p1
+};//end of the fiducial cut for sector3
+};//end of the sector3
   
- if ((ph_PIp >= 150) && (ph_PIp <=210)&&(PdHit_PIp !=48)){
+if ((ph_PIp >= 150) && (ph_PIp <=210)){
  
- //&&(PdHit_PIp!=42)&&(PdHit_PIp!=43)&&(PdHit_PIp!=46)&&(PdHit_PIp!=39)&&(PdHit_PIp!=48)
- //&&(PdHit_PIp!=42)&&(PdHit_PIp!=43)&&(PdHit_PIp!=46)&&(PdHit_PIp!=39)&&(PdHit_PIp!=48)
- if ((P_PIp > 0) && (P_PIp < 1.2)&&(indtype==2)) ph_vs_th_pip_sim[3]->Fill(th_PIp,ph_PIp-180,1);
- if ((ph_PIp > pip_fid_b+180) && (ph_PIp < pip_fid_a+180)){
+//fiducial sector4
+if ((th_PIp > th_min)&&(th_PIp < th_max)&&(ph_PIp > pip_fid_b+180) && (ph_PIp < pip_fid_a+180)){
  
- if ((th_PIp <pow((P_PIp-0.452908),(0.102883))*84.0374  -40.301+ 1.3) ||(th_PIp> (304.23*(P_PIp+0.18)*(P_PIp+0.18)*(P_PIp+0.18) -255.798*(P_PIp+0.18)*(P_PIp+0.18)+497.462*(P_PIp+0.18) +38.0385)*exp(-1.85*(P_PIp+0.18)) +5.)|| ((th_PIp< (304.23*(P_PIp+0.18)*(P_PIp+0.18)*(P_PIp+0.18) -255.798*(P_PIp+0.18)*(P_PIp+0.18)+497.462*(P_PIp+0.18) +38.0385)*exp(-1.85*(P_PIp+0.18)) - 2.)&&(th_PIp >(1600*(P_PIp+0.03)*(P_PIp+0.03)*(P_PIp+0.03) -1068.36*(P_PIp+0.03)*(P_PIp+0.03)+ 775.016*(P_PIp+0.03)-1.13034)*exp(-2.75*(P_PIp+0.03))))||((th_PIp < (pow((P_PIp-0.103718),(0.0703664))*252.822-133.024)*exp(-0.45*P_PIp)-7.)&&((th_PIp >pow((P_PIp-0.412699),(0.214407))*52.0544 -0.0995427-2.1 )||(P_PIp <=0.412699)))){ 
- 
- if (indtype==1) beta_vs_p_pip_sim[3][PdHit_PIp-1]->Fill(P_PIp,beta_PIp,1);
-   if (indtype==1) time_pip_sim[3][PdHit_PIp-1]->Fill(P_PIp,PIp_dist*(1./beta_nom_pip-1/beta_PIp)/30.,1.);
-    if (indtype==1) th_vs_p_pip_1_sim[3]->Fill(P_PIp,th_PIp,1.);
-cuts_sim = true;
-};//th_vs_p
- };//end of the fiducial cut for sector4
- 
- }; //end of the sector4
-  
-if ((ph_PIp >= 210) && (ph_PIp <=270)&&(PdHit_PIp !=17)&&(PdHit_PIp !=48)) {
+	if ((P_PIp > 0) && (P_PIp < 1.2)&&(indtype==1)) ph_vs_th_pip_sim[3]->Fill(th_PIp,ph_PIp-180,1); 
+	if (indtype==1) th_vs_p_pip_2_sim[3]->Fill(P_PIp,th_PIp,sigma);  	
+	 
+//th_vs_p1	
+if (!((th_PIp<(304.23*(P_PIp+0.165)*(P_PIp+0.165)*(P_PIp+0.165) -255.798*(P_PIp+0.165)*(P_PIp+0.165)+497.462*(P_PIp+0.165) +38.0385)*exp(-1.85*(P_PIp+0.165)) +5.)&&!(th_PIp<(304.23*(P_PIp+0.18)*(P_PIp+0.18)*(P_PIp+0.18) -255.798*(P_PIp+0.18)*(P_PIp+0.18)+497.462*(P_PIp+0.18) +38.0385)*exp(-1.85*(P_PIp+0.18)) - 1.))){
+//th_vs_p2
+if (!((th_PIp<(1600*(P_PIp+0.03)*(P_PIp+0.03)*(P_PIp+0.03) -1068.36*(P_PIp+0.03)*(P_PIp+0.03)+ 775.016*(P_PIp+0.03)-1.13034)*exp(-2.75*(P_PIp+0.03)))&&!(th_PIp<(pow((P_PIp-0.103718),(0.0703664))*252.822-133.024)*exp(-0.45*P_PIp)-7.))){
+//th_vs_p3
+if (!((th_PIp<pow((P_PIp-0.416536),(0.108376))*67.4593-21.4374)&&!(th_PIp<pow((P_PIp -0.454898),( 0.289291))* 35.7267+6.65908+1.5))){
 
-//&&(PdHit_PIp!=40)&&(PdHit_PIp!=42)&&(PdHit_PIp!=44)&&(PdHit_PIp!=46)&&(PdHit_PIp!=47)&&(PdHit_PIp!=17)&&(PdHit_PIp!=48)
-//&&(PdHit_PIp!=40)&&(PdHit_PIp!=42)&&(PdHit_PIp!=44)&&(PdHit_PIp!=46)&&(PdHit_PIp!=47)&&(PdHit_PIp!=17)&&(PdHit_PIp!=48)
-if ((P_PIp > 0) && (P_PIp < 1.2)&&(indtype==2)) ph_vs_th_pip_sim[4]->Fill(th_PIp,ph_PIp-240,1);
-if ((ph_PIp > pip_fid_b+240) && (ph_PIp < pip_fid_a+240)){
+// 	if ((indtype==1)) hist_z_el_4_sim_1->Fill(z_PIp,sigma);
 
-if ((th_PIp < (525.498*(P_PIp-0.02)*(P_PIp-0.02)*(P_PIp-0.02) -1284.98*(P_PIp-0.02)*(P_PIp-0.02)+1460.67*(P_PIp-0.02)-499.999)*exp(-1.94*(P_PIp-0.02)) -4.7) || (th_PIp > (304.23*(P_PIp)*(P_PIp)*(P_PIp) -255.798*(P_PIp)*(P_PIp)+497.462*(P_PIp) +38.0385)*exp(-1.85*(P_PIp)) ) ||((th_PIp < (304.23*(P_PIp+0.03)*(P_PIp+0.03)*(P_PIp+0.03) -255.798*(P_PIp+0.03)*(P_PIp+0.03)+497.462*(P_PIp+0.03) +38.0385)*exp(-1.85*(P_PIp+0.03)) -11.)&&((th_PIp > pow((P_PIp-0.304992),(0.0758186))*91.5643-48.2057 - 1.)||(P_PIp <=0.304992))) || ((th_PIp < pow((P_PIp -0.36848),( 0.0864219))*70.4769  -34.9998+ 1.5)&&(th_PIp > (525.498*(P_PIp+0.03)*(P_PIp+0.03)*(P_PIp+0.03) -1284.98*(P_PIp+0.03)*(P_PIp+0.03)+1460.67*(P_PIp+0.03)-499.999)*exp(-1.94*(P_PIp+0.03))))){
-if (indtype==1) beta_vs_p_pip_sim[4][PdHit_PIp-1]->Fill(P_PIp,beta_PIp,1);
-if (indtype==1) time_pip_sim[4][PdHit_PIp-1]->Fill(P_PIp,PIp_dist*(1./beta_nom_pip-1/beta_PIp)/30.,1.);
-if (indtype==1) th_vs_p_pip_1_sim[4]->Fill(P_PIp,th_PIp,1.);
 cuts_sim = true;
-};//th_vs_p
- };//end of the fiducial cut for sector5
+};//th_vs_p3
+};//th_vs_p2
+};//th_vs_p1
+};//end of the fiducial cut for sector4
+}; //end of the sector4
+  
+if ((ph_PIp >= 210) && (ph_PIp <=270)&&(PdHit_PIp !=17)) {
 
-}; //end of the sector5
-  
-  
- if ((ph_PIp >= 270) && (ph_PIp <=330)&&(PdHit_PIp !=48)){
- 
- //&&(PdHit_PIp!=40)&&(PdHit_PIp!=44)&&(PdHit_PIp!=45)&&(PdHit_PIp!=31)&&(PdHit_PIp!=48)&&(PdHit_PIp!=47)
- //&&(PdHit_PIp!=40)&&(PdHit_PIp!=43)&&(PdHit_PIp!=44)&&(PdHit_PIp!=45)&&(PdHit_PIp!=31)&&(PdHit_PIp!=48)&&(PdHit_PIp!=47)
-if ((P_PIp > 0) && (P_PIp < 1.2)&&(indtype==2)) ph_vs_th_pip_sim[5]->Fill(th_PIp,ph_PIp-300,1);
- if ((ph_PIp > pip_fid_b+300) && (ph_PIp < pip_fid_a+300)){
- 
-if ((th_PIp < pow((P_PIp -0.454098),(0.0912936))*58.2946-20.4843+1.5) || (P_PIp<=0.05+0.0942469)||(th_PIp > pow((P_PIp-0.05-0.0942469),( 0.0582707))*114.358-50 -0.5)||((th_PIp < pow((P_PIp-0.05-0.126994),( 0.0706829))* 110.073-50+2.) &&((th_PIp > pow((P_PIp-0.416536),(0.108376))*67.4593-21.4374-1.)||(P_PIp<=0.416536)))){ 
-if (indtype==1) beta_vs_p_pip_sim[5][PdHit_PIp-1]->Fill(P_PIp,beta_PIp,1);
-if (indtype==1) time_pip_sim[5][PdHit_PIp-1]->Fill(P_PIp,PIp_dist*(1./beta_nom_pip-1/beta_PIp)/30.,1.);
-if (indtype==1) th_vs_p_pip_1_sim[5]->Fill(P_PIp,th_PIp,1.);
+//fiducial sector5
+if ((th_PIp > th_min)&&(th_PIp < th_max)&&(ph_PIp > pip_fid_b+240) && (ph_PIp < pip_fid_a+240)){
+
+	if ((P_PIp > 0) && (P_PIp < 1.2)&&(indtype==1)) ph_vs_th_pip_sim[4]->Fill(th_PIp,ph_PIp-240,1);
+	if (indtype==1) th_vs_p_pip_2_sim[4]->Fill(P_PIp,th_PIp,sigma);  
+		
+//th_vs_p1
+if (!((th_PIp<(525.498*(P_PIp+0.03)*(P_PIp+0.03)*(P_PIp+0.03) -1284.98*(P_PIp+0.03)*(P_PIp+0.03)+1460.67*(P_PIp+0.03)-499.999)*exp(-1.94*(P_PIp+0.03)))&&!(th_PIp<(525.498*(P_PIp-0.02)*(P_PIp-0.02)*(P_PIp-0.02) -1284.98*(P_PIp-0.02)*(P_PIp-0.02)+1460.67*(P_PIp-0.02)-499.999)*exp(-1.94*(P_PIp-0.02)) -4.7))){
+//th_vs_p2
+if (!((th_PIp<(304.23*(P_PIp)*(P_PIp)*(P_PIp) -255.798*(P_PIp)*(P_PIp)+497.462*(P_PIp) +38.0385)*exp(-1.85*(P_PIp)))&&!(th_PIp<(304.23*(P_PIp+0.03)*(P_PIp+0.03)*(P_PIp+0.03) -255.798*(P_PIp+0.03)*(P_PIp+0.03)+497.462*(P_PIp+0.03) +38.0385)*exp(-1.85*(P_PIp+0.03)) -11.))){
+//th_vs_p3
+if (!((th_PIp<pow((P_PIp-0.304992),(0.0758186))*91.5643-48.2057 - 1.)&&!(th_PIp<pow((P_PIp -0.36848),( 0.0864219))*70.4769  -34.9998+ 1.5))){
+
+// 	if ((indtype==1)) hist_z_el_5_sim_1->Fill(z_PIp,sigma);
+	
 cuts_sim = true;
-};//th_vs_p
- };//end of the fiducial cut for sector6
+};//th_vs_p3
+};//th_vs_p2
+};//th_vs_p1
+};//end of the fiducial cut for sector5
+};//end of the sector5
+  
+  
+if ((ph_PIp >= 270) && (ph_PIp <=330)){
  
- }; //end of the sector6
+//fiducial sector6
+if ((th_PIp > th_min)&&(th_PIp < th_max)&&(ph_PIp > pip_fid_b+300) && (ph_PIp < pip_fid_a+300)){
+ 
+	if ((P_PIp > 0) && (P_PIp < 1.2)&&(indtype==1)) ph_vs_th_pip_sim[5]->Fill(th_PIp,ph_PIp-300,1); 
+	if (indtype==1) th_vs_p_pip_2_sim[5]->Fill(P_PIp,th_PIp,sigma); 
+		 
+//th_vs_p1
+if (!((th_PIp<pow((P_PIp-0.05-0.0942469),( 0.0582707))*114.358-50 -0.5)&&!(th_PIp<pow((P_PIp-0.05-0.126994),( 0.0706829))* 110.073-50+2.))){
+//th_vs_p2
+if (!((th_PIp<pow((P_PIp-0.416536),(0.108376))*67.4593-21.4374-1.)&&!(th_PIp<pow((P_PIp -0.454098),(0.0912936))*58.2946-20.4843+1.5))){
+
+// 	if ((indtype==1)) hist_z_el_6_sim_1->Fill(z_PIp,sigma);
+
+cuts_sim = true;
+};//th_vs_p2
+};//th_vs_p1
+};//end of the fiducial cut for sector6
+};//end of the sector6
   
   
   
-  
-  };
+ };//vertex cut  
+  };//end of pi+ id beta vs p cut
     return cuts_sim;
    };
    
@@ -795,151 +923,170 @@ cuts_sim = true;
   bool cuts_sim::PIm_cuts_sim(){
        
    bool cuts_sim;
-   Float_t m_pim,th_min,par1,par2,pim_fid_a,pim_fid_b,beta_nom_pim;
-   
+   Float_t m_pim,th_min,th_max,th_edge,par1,par2,par3,pim_fid_a,pim_fid_b,th_min_lowp;
     
    m_pim = 0.13957; 
-  th_min=(11.09+8./(0.472*P_PIm+0.117));
-  par1=0.705+1.1*P_PIm;
-  par2=-63.2-29.3*P_PIm;       
-   pim_fid_a=35.*pow((sin((th_PIm-th_min)*0.007)),(par1+par2/th_PIm+1350./th_PIm/th_PIm))-1;
-    beta_nom_pim = P_PIm/sqrt(m_pim*m_pim+P_PIm*P_PIm); 
-   pim_fid_b=-35.*pow((sin((th_PIm-th_min)*0.007)),(par1+par2/th_PIm+1350./th_PIm/th_PIm))+1; 
-   cuts_sim = false; 
-  
-     
-   
- 
-   if ((n_PIm == 1)&& (PIm_dist*(1./beta_nom_pim-1/beta_PIm)/30. < 0.001284/(P_PIm*P_PIm*P_PIm*P_PIm+0.00206)+0.6335)&&(PIm_dist*(1./beta_nom_pim-1/beta_PIm)/30. > -0.002811/(P_PIm*P_PIm*P_PIm*P_PIm+0.002855)-0.5364)) {
-   
-   //&& (beta_PIm < 0.8*P_PIm/sqrt(m_pim*m_pim+1.2*P_PIm*P_PIm+0.008756) + 0.02963) && (beta_PIm > 0.7686*P_PIm/sqrt(m_pim*m_pim+0.4188*P_PIm*P_PIm - 0.01057)-0.2111)
-   
-   //&& (beta_PIm < 0.2338*P_PIm/sqrt(m_pim*m_pim+0.0518*P_PIm*P_PIm-0.0187) + 0.0001728) && (beta_PIm > 0.9659*P_PIm/sqrt(m_pim*m_pim+0.9729*P_PIm*P_PIm + 0.008634)-0.0003043)
-   //&& (beta_PIm < 0.1717*P_PIm/sqrt(m_pim*m_pim+0.028*P_PIm*P_PIm-0.02) + 0.00023) && (beta_PIm > 0.112*P_PIm/sqrt(m_pim*m_pim+0.015*P_PIm*P_PIm - 0.02))
-   
-   
- if ((ph_PIm >= 330) && (ph_PIm <=360)&&(PdHit_PIm!=48)){
- 
- //&&(PdHit_PIm!=42)&&(PdHit_PIm!=45)&&(PdHit_PIm!=46)&&(PdHit_PIm!=47)&&(PdHit_PIm!=48)
- //&&(PdHit_PIm!=42)&&(PdHit_PIm!=45)&&(PdHit_PIm!=46)&&(PdHit_PIm!=47)&&(PdHit_PIm!=48)
 
-
-
-  if ((ph_PIm > pim_fid_b+360) && (ph_PIm < pim_fid_a+360)){
-   if ((P_PIm > 0) && (P_PIm < 2.)&&(indtype==1)) ph_vs_th_pim_sim[0][int(P_PIm/0.4)]->Fill(th_PIm,ph_PIm-360,1);
-   if ((th_PIm < (11.09+8./(0.472*(P_PIm+0.25)+0.117))+75.) || (th_PIm >(11.09+8./(0.472*(P_PIm+0.25)+0.117))+85. )){
+    th_min=(11.09+8./(0.472*(P_PIm-0.03)+0.117))-1.;
+    th_min_lowp = 30.+5.24894e-05/(5.71075e-05*(P_PIm+0.004)*(P_PIm+0.004)+4.44089e-16)+3.;
+      
+  if (P_PIm<0.31) th_max = 140.;  
+  if (P_PIm>0.31) th_max =  254.914-506.82*P_PIm + 424.853*P_PIm*P_PIm-129.339*P_PIm*P_PIm*P_PIm;
   
- if (indtype==1) beta_vs_p_pim_sim[0][PdHit_PIm-1]->Fill(P_PIm,beta_PIm,1);
- if (indtype==1) time_pim_sim[0][PdHit_PIm-1]->Fill(P_PIm,PIm_dist/30.*(1./beta_nom_pim-1./beta_PIm),1.);
- if (indtype==1) th_vs_p_pim_1_sim[0]->Fill(P_PIm,th_PIm,1.);
-   cuts_sim = true;
-   };//th_vs_p
-   };//end of the fiducial cut for first part of sector1
-  }; //end of the first part of sector1
+  th_edge = th_max- 4./3.*(th_max-th_min)/2.;
   
-  if ((ph_PIm >= 0) && (ph_PIm <=30)&&(PdHit_PIm!=48)){
-  
-  //&&(PdHit_PIm!=42)&&(PdHit_PIm!=45)&&(PdHit_PIm!=46)&&(PdHit_PIm!=47)&&(PdHit_PIm!=48)
-  //&&(PdHit_PIm!=42)&&(PdHit_PIm!=45)&&(PdHit_PIm!=46)&&(PdHit_PIm!=47)&&(PdHit_PIm!=48)
-
- 
- if ((ph_PIm > pim_fid_b) && (ph_PIm < pim_fid_a)){
-  if ((P_PIm > 0) && (P_PIm < 2.)&&(indtype==1)) ph_vs_th_pim_sim[0][int(P_PIm/0.4)]->Fill(th_PIm,ph_PIm,1);
-if ((th_PIm < (11.09+8./(0.472*(P_PIm+0.25)+0.117))+75.) || (th_PIm >(11.09+8./(0.472*(P_PIm+0.25)+0.117))+85. )){ 
-if (indtype==1) beta_vs_p_pim_sim[0][PdHit_PIm-1]->Fill(P_PIm,beta_PIm,1);
-if (indtype==1) time_pim_sim[0][PdHit_PIm-1]->Fill(P_PIm,PIm_dist/30.*(1./beta_nom_pim-1./beta_PIm),1.);
-if (indtype==1) th_vs_p_pim_1_sim[0]->Fill(P_PIm,th_PIm,1.);
-cuts_sim = true;
-};//th_vs_p
-   };//end of the fiducial cut for second part of sector1
-   };//end of the second part of sector1
-  
-    if ((ph_PIm >= 30) && (ph_PIm <=90)&&(PdHit_PIm!=48)) {
+  par1=0.61+1.18*P_PIm;
+  par2=-59.2-35.3*P_PIm; 
+  par3=17.2*P_PIm-11.9*P_PIm*P_PIm-1.;
+      
+   pim_fid_a=+23.5*pow((sin((th_PIm-th_min)*0.015)),(par1+par2/th_PIm+1400./th_PIm/th_PIm))+par3;
+   pim_fid_b=-23.5*pow((sin((th_PIm-th_min)*0.015)),(par1+par2/th_PIm+1400./th_PIm/th_PIm))-par3;
     
- //  &&(PdHit_PIm!=16)&&(PdHit_PIm!=24)&&(PdHit_PIm!=41)&&(PdHit_PIm!=42)&&(PdHit_PIm!=43)&&(PdHit_PIm!=44)&&(PdHit_PIm!=45)&&(PdHit_PIm!=46)&&(PdHit_PIm!=47)&&(PdHit_PIm!=48) //&&(PdHit_PIm!=16)&&(PdHit_PIm!=24)&&(PdHit_PIm!=41)&&(PdHit_PIm!=42)&&(PdHit_PIm!=43)&&(PdHit_PIm!=44)&&(PdHit_PIm!=45)&&(PdHit_PIm!=46)&&(PdHit_PIm!=47)&&(PdHit_PIm!=48)
+  if (th_PIm > th_edge) pim_fid_a=+23.5*pow((sin((th_edge-th_min)*0.015)),(par1+par2/th_edge+1400./th_edge/th_edge))+par3;
+  if (th_PIm > th_edge) pim_fid_b=-23.5*pow((sin((th_edge-th_min)*0.015)),(par1+par2/th_edge+1400./th_edge/th_edge))-par3;   
 
+	   
+cuts_sim = false; 
+  
+//pi- id beta vs p cut        
+if((n_PIm == 1)&& (beta_PIm < 0.779984*P_PIm/sqrt(m_pip*m_pip+0.700052*P_PIm*P_PIm-0.00506451 )+ 0.105877) && (beta_PIm > 0.854914*P_PIm/sqrt(m_pip*m_pip +0.629965*P_PIm*P_PIm -0.00757789)-0.113261 )&&(PdHit_PIm!=48)){    
 
-if ((ph_PIm > pim_fid_b+60) && (ph_PIm < pim_fid_a+60)){
- if ((P_PIm > 0) && (P_PIm < 2.)&&(indtype==1)) ph_vs_th_pim_sim[1][int(P_PIm/0.4)]->Fill(th_PIm,ph_PIm-60,1);
-if ((th_PIm < 36.152+3.69909e-05/(5.40783e-06*P_PIm+1.81169e-07)-2.5) || (th_PIm > 36.152+3.69909e-05/(5.40783e-06*P_PIm+1.81169e-07)+2.)){ 
-if (indtype==1) beta_vs_p_pim_sim[1][PdHit_PIm-1]->Fill(P_PIm,beta_PIm,1);
-if (indtype==1) time_pim_sim[1][PdHit_PIm-1]->Fill(P_PIm,PIm_dist/30.*(1./beta_nom_pim-1./beta_PIm),1.);
-if (indtype==1) th_vs_p_pim_1_sim[1]->Fill(P_PIm,th_PIm,1.);
+//vertex cut
+if ((z_PIm>-4.8) && (z_PIm<4.)){
+
+//th_min for low momenta
+if (((P_PIm<0.3)&&(th_PIm > th_min_lowp))||(P_PIm>0.3)){ 
+ 
+if ((ph_PIm >= 330) && (ph_PIm <=360)){
+ 
+//fiducial cut sector 1  
+if ((th_PIm > th_min)&&(th_PIm < th_max)&&(ph_PIm > pim_fid_b+360) && (ph_PIm < pim_fid_a+360)){
+
+	if ((P_PIm > 0) && (P_PIm < 2.)&&(indtype==1)) ph_vs_th_pim_sim[0][int(P_PIm/0.4)]->Fill(th_PIm,ph_PIm-360,1);
+	if (indtype==1) th_vs_p_pim_2_sim[0]->Fill(P_PIm,th_PIm,sigma); 
+	
+//th_vs_p
+if (th_PIm < (11.09+8./(0.472*(P_PIm+0.3)+0.117))+77.){	 
+
+ 	if ((indtype==1)) hist_z_el_1_sim_1->Fill(z_PIm,sigma);	
+
+ cuts_sim = true;
+};//th_vs_p
+};//end of the fiducial cut for first part of sector1
+}; //end of the first part of sector1
+  
+if ((ph_PIm >= 0) && (ph_PIm <=30)){
+
+//fiducial cut sector 1  
+if ((th_PIm > th_min)&&(th_PIm < th_max)&&(ph_PIm > pim_fid_b) && (ph_PIm < pim_fid_a)){
+
+	if ((P_PIm > 0) && (P_PIm < 2.)&&(indtype==1)) ph_vs_th_pim_sim[0][int(P_PIm/0.4)]->Fill(th_PIm,ph_PIm,1);
+	if (indtype==1) th_vs_p_pim_2_sim[0]->Fill(P_PIm,th_PIm,sigma);
+	
+//th_vs_p
+if (th_PIm < (11.09+8./(0.472*(P_PIm+0.3)+0.117))+77.){	 
+
+ 	if ((indtype==1)) hist_z_el_1_sim_1->Fill(z_PIm,sigma);
+		 
 cuts_sim = true;
 };//th_vs_p
- };//end of the fiducial cut for sector2
+};//end of the fiducial cut for second part of sector1
+};//end of the second part of sector1
+ 
+if ((ph_PIm >= 30) && (ph_PIm <=90)&&(PdHit_PIm!=16)) {
+    
+//fiducial cut sector 2 
+if ((th_PIm > th_min)&&(th_PIm < th_max)&&(ph_PIm > pim_fid_b+60) && (ph_PIm < pim_fid_a+60)){
+
+	if ((P_PIm > 0) && (P_PIm < 2.)&&(indtype==1)) ph_vs_th_pim_sim[1][int(P_PIm/0.4)]->Fill(th_PIm,ph_PIm-60,1);
+	if (indtype==1) th_vs_p_pim_2_sim[1]->Fill(P_PIm,th_PIm,sigma);
+	
+//th_vs_p
+if ((th_PIm < 36.152+3.69909e-05/(5.40783e-06*P_PIm+1.81169e-07)-2.5) || (th_PIm > 36.152+3.69909e-05/(5.40783e-06*P_PIm+1.81169e-07)+2.)){
+
+ 	if ((indtype==1)) hist_z_el_2_sim_1->Fill(z_PIm,sigma);
+
+cuts_sim = true;
+};//th_vs_p
+};//end of the fiducial cut for sector2
 };//end of the sector2
     
-if ((ph_PIm >= 90) && (ph_PIm <=150)&&(PdHit_PIm!=44)&&(PdHit_PIm!=48)) {
+if ((ph_PIm >= 90) && (ph_PIm <=150)&&(PdHit_PIm!=44)) {
 
-//&&(PdHit_PIm!=25)&&(PdHit_PIm!=40)&&(PdHit_PIm!=41)&&(PdHit_PIm!=42)&&(PdHit_PIm!=43)&&(PdHit_PIm!=44)&&(PdHit_PIm!=46)&&(PdHit_PIm!=47)&&(PdHit_PIm!=48)
-//&&(PdHit_PIm!=25)&&(PdHit_PIm!=40)&&(PdHit_PIm!=41)&&(PdHit_PIm!=42)&&(PdHit_PIm!=43)&&(PdHit_PIm!=44)&&(PdHit_PIm!=46)&&(PdHit_PIm!=47)&&(PdHit_PIm!=48)
+//fiducial cut sector 3
+if ((th_PIm > th_min)&&(th_PIm < th_max)&&(ph_PIm > pim_fid_b+120) && (ph_PIm < pim_fid_a+120)){
 
+	if ((P_PIm > 0) && (P_PIm < 2.)&&(indtype==1)) ph_vs_th_pim_sim[2][int(P_PIm/0.4)]->Fill(th_PIm,ph_PIm-120,1); 
+	if (indtype==1) th_vs_p_pim_2_sim[2]->Fill(P_PIm,th_PIm,sigma);
+	
+//th_vs_p
+if (th_PIm <(11.09+8./(0.472*(P_PIm+0.2)+0.117))+85.){ 
 
- if ((ph_PIm > pim_fid_b+120) && (ph_PIm < pim_fid_a+120)){
-  if ((P_PIm > 0) && (P_PIm < 2.)&&(indtype==1)) ph_vs_th_pim_sim[2][int(P_PIm/0.4)]->Fill(th_PIm,ph_PIm-120,1); 
-if ((th_PIm <36.152+3.69909e-05/(5.40783e-06*(P_PIm+0.08)+1.81169e-07)+ 71) || (th_PIm >36.152+3.69909e-05/(5.40783e-06*(P_PIm+0.1)+1.81169e-07)+ 80. )){  
-if (indtype==1) beta_vs_p_pim_sim[2][PdHit_PIm-1]->Fill(P_PIm,beta_PIm,1);
-if (indtype==1) time_pim_sim[2][PdHit_PIm-1]->Fill(P_PIm,PIm_dist/30.*(1./beta_nom_pim-1./beta_PIm),1.);
-if (indtype==1) th_vs_p_pim_1_sim[2]->Fill(P_PIm,th_PIm,1.);
+ 	if ((indtype==1)) hist_z_el_3_sim_1->Fill(z_PIm,sigma);
+	
 cuts_sim = true;
 };//th_vs_p
- };//end of the fiducial cut for sector3
+};//end of the fiducial cut for sector3
 };  //end of the sector3
   
- if ((ph_PIm >= 150) && (ph_PIm <=210)&&(PdHit_PIm!=48)){
+if ((ph_PIm >= 150) && (ph_PIm <=210)){
  
- //&&(PdHit_PIm!=39)&&(PdHit_PIm!=42)&&(PdHit_PIm!=43)&&(PdHit_PIm!=46)&&(PdHit_PIm!=47)&&(PdHit_PIm!=48)
- //&&(PdHit_PIm!=39)&&(PdHit_PIm!=42)&&(PdHit_PIm!=43)&&(PdHit_PIm!=46)&&(PdHit_PIm!=47)&&(PdHit_PIm!=48)
- 
+//fiducial cut sector 4 
+if ((th_PIm > th_min)&&(th_PIm < th_max)&&(ph_PIm > pim_fid_b+180) && (ph_PIm < pim_fid_a+180)){
 
- if ((ph_PIm > pim_fid_b+180) && (ph_PIm < pim_fid_a+180)){
-  if ((P_PIm > 0) && (P_PIm < 2.)&&(indtype==1)) ph_vs_th_pim_sim[3][int(P_PIm/0.4)]->Fill(th_PIm,ph_PIm-180,1);
-if ((th_PIm < 36.152+3.69909e-05/(5.40783e-06*(P_PIm+0.31)+1.81169e-07)+62.) || ((th_PIm>36.152+3.69909e-05/(5.40783e-06*(P_PIm+0.31)+1.81169e-07)+66.)&&(th_PIm <36.152+3.69909e-05/(5.40783e-06*(P_PIm+0.15)+1.81169e-07)+77.)) || (th_PIm > 36.152+3.69909e-05/(5.40783e-06*(P_PIm+0.15)+1.81169e-07)+83.)){  
-if (indtype==1) beta_vs_p_pim_sim[3][PdHit_PIm-1]->Fill(P_PIm,beta_PIm,1);
-if (indtype==1) time_pim_sim[3][PdHit_PIm-1]->Fill(P_PIm,PIm_dist/30.*(1./beta_nom_pim-1./beta_PIm),1.);
-if (indtype==1) th_vs_p_pim_1_sim[3]->Fill(P_PIm,th_PIm,1.);
+	if ((P_PIm > 0) && (P_PIm < 2.)&&(indtype==1)) ph_vs_th_pim_sim[3][int(P_PIm/0.4)]->Fill(th_PIm,ph_PIm-180,1);
+	if (indtype==1) th_vs_p_pim_2_sim[3]->Fill(P_PIm,th_PIm,sigma);
+	
+//th_vs_p  
+if ((th_PIm < 36.152+3.69909e-05/(5.40783e-06*(P_PIm+0.31)+1.81169e-07)+62.)||((th_PIm>36.152+3.69909e-05/(5.40783e-06*(P_PIm+0.31)+1.81169e-07)+66.)&&(th_PIm <36.152+3.69909e-05/(5.40783e-06*(P_PIm+0.25)+1.81169e-07)+80.))){
+
+ 	if ((indtype==1)) hist_z_el_4_sim_1->Fill(z_PIm,sigma);
+
 cuts_sim = true;
 };//th_vs_p
- };//end of the fiducial cut for sector4
- }; //end of the sector4
+};//end of the fiducial cut for sector4
+};//end of the sector4
   
-if ((ph_PIm >= 210) && (ph_PIm <=270)&&(PdHit_PIm!=17)&&(PdHit_PIm!=48)) {
+if ((ph_PIm >= 210) && (ph_PIm <=270)&&(PdHit_PIm!=17)) {
 
-//&&(PdHit_PIm!=17)&&(PdHit_PIm!=40)&&(PdHit_PIm!=42)&&(PdHit_PIm!=43)&&(PdHit_PIm!=44)&&(PdHit_PIm!=46)&&(PdHit_PIm!=47)&&(PdHit_PIm!=48)
-//&&(PdHit_PIm!=17)&&(PdHit_PIm!=40)&&(PdHit_PIm!=42)&&(PdHit_PIm!=43)&&(PdHit_PIm!=44)&&(PdHit_PIm!=46)&&(PdHit_PIm!=47)&&(PdHit_PIm!=48)
+//fiducial cut sector 5  
+if ((th_PIm > th_min)&&(th_PIm < th_max)&&(ph_PIm > pim_fid_b+240) && (ph_PIm < pim_fid_a+240)){
 
-if ((ph_PIm > pim_fid_b+240) && (ph_PIm < pim_fid_a+240)){
- if ((P_PIm > 0) && (P_PIm < 2.)&&(indtype==1)) ph_vs_th_pim_sim[4][int(P_PIm/0.4)]->Fill(th_PIm,ph_PIm-240,1);
-if ((th_PIm <36.152+3.69909e-05/(5.40783e-06*(P_PIm)+1.81169e-07)-1.5) || ((th_PIm < 36.152+3.69909e-05/(5.40783e-06*(P_PIm+0.2)+1.81169e-07)+82)&&(th_PIm > 36.152+3.69909e-05/(5.40783e-06*(P_PIm+0.2)+1.81169e-07)+72)) || ((th_PIm< 36.152+3.69909e-05/(5.40783e-06*(P_PIm+0.03)+1.81169e-07)+60)&&(th_PIm >36.152+3.69909e-05/(5.40783e-06*(P_PIm)+1.81169e-07)+4 ))){  
+	if ((P_PIm > 0) && (P_PIm < 2.)&&(indtype==1)) ph_vs_th_pim_sim[4][int(P_PIm/0.4)]->Fill(th_PIm,ph_PIm-240,1);
+	if (indtype==1) th_vs_p_pim_2_sim[4]->Fill(P_PIm,th_PIm,sigma);
+	
+//th_vs_p
+if ((th_PIm<36.152+3.69909e-05/(5.40783e-06*(P_PIm)+1.81169e-07)-1.)||((th_PIm>36.152+3.69909e-05/(5.40783e-06*(P_PIm-0.01)+1.81169e-07)+3)&&(th_PIm<36.152+3.69909e-05/(5.40783e-06*(P_PIm+0.1)+1.81169e-07)+63.))){ 
 
-if (indtype==1) beta_vs_p_pim_sim[4][PdHit_PIm-1]->Fill(P_PIm,beta_PIm,1);
-if (indtype==1) time_pim_sim[4][PdHit_PIm-1]->Fill(P_PIm,PIm_dist/30.*(1./beta_nom_pim-1./beta_PIm),1.);
-if (indtype==1) th_vs_p_pim_1_sim[4]->Fill(P_PIm,th_PIm,1.);
+ 	if ((indtype==1)) hist_z_el_5_sim_1->Fill(z_PIm,sigma);
+
 cuts_sim = true;
 };//th_vs_p
- };//end of the fiducial cut for sector5
+};//end of the fiducial cut for sector5
 }; //end of the sector5
     
- if ((ph_PIm >= 270) && (ph_PIm <=330)&&(PdHit_PIm!=48)){
+ if ((ph_PIm >= 270) && (ph_PIm <=330)){
  
- //&&(PdHit_PIm!=31)&&(PdHit_PIm!=40)&&(PdHit_PIm!=43)&&(PdHit_PIm!=44)&&(PdHit_PIm!=45)&&(PdHit_PIm!=46)&&(PdHit_PIm!=47)&&(PdHit_PIm!=48) //&&(PdHit_PIm!=31)&&(PdHit_PIm!=40)&&(PdHit_PIm!=43)&&(PdHit_PIm!=44)&&(PdHit_PIm!=45)&&(PdHit_PIm!=46)&&(PdHit_PIm!=47)&&(PdHit_PIm!=48)
+//fiducial cut sector 6  
+if ((th_PIm > th_min)&&(th_PIm < th_max)&&(ph_PIm > pim_fid_b+300) && (ph_PIm < pim_fid_a+300)){
+ 
+	if ((P_PIm > 0) && (P_PIm < 2.)&&(indtype==1)) ph_vs_th_pim_sim[5][int(P_PIm/0.4)]->Fill(th_PIm,ph_PIm-300,1);
+	if (indtype==1) th_vs_p_pim_2_sim[5]->Fill(P_PIm,th_PIm,sigma);
+	
+//th_vs_p
+if ((th_PIm <36.152+3.69909e-05/(5.40783e-06*(P_PIm+0.15)+1.81169e-07)+71.) || (th_PIm > 36.152+3.69909e-05/(5.40783e-06*(P_PIm+0.1)+1.81169e-07)+72.5 )){  
 
- 
- if ((ph_PIm > pim_fid_b+300) && (ph_PIm < pim_fid_a+300)){
-  if ((P_PIm > 0) && (P_PIm < 2.)&&(indtype==1)) ph_vs_th_pim_sim[5][int(P_PIm/0.4)]->Fill(th_PIm,ph_PIm-300,1);
- if ((th_PIm <36.152+3.69909e-05/(5.40783e-06*(P_PIm+0.15)+1.81169e-07)+70) || (th_PIm > 36.152+3.69909e-05/(5.40783e-06*(P_PIm+0.15)+1.81169e-07)+75 )){  
-if (indtype==1) beta_vs_p_pim_sim[5][PdHit_PIm-1]->Fill(P_PIm,beta_PIm,1);
-if (indtype==1) time_pim_sim[5][PdHit_PIm-1]->Fill(P_PIm,PIm_dist/30.*(1./beta_nom_pim-1./beta_PIm),1.);
-if (indtype==1) th_vs_p_pim_1_sim[5]->Fill(P_PIm,th_PIm,1.);
+ 	if ((indtype==1)) hist_z_el_6_sim_1->Fill(z_PIm,sigma);
+	
 cuts_sim = true;
 };//th_vs_p
- };//end of the fiducial cut for sector6
- }; //end of the sector6
+};//end of the fiducial cut for sector6
+}; //end of the sector6
   
    
   
-  
-   };
+  };//th_min for low momenta
+   };//vertex cut
+   };//end of pi- id beta vs p cut 
     return cuts_sim;
    };   

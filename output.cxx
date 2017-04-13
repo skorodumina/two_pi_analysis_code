@@ -233,7 +233,8 @@ int output() {
        outFile->mkdir("new_gen_fermi_comp_0925"); 
        outFile->mkdir("new_gen_fermi_comp_0975"); */
        
-       outFile->mkdir("excl_diff_miss_mass_mom_5wbins");
+       outFile->mkdir("excl_top_plots");
+        outFile->mkdir("main_top_plots");
  /*      outFile->mkdir("miss_mass_pim_th_dep_pim"); 
        outFile->mkdir("miss_mass_pim_th_dep_pip"); 
        outFile->mkdir("miss_mass_pim_th_dep_pr"); 
@@ -405,6 +406,12 @@ h_z_P_sim ->Write("", TObject::kOverwrite);
 h_z_PIp_sim->Write("", TObject::kOverwrite);
 h_z_PIm_sim->Write("", TObject::kOverwrite);
 
+h_dc_y_vs_x_el->Write("", TObject::kOverwrite);
+
+h_z_corr1_data->Write("", TObject::kOverwrite);
+h_z_corr2_data->Write("", TObject::kOverwrite);
+h_z_corr1_sim->Write("", TObject::kOverwrite);
+h_z_corr2_sim->Write("", TObject::kOverwrite);
 
 
 h_1d_rc_0425->Write("", TObject::kOverwrite);
@@ -457,11 +464,6 @@ h_1d_rc_0975_evt->Write("", TObject::kOverwrite);
       h_mm_pip_vs_npart_sim->Write("", TObject::kOverwrite);
       
     	
-   h_delta_w_vs_w_old_data->Write("", TObject::kOverwrite);
-    h_delta_w_vs_w_old_data_mmcut->Write("", TObject::kOverwrite);
-   h_delta_w_vs_w_old_gen->Write("", TObject::kOverwrite);
-   h_delta_w_vs_w_old_rec->Write("", TObject::kOverwrite);   
-   
       hist_ltime->Write("", TObject::kOverwrite); 
       hist_n_incl->Write("", TObject::kOverwrite);
       hist_n_elast->Write("", TObject::kOverwrite); 
@@ -480,24 +482,13 @@ h_1d_rc_0975_evt->Write("", TObject::kOverwrite);
       
       hist_w_hadr_all_reg->Write("", TObject::kOverwrite);
       hist_w_el_all_reg->Write("", TObject::kOverwrite);
-      hist_w_sim_new_1dim->Write("", TObject::kOverwrite);
-      hist_w_sim_old_1dim->Write("", TObject::kOverwrite);
+    
                     
        h_miss_mass_0->Write("", TObject::kOverwrite);
        h_miss_mass_0_sim->Write("", TObject::kOverwrite); 
        hist_miss_en_0->Write("", TObject::kOverwrite);
        h_miss_en_0_sim->Write("", TObject::kOverwrite);
-       h_miss_mass_0_d->Write("", TObject::kOverwrite);
-       h_miss_mass_0_d_sim->Write("", TObject::kOverwrite);
-       
-        h_miss_mass_0_d_mmcut->Write("", TObject::kOverwrite);
-       h_miss_mass_0_d_sim_mmcut->Write("", TObject::kOverwrite);
-       
-       h_inprot_miss->Write("", TObject::kOverwrite);
-       h_inprot_miss_en->Write("", TObject::kOverwrite);
-       
-        h_inprot_miss_sim->Write("", TObject::kOverwrite);
-       h_inprot_miss_en_sim->Write("", TObject::kOverwrite);
+      
        
        h_miss_mom_0_nocut->Write("", TObject::kOverwrite);
        h_miss_mom_0_cut_on0->Write("", TObject::kOverwrite);
@@ -510,12 +501,9 @@ h_1d_rc_0975_evt->Write("", TObject::kOverwrite);
        
        h_miss_mom_0->Write("", TObject::kOverwrite);
        h_miss_mom_0_sim->Write("", TObject::kOverwrite);
-       h_miss_mom_0_d->Write("", TObject::kOverwrite);
-       h_miss_mom_0_d_sim->Write("", TObject::kOverwrite);
+     
        
-       h_miss_mom_0_d_mmcut->Write("", TObject::kOverwrite);
-       h_miss_mom_0_d_sim_mmcut->Write("", TObject::kOverwrite);
-       
+      
        hist_PIm_miss->Write("", TObject::kOverwrite);
        h_PIm_miss_sim->Write("", TObject::kOverwrite);
        hist_PIm_miss_en->Write("", TObject::kOverwrite);
@@ -817,42 +805,42 @@ norm_nphe_s6 -> Write("", TObject::kOverwrite);*/
  
  ////kkkk
  outFile->cd("sector1_p_fid");
- for (ti=0; ti<5; ti++){
+ for (ti=0; ti<6; ti++){
  ph_th_p_1[ti]->Write("", TObject::kOverwrite); 
  };
  ph_vs_th_p_1_w->Write("", TObject::kOverwrite);
  ph_vs_th_p_1->Write("", TObject::kOverwrite);
  
  outFile->cd("sector2_p_fid");
- for (ti=0; ti<5; ti++){
+ for (ti=0; ti<6; ti++){
  ph_th_p_2[ti]->Write("", TObject::kOverwrite); 
  };
  ph_vs_th_p_2_w->Write("", TObject::kOverwrite);
  ph_vs_th_p_2->Write("", TObject::kOverwrite);
  
  outFile->cd("sector3_p_fid");
- for (ti=0; ti<5; ti++){
+ for (ti=0; ti<6; ti++){
  ph_th_p_3[ti]->Write("", TObject::kOverwrite); 
  };
  ph_vs_th_p_3_w->Write("", TObject::kOverwrite);
  ph_vs_th_p_3->Write("", TObject::kOverwrite);
  
  outFile->cd("sector4_p_fid");
- for (ti=0; ti<5; ti++){
+ for (ti=0; ti<6; ti++){
  ph_th_p_4[ti]->Write("", TObject::kOverwrite); 
  };
  ph_vs_th_p_4_w->Write("", TObject::kOverwrite);
  ph_vs_th_p_4->Write("", TObject::kOverwrite);
  
  outFile->cd("sector5_p_fid");
- for (ti=0; ti<5; ti++){
+ for (ti=0; ti<6; ti++){
  ph_th_p_5[ti]->Write("", TObject::kOverwrite); 
  };
  ph_vs_th_p_5_w->Write("", TObject::kOverwrite);
  ph_vs_th_p_5->Write("", TObject::kOverwrite);
  
  outFile->cd("sector6_p_fid");
- for (ti=0; ti<5; ti++){
+ for (ti=0; ti<6; ti++){
  ph_th_p_6[ti]->Write("", TObject::kOverwrite); 
  };
  ph_vs_th_p_6_w->Write("", TObject::kOverwrite);
@@ -893,7 +881,7 @@ norm_nphe_s6 -> Write("", TObject::kOverwrite);*/
  
  ////pppp
  outFile->cd("sector1_pim_fid");
- for (ti=0; ti<10; ti++){
+ for (ti=0; ti<15; ti++){
  ph_vs_th_pim[0][ti]->Write("", TObject::kOverwrite); 
  };
  ph_th_pim_all_p[0]->Write("", TObject::kOverwrite);
@@ -1398,26 +1386,26 @@ outFile->cd("y_sc_vs_x_sc_pim");
 ///oooo
   outFile->cd("th_vs_p");
   for (ti=0; ti<6; ti++){ 
-th_vs_p_e_1[ti]->Write("", TObject::kOverwrite);  
+//th_vs_p_e_1[ti]->Write("", TObject::kOverwrite);  
 th_vs_p_e_2[ti]->Write("", TObject::kOverwrite); 
-th_vs_p_p_1[ti]->Write("", TObject::kOverwrite);  
+//th_vs_p_p_1[ti]->Write("", TObject::kOverwrite);  
 th_vs_p_p_2[ti]->Write("", TObject::kOverwrite);  
-th_vs_p_pip_1[ti]->Write("", TObject::kOverwrite);  
+//th_vs_p_pip_1[ti]->Write("", TObject::kOverwrite);  
 th_vs_p_pip_2[ti]->Write("", TObject::kOverwrite);
-th_vs_p_pim_1[ti]->Write("", TObject::kOverwrite);  
+//th_vs_p_pim_1[ti]->Write("", TObject::kOverwrite);  
 th_vs_p_pim_2[ti]->Write("", TObject::kOverwrite); 
  
  
  }; 
  outFile->cd("th_vs_p_sim");
 for (ti=0; ti<6; ti++){ 
-th_vs_p_e_1_sim[ti]->Write("", TObject::kOverwrite);  
+//th_vs_p_e_1_sim[ti]->Write("", TObject::kOverwrite);  
 th_vs_p_e_2_sim[ti]->Write("", TObject::kOverwrite); 
-th_vs_p_p_1_sim[ti]->Write("", TObject::kOverwrite);  
+//th_vs_p_p_1_sim[ti]->Write("", TObject::kOverwrite);  
 th_vs_p_p_2_sim[ti]->Write("", TObject::kOverwrite);  
-th_vs_p_pip_1_sim[ti]->Write("", TObject::kOverwrite);  
+//th_vs_p_pip_1_sim[ti]->Write("", TObject::kOverwrite);  
 th_vs_p_pip_2_sim[ti]->Write("", TObject::kOverwrite);
-th_vs_p_pim_1_sim[ti]->Write("", TObject::kOverwrite);  
+//th_vs_p_pim_1_sim[ti]->Write("", TObject::kOverwrite);  
 th_vs_p_pim_2_sim[ti]->Write("", TObject::kOverwrite); 
  
  
@@ -1664,19 +1652,27 @@ h_mis_mom_fermi_mmas_cut_sim_7[ti]->Write("", TObject::kOverwrite);
 
 };*/
 
-outFile->cd("excl_diff_miss_mass_mom_5wbins");
+outFile->cd("excl_top_plots");
 
 for (tj=0; tj<5; tj++){
  h_pim_mis_all_reg[tj]->Write("", TObject::kOverwrite);
   h_pim_mis_all_reg_sim[tj]->Write("", TObject::kOverwrite); 
+  
+ h_0_mis_all_reg[tj]->Write("", TObject::kOverwrite);
+  h_0_mis_all_reg_sim[tj]->Write("", TObject::kOverwrite); 
+    
    h_mom_all_reg[tj]->Write("", TObject::kOverwrite);
   h_mom_all_reg_sim[tj]->Write("", TObject::kOverwrite);
   
-   h_pip_mis_all_reg[tj]->Write("", TObject::kOverwrite);
-  h_pip_mis_all_reg_sim[tj]->Write("", TObject::kOverwrite); 
-  
- h_pr_mis_all_reg[tj]->Write("", TObject::kOverwrite);
-  h_pr_mis_all_reg_sim[tj]->Write("", TObject::kOverwrite); 
+ 
+};
+
+outFile->cd("main_top_plots");
+
+for (tj=0; tj<5; tj++){
+ h_pim_mis_main_top[tj]->Write("", TObject::kOverwrite);
+  h_pim_mis_main_top_sim[tj]->Write("", TObject::kOverwrite); 
+   
 };
 /*outFile->cd("miss_mass_pim_th_dep_pim");
 
