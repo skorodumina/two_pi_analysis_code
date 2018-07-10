@@ -68,6 +68,30 @@ extern Float_t fract_integ[3][6][18];
 extern Short_t ph_cc_match;
 extern TH1F *h_sim_mom_corr_test;
 
+extern TH1F *h_maintop_pimismas_noq2dep[21];
+extern TH1F *h_maintop_pimismas_noq2dep_sim[21];
+
+extern TH1F *h_maintop_pimismas_1[4][21];
+extern TH1F *h_maintop_pimismas_sim_1[4][21];
+
+extern TH1F *h_maintop_pimismas_2[2][19];
+extern TH1F *h_maintop_pimismas_sim_2[2][19];
+
+extern TH1F *h_maintop_pimismas_3[2][17];
+extern TH1F *h_maintop_pimismas_sim_3[2][17];
+
+extern TH1F *h_maintop_pimismas_4[14];
+extern TH1F *h_maintop_pimismas_sim_4[14];
+
+extern TH1F *h_maintop_pimismas_5[13];
+extern TH1F *h_maintop_pimismas_sim_5[13];
+
+extern TH1F *h_maintop_pimismas_6[12];
+extern TH1F *h_maintop_pimismas_sim_6[12];
+
+extern TH1F *h_maintop_pimismas_7[10];
+extern TH1F *h_maintop_pimismas_sim_7[10];
+
 extern TH1F *h_pim_mis_main_top[5];
 extern TH1F *h_pim_mis_main_top_sim[5];
 
@@ -81,6 +105,8 @@ extern TH1F *h_mom_all_reg[5];
 extern TH1F *h_mom_all_reg_sim[5];
 
 
+extern TH1F *h_w_1dim, *h_w_1dim_sim ;
+
 extern TH1F *h_1d_rc_0425;
 extern TH1F *h_1d_rc_0475;
 extern TH1F *h_1d_rc_0525;
@@ -93,6 +119,21 @@ extern TH1F *h_1d_rc_0825;
 extern TH1F *h_1d_rc_0875;
 extern TH1F *h_1d_rc_0925;
 extern TH1F *h_1d_rc_0975;
+
+extern TH1F *h_1d_rc_0425_evt;
+extern TH1F *h_1d_rc_0475_evt;
+extern TH1F *h_1d_rc_0525_evt;
+extern TH1F *h_1d_rc_0575_evt;
+extern TH1F *h_1d_rc_0625_evt;
+extern TH1F *h_1d_rc_0675_evt;
+extern TH1F *h_1d_rc_0725_evt;
+extern TH1F *h_1d_rc_0775_evt;
+extern TH1F *h_1d_rc_0825_evt;
+extern TH1F *h_1d_rc_0875_evt;
+extern TH1F *h_1d_rc_0925_evt;
+extern TH1F *h_1d_rc_0975_evt;
+
+
 
 extern TH1F *h_z_P;
 extern TH1F *h_z_PIp;

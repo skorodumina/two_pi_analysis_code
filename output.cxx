@@ -52,6 +52,36 @@ ostringstream qqq3;
  macro macros; 
  TMacro *crs_plot;
 int output() {
+TFile *file1 = TFile::Open("out_radcorr.root","RECREATE");
+file1->cd();
+
+h_1d_rc_0425->Write("", TObject::kOverwrite);
+h_1d_rc_0475->Write("", TObject::kOverwrite);
+h_1d_rc_0525->Write("", TObject::kOverwrite);
+h_1d_rc_0575->Write("", TObject::kOverwrite);
+h_1d_rc_0625->Write("", TObject::kOverwrite);
+h_1d_rc_0675->Write("", TObject::kOverwrite);
+h_1d_rc_0725->Write("", TObject::kOverwrite);
+h_1d_rc_0775->Write("", TObject::kOverwrite);
+h_1d_rc_0825->Write("", TObject::kOverwrite);
+h_1d_rc_0875->Write("", TObject::kOverwrite);
+h_1d_rc_0925->Write("", TObject::kOverwrite);
+h_1d_rc_0975->Write("", TObject::kOverwrite);
+
+h_1d_rc_0425_evt->Write("", TObject::kOverwrite);
+h_1d_rc_0475_evt->Write("", TObject::kOverwrite);
+h_1d_rc_0525_evt->Write("", TObject::kOverwrite);
+h_1d_rc_0575_evt->Write("", TObject::kOverwrite);
+h_1d_rc_0625_evt->Write("", TObject::kOverwrite);
+h_1d_rc_0675_evt->Write("", TObject::kOverwrite);
+h_1d_rc_0725_evt->Write("", TObject::kOverwrite);
+h_1d_rc_0775_evt->Write("", TObject::kOverwrite);
+h_1d_rc_0825_evt->Write("", TObject::kOverwrite);
+h_1d_rc_0875_evt->Write("", TObject::kOverwrite);
+h_1d_rc_0925_evt->Write("", TObject::kOverwrite);
+h_1d_rc_0975_evt->Write("", TObject::kOverwrite);
+
+
 
     outFile->cd();
      outFile->mkdir("sector1");
@@ -218,22 +248,23 @@ int output() {
  //   outFile->mkdir("5dim_hist_sim");
  //    outFile->mkdir("5dim_excl_hist_data"); 
   //  outFile->mkdir("5dim_excl_hist_sim");
-     
-    /*    
-     outFile->mkdir("new_gen_fermi_comp_0425"); 
-       outFile->mkdir("new_gen_fermi_comp_0475"); 
-       outFile->mkdir("new_gen_fermi_comp_0525"); 
-       outFile->mkdir("new_gen_fermi_comp_0575"); 
-       outFile->mkdir("new_gen_fermi_comp_0625"); 
-       outFile->mkdir("new_gen_fermi_comp_0675"); 
-       outFile->mkdir("new_gen_fermi_comp_0725"); 
-       outFile->mkdir("new_gen_fermi_comp_0775"); 
-       outFile->mkdir("new_gen_fermi_comp_0825"); 
-       outFile->mkdir("new_gen_fermi_comp_0875"); 
-       outFile->mkdir("new_gen_fermi_comp_0925"); 
-       outFile->mkdir("new_gen_fermi_comp_0975"); */
+      
+       outFile->mkdir("main_top_mm_pim_0425"); 
+       outFile->mkdir("main_top_mm_pim_0475"); 
+       outFile->mkdir("main_top_mm_pim_0525"); 
+       outFile->mkdir("main_top_mm_pim_0575"); 
+       outFile->mkdir("main_top_mm_pim_0625"); 
+       outFile->mkdir("main_top_mm_pim_0675"); 
+       outFile->mkdir("main_top_mm_pim_0725"); 
+       outFile->mkdir("main_top_mm_pim_0775"); 
+       outFile->mkdir("main_top_mm_pim_0825"); 
+       outFile->mkdir("main_top_mm_pim_0875"); 
+       outFile->mkdir("main_top_mm_pim_0925"); 
+       outFile->mkdir("main_top_mm_pim_0975"); 
        
+        outFile->mkdir("main_top_mm_pim_noq2dep");
        outFile->mkdir("excl_top_plots");
+       
         outFile->mkdir("main_top_plots");
  /*      outFile->mkdir("miss_mass_pim_th_dep_pim"); 
        outFile->mkdir("miss_mass_pim_th_dep_pip"); 
@@ -414,32 +445,7 @@ h_z_corr1_sim->Write("", TObject::kOverwrite);
 h_z_corr2_sim->Write("", TObject::kOverwrite);
 
 
-h_1d_rc_0425->Write("", TObject::kOverwrite);
-h_1d_rc_0475->Write("", TObject::kOverwrite);
-h_1d_rc_0525->Write("", TObject::kOverwrite);
-h_1d_rc_0575->Write("", TObject::kOverwrite);
-h_1d_rc_0625->Write("", TObject::kOverwrite);
-h_1d_rc_0675->Write("", TObject::kOverwrite);
-h_1d_rc_0725->Write("", TObject::kOverwrite);
-h_1d_rc_0775->Write("", TObject::kOverwrite);
-h_1d_rc_0825->Write("", TObject::kOverwrite);
-h_1d_rc_0875->Write("", TObject::kOverwrite);
-h_1d_rc_0925->Write("", TObject::kOverwrite);
-h_1d_rc_0975->Write("", TObject::kOverwrite);
-/*
-h_1d_rc_0425_evt->Write("", TObject::kOverwrite);
-h_1d_rc_0475_evt->Write("", TObject::kOverwrite);
-h_1d_rc_0525_evt->Write("", TObject::kOverwrite);
-h_1d_rc_0575_evt->Write("", TObject::kOverwrite);
-h_1d_rc_0625_evt->Write("", TObject::kOverwrite);
-h_1d_rc_0675_evt->Write("", TObject::kOverwrite);
-h_1d_rc_0725_evt->Write("", TObject::kOverwrite);
-h_1d_rc_0775_evt->Write("", TObject::kOverwrite);
-h_1d_rc_0825_evt->Write("", TObject::kOverwrite);
-h_1d_rc_0875_evt->Write("", TObject::kOverwrite);
-h_1d_rc_0925_evt->Write("", TObject::kOverwrite);
-h_1d_rc_0975_evt->Write("", TObject::kOverwrite);
-*/
+
 
 
       h_cos_th->Write("", TObject::kOverwrite);
@@ -478,6 +484,9 @@ h_1d_rc_0975_evt->Write("", TObject::kOverwrite);
       
       W_2pi_selection->Write("", TObject::kOverwrite);
       W_2pi_selection_sim->Write("", TObject::kOverwrite);
+      
+      h_w_1dim->Write("", TObject::kOverwrite);
+      h_w_1dim_sim->Write("", TObject::kOverwrite);
       
       
       hist_w_hadr_all_reg->Write("", TObject::kOverwrite);
@@ -1410,247 +1419,113 @@ th_vs_p_pim_2_sim[ti]->Write("", TObject::kOverwrite);
  
  
  };  
- /*
-  outFile->cd("new_gen_fermi_comp_0425");
- 
-for (ti=0; ti<5; ti++){
-h_pim_mis_fermi_nocut_1[0][ti]->Write("", TObject::kOverwrite); 
-h_pim_mis_fermi_nocut_sim_1[0][ti]->Write("", TObject::kOverwrite); 
 
-
-h_pim_mis_fermi_momcut_1[0][ti]->Write("", TObject::kOverwrite); 
-h_pim_mis_fermi_momcut_sim_1[0][ti]->Write("", TObject::kOverwrite); 
-
-
-h_mis_mom_fermi_1[0][ti]->Write("", TObject::kOverwrite); 
-h_mis_mom_fermi_sim_1[0][ti]->Write("", TObject::kOverwrite); 
-
-
-
-h_mis_mom_fermi_mmas_cut_1[0][ti]->Write("", TObject::kOverwrite); 
-h_mis_mom_fermi_mmas_cut_sim_1[0][ti]->Write("", TObject::kOverwrite); 
-
-};
-
-
-  outFile->cd("new_gen_fermi_comp_0475");
+  outFile->cd("main_top_mm_pim_0425");
  
 for (ti=0; ti<21; ti++){
-h_pim_mis_fermi_nocut_1[1][ti]->Write("", TObject::kOverwrite); 
-h_pim_mis_fermi_nocut_sim_1[1][ti]->Write("", TObject::kOverwrite); 
-};
-
-for (ti=0; ti<5; ti++){
-h_pim_mis_fermi_momcut_1[1][ti]->Write("", TObject::kOverwrite); 
-h_pim_mis_fermi_momcut_sim_1[1][ti]->Write("", TObject::kOverwrite); 
-
-
-h_mis_mom_fermi_1[1][ti]->Write("", TObject::kOverwrite); 
-h_mis_mom_fermi_sim_1[1][ti]->Write("", TObject::kOverwrite); 
-
-
-
-h_mis_mom_fermi_mmas_cut_1[1][ti]->Write("", TObject::kOverwrite); 
-h_mis_mom_fermi_mmas_cut_sim_1[1][ti]->Write("", TObject::kOverwrite); 
+h_maintop_pimismas_1[0][ti]->Write("", TObject::kOverwrite); 
+h_maintop_pimismas_sim_1[0][ti]->Write("", TObject::kOverwrite); 
 
 };
 
 
- outFile->cd("new_gen_fermi_comp_0525");
+  outFile->cd("main_top_mm_pim_0475");
  
 for (ti=0; ti<21; ti++){
-h_pim_mis_fermi_nocut_1[2][ti]->Write("", TObject::kOverwrite); 
-h_pim_mis_fermi_nocut_sim_1[2][ti]->Write("", TObject::kOverwrite); 
-};
-
-for (ti=0; ti<5; ti++){
-h_pim_mis_fermi_momcut_1[2][ti]->Write("", TObject::kOverwrite); 
-h_pim_mis_fermi_momcut_sim_1[2][ti]->Write("", TObject::kOverwrite); 
-
-
-h_mis_mom_fermi_1[2][ti]->Write("", TObject::kOverwrite); 
-h_mis_mom_fermi_sim_1[2][ti]->Write("", TObject::kOverwrite); 
-
-h_mis_mom_fermi_mmas_cut_1[2][ti]->Write("", TObject::kOverwrite); 
-h_mis_mom_fermi_mmas_cut_sim_1[2][ti]->Write("", TObject::kOverwrite); 
-
+h_maintop_pimismas_1[1][ti]->Write("", TObject::kOverwrite); 
+h_maintop_pimismas_sim_1[1][ti]->Write("", TObject::kOverwrite); 
 };
 
 
-outFile->cd("new_gen_fermi_comp_0575");
+
+
+ outFile->cd("main_top_mm_pim_0525");
  
 for (ti=0; ti<21; ti++){
-h_pim_mis_fermi_nocut_1[3][ti]->Write("", TObject::kOverwrite); 
-h_pim_mis_fermi_nocut_sim_1[3][ti]->Write("", TObject::kOverwrite); 
+h_maintop_pimismas_1[2][ti]->Write("", TObject::kOverwrite); 
+h_maintop_pimismas_sim_1[2][ti]->Write("", TObject::kOverwrite); 
 };
 
-for (ti=0; ti<5; ti++){
-h_pim_mis_fermi_momcut_1[3][ti]->Write("", TObject::kOverwrite); 
-h_pim_mis_fermi_momcut_sim_1[3][ti]->Write("", TObject::kOverwrite); 
 
 
-h_mis_mom_fermi_1[3][ti]->Write("", TObject::kOverwrite); 
-h_mis_mom_fermi_sim_1[3][ti]->Write("", TObject::kOverwrite); 
-
-h_mis_mom_fermi_mmas_cut_1[3][ti]->Write("", TObject::kOverwrite); 
-h_mis_mom_fermi_mmas_cut_sim_1[3][ti]->Write("", TObject::kOverwrite); 
-
+outFile->cd("main_top_mm_pim_0575");
+ 
+for (ti=0; ti<21; ti++){
+h_maintop_pimismas_1[3][ti]->Write("", TObject::kOverwrite); 
+h_maintop_pimismas_sim_1[3][ti]->Write("", TObject::kOverwrite); 
 };
 
-outFile->cd("new_gen_fermi_comp_0625");
+
+outFile->cd("main_top_mm_pim_0625");
  
 for (ti=0; ti<19; ti++){
-h_pim_mis_fermi_nocut_2[0][ti]->Write("", TObject::kOverwrite); 
-h_pim_mis_fermi_nocut_sim_2[0][ti]->Write("", TObject::kOverwrite); 
-};
-for (ti=0; ti<5; ti++){
-h_pim_mis_fermi_momcut_2[0][ti]->Write("", TObject::kOverwrite); 
-h_pim_mis_fermi_momcut_sim_2[0][ti]->Write("", TObject::kOverwrite); 
-
-
-h_mis_mom_fermi_2[0][ti]->Write("", TObject::kOverwrite); 
-h_mis_mom_fermi_sim_2[0][ti]->Write("", TObject::kOverwrite); 
-
-h_mis_mom_fermi_mmas_cut_2[0][ti]->Write("", TObject::kOverwrite); 
-h_mis_mom_fermi_mmas_cut_sim_2[0][ti]->Write("", TObject::kOverwrite); 
-
+h_maintop_pimismas_2[0][ti]->Write("", TObject::kOverwrite); 
+h_maintop_pimismas_sim_2[0][ti]->Write("", TObject::kOverwrite); 
 };
 
-outFile->cd("new_gen_fermi_comp_0675");
+
+outFile->cd("main_top_mm_pim_0675");
  
 for (ti=0; ti<19; ti++){
-h_pim_mis_fermi_nocut_2[1][ti]->Write("", TObject::kOverwrite); 
-h_pim_mis_fermi_nocut_sim_2[1][ti]->Write("", TObject::kOverwrite); 
-};
-for (ti=0; ti<5; ti++){
-h_pim_mis_fermi_momcut_2[1][ti]->Write("", TObject::kOverwrite); 
-h_pim_mis_fermi_momcut_sim_2[1][ti]->Write("", TObject::kOverwrite); 
-
-
-h_mis_mom_fermi_2[1][ti]->Write("", TObject::kOverwrite); 
-h_mis_mom_fermi_sim_2[1][ti]->Write("", TObject::kOverwrite); 
-
-h_mis_mom_fermi_mmas_cut_2[1][ti]->Write("", TObject::kOverwrite); 
-h_mis_mom_fermi_mmas_cut_sim_2[1][ti]->Write("", TObject::kOverwrite); 
-
+h_maintop_pimismas_2[1][ti]->Write("", TObject::kOverwrite); 
+h_maintop_pimismas_sim_2[1][ti]->Write("", TObject::kOverwrite); 
 };
 
 
-outFile->cd("new_gen_fermi_comp_0725");
+outFile->cd("main_top_mm_pim_0725");
  
 for (ti=0; ti<17; ti++){
-h_pim_mis_fermi_nocut_3[0][ti]->Write("", TObject::kOverwrite); 
-h_pim_mis_fermi_nocut_sim_3[0][ti]->Write("", TObject::kOverwrite); 
-};
-for (ti=0; ti<4; ti++){
-h_pim_mis_fermi_momcut_3[0][ti]->Write("", TObject::kOverwrite); 
-h_pim_mis_fermi_momcut_sim_3[0][ti]->Write("", TObject::kOverwrite); 
-
-
-h_mis_mom_fermi_3[0][ti]->Write("", TObject::kOverwrite); 
-h_mis_mom_fermi_sim_3[0][ti]->Write("", TObject::kOverwrite); 
-
-h_mis_mom_fermi_mmas_cut_3[0][ti]->Write("", TObject::kOverwrite); 
-h_mis_mom_fermi_mmas_cut_sim_3[0][ti]->Write("", TObject::kOverwrite); 
-
+h_maintop_pimismas_3[0][ti]->Write("", TObject::kOverwrite); 
+h_maintop_pimismas_sim_3[0][ti]->Write("", TObject::kOverwrite); 
 };
 
 
-outFile->cd("new_gen_fermi_comp_0775");
+outFile->cd("main_top_mm_pim_0775");
  
 for (ti=0; ti<17; ti++){
-h_pim_mis_fermi_nocut_3[1][ti]->Write("", TObject::kOverwrite); 
-h_pim_mis_fermi_nocut_sim_3[1][ti]->Write("", TObject::kOverwrite); 
+h_maintop_pimismas_3[1][ti]->Write("", TObject::kOverwrite); 
+h_maintop_pimismas_sim_3[1][ti]->Write("", TObject::kOverwrite); 
 };
-for (ti=0; ti<4; ti++){
-h_pim_mis_fermi_momcut_3[1][ti]->Write("", TObject::kOverwrite); 
-h_pim_mis_fermi_momcut_sim_3[1][ti]->Write("", TObject::kOverwrite); 
-
-
-h_mis_mom_fermi_3[1][ti]->Write("", TObject::kOverwrite); 
-h_mis_mom_fermi_sim_3[1][ti]->Write("", TObject::kOverwrite); 
-
-h_mis_mom_fermi_mmas_cut_3[1][ti]->Write("", TObject::kOverwrite); 
-h_mis_mom_fermi_mmas_cut_sim_3[1][ti]->Write("", TObject::kOverwrite); 
-
-};  
   
-  outFile->cd("new_gen_fermi_comp_0825");
+  outFile->cd("main_top_mm_pim_0825");
  
 for (ti=0; ti<14; ti++){
-h_pim_mis_fermi_nocut_4[ti]->Write("", TObject::kOverwrite); 
-h_pim_mis_fermi_nocut_sim_4[ti]->Write("", TObject::kOverwrite); 
+h_maintop_pimismas_4[ti]->Write("", TObject::kOverwrite); 
+h_maintop_pimismas_sim_4[ti]->Write("", TObject::kOverwrite); 
 };
-for (ti=0; ti<4; ti++){
-h_pim_mis_fermi_momcut_4[ti]->Write("", TObject::kOverwrite); 
-h_pim_mis_fermi_momcut_sim_4[ti]->Write("", TObject::kOverwrite); 
 
 
-h_mis_mom_fermi_4[ti]->Write("", TObject::kOverwrite); 
-h_mis_mom_fermi_sim_4[ti]->Write("", TObject::kOverwrite); 
-
-h_mis_mom_fermi_mmas_cut_4[ti]->Write("", TObject::kOverwrite); 
-h_mis_mom_fermi_mmas_cut_sim_4[ti]->Write("", TObject::kOverwrite); 
-
-};  
-
- outFile->cd("new_gen_fermi_comp_0875");
+ outFile->cd("main_top_mm_pim_0875");
  
 for (ti=0; ti<13; ti++){
-h_pim_mis_fermi_nocut_5[ti]->Write("", TObject::kOverwrite); 
-h_pim_mis_fermi_nocut_sim_5[ti]->Write("", TObject::kOverwrite); 
+h_maintop_pimismas_5[ti]->Write("", TObject::kOverwrite); 
+h_maintop_pimismas_sim_5[ti]->Write("", TObject::kOverwrite); 
 };
-for (ti=0; ti<3; ti++){
-h_pim_mis_fermi_momcut_5[ti]->Write("", TObject::kOverwrite); 
-h_pim_mis_fermi_momcut_sim_5[ti]->Write("", TObject::kOverwrite); 
 
 
-h_mis_mom_fermi_5[ti]->Write("", TObject::kOverwrite); 
-h_mis_mom_fermi_sim_5[ti]->Write("", TObject::kOverwrite); 
-
-h_mis_mom_fermi_mmas_cut_5[ti]->Write("", TObject::kOverwrite); 
-h_mis_mom_fermi_mmas_cut_sim_5[ti]->Write("", TObject::kOverwrite); 
-
-};  
-
-
- outFile->cd("new_gen_fermi_comp_0925");
+ outFile->cd("main_top_mm_pim_0925");
  
 for (ti=0; ti<12; ti++){
-h_pim_mis_fermi_nocut_6[ti]->Write("", TObject::kOverwrite); 
-h_pim_mis_fermi_nocut_sim_6[ti]->Write("", TObject::kOverwrite); 
+h_maintop_pimismas_6[ti]->Write("", TObject::kOverwrite); 
+h_maintop_pimismas_sim_6[ti]->Write("", TObject::kOverwrite); 
 };
-for (ti=0; ti<3; ti++){
-h_pim_mis_fermi_momcut_6[ti]->Write("", TObject::kOverwrite); 
-h_pim_mis_fermi_momcut_sim_6[ti]->Write("", TObject::kOverwrite); 
 
 
-h_mis_mom_fermi_6[ti]->Write("", TObject::kOverwrite); 
-h_mis_mom_fermi_sim_6[ti]->Write("", TObject::kOverwrite); 
-
-h_mis_mom_fermi_mmas_cut_6[ti]->Write("", TObject::kOverwrite); 
-h_mis_mom_fermi_mmas_cut_sim_6[ti]->Write("", TObject::kOverwrite); 
-
-};  
-
- outFile->cd("new_gen_fermi_comp_0975");
+ outFile->cd("main_top_mm_pim_0975");
  
 for (ti=0; ti<10; ti++){
-h_pim_mis_fermi_nocut_7[ti]->Write("", TObject::kOverwrite); 
-h_pim_mis_fermi_nocut_sim_7[ti]->Write("", TObject::kOverwrite); 
+h_maintop_pimismas_7[ti]->Write("", TObject::kOverwrite); 
+h_maintop_pimismas_sim_7[ti]->Write("", TObject::kOverwrite); 
 };
-for (ti=0; ti<3; ti++){
-h_pim_mis_fermi_momcut_7[ti]->Write("", TObject::kOverwrite); 
-h_pim_mis_fermi_momcut_sim_7[ti]->Write("", TObject::kOverwrite); 
 
+ outFile->cd("main_top_mm_pim_noq2dep");
+ 
+for (ti=0; ti<21; ti++){
+h_maintop_pimismas_noq2dep[ti]->Write("", TObject::kOverwrite);
+h_maintop_pimismas_noq2dep_sim[ti]->Write("", TObject::kOverwrite);
+}; 
+ 
 
-h_mis_mom_fermi_7[ti]->Write("", TObject::kOverwrite); 
-h_mis_mom_fermi_sim_7[ti]->Write("", TObject::kOverwrite); 
-
-h_mis_mom_fermi_mmas_cut_7[ti]->Write("", TObject::kOverwrite); 
-h_mis_mom_fermi_mmas_cut_sim_7[ti]->Write("", TObject::kOverwrite); 
-
-};*/
 
 outFile->cd("excl_top_plots");
 
@@ -1772,7 +1647,8 @@ h_inv_NPIm[ti]->Write("", TObject::kOverwrite);
 // macros.W_plot_write();
  
     outFile->Write();
-    
+    file1->Write();
+    file1->Close();	
       nphe_sector1->Delete();
       nphe_sector1_after->Delete();
       nphe_sector2->Delete();
