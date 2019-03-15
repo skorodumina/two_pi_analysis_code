@@ -108,7 +108,6 @@ TH2F  *avrg_nphe_sector1,*avrg_nphe_sector2,*avrg_nphe_sector3,*avrg_nphe_sector
 TH2F  *norm_nphe_s1,*norm_nphe_s2,*norm_nphe_s3,*norm_nphe_s4,*norm_nphe_s5,*norm_nphe_s6;
 
 
-
 TH1F *h_inv_NP[5];
 TH1F *h_inv_NPIp[5];
 TH1F *h_inv_NPIm[5];
@@ -144,6 +143,8 @@ TH1F *h_pim_mis_main_top_sim[5];
 TH1F *h_pim_mis_all_reg[5];
 TH1F *h_pim_mis_all_reg_sim[5];
 
+TH1F *h_miss_mass_0_d[5];
+TH1F *h_miss_mass_0_d_sim[5];
 
 TH1F *h_0_mis_all_reg[5];
 TH1F *h_0_mis_all_reg_sim[5];
@@ -151,8 +152,10 @@ TH1F *h_0_mis_all_reg_sim[5];
 TH1F *h_mom_all_reg[5];
 TH1F *h_mom_all_reg_sim[5];
 
+TH1F *h_w_inclusive[6][6];
 
-
+TH1F *h_prot_mom = new TH1F ("h_prot_mom","h_prot_mom",200,-0.05,1.95);
+TH1F *h_prot_mom_sim = new TH1F ("h_prot_mom_sim","h_prot_mom_sim",200,-0.05,1.95);
 
 TH1F *h_sim_mom_corr_test = new TH1F ("h_sim_mom_corr_test","h_sim_mom_corr_test",200,-0.05,0.05);
 
@@ -262,24 +265,38 @@ TH1F *h_1d_rc_0975_evt = new TH1F("h_1d_rc_0975_evt","h_1d_rc_0975_evt",21, 1.3,
 
 
 TH1F *hist_PIm_miss = new TH1F("hist_PIm_miss","hist_PIm_miss",400, -0.5, 0.5);
-TH1F *h_PIm_miss_sim = new TH1F("h_PIm_miss_sim","h_PIm_miss_sim",400, -0.5, 0.5);
+TH1F *h_PIm_miss_sim = new TH1F("h_PIm_miss_sim","h_PIm_miss_sim",100, 0.13957*0.13957 - 0.02+0.0005,0.13957*0.13957 + 0.18+0.0005);
+
+
+TH1F *h_PIm_miss_tmp = new TH1F("hist_PIm_miss_tmp","hist_PIm_miss_tmp",200, -0.4, 0.4);
+TH1F *h_PIm_miss_sim_tmp = new TH1F("h_PIm_miss_sim_tmp","h_PIm_miss_sim_tmp",200, -0.4, 0.4);
+
+
 
 TH1F *hist_w_hadr_all_reg = new TH1F("hist_w_hadr_all_reg","hist_w_hadr_all_reg",210., 1.2, 1.9);
 TH1F *hist_w_el_all_reg = new TH1F("hist_w_el_all_reg","hist_w_el_all_reg",210., 1.2, 1.9);
 
-TH1F *hist_PIm_miss_all_reg_1 = new TH1F("hist_PIm_miss_all_reg_1","hist_PIm_miss_all_reg_1",400, -0.2, 0.2);
-TH1F *hist_PIm_miss_all_reg_2 = new TH1F("hist_PIm_miss_all_reg_2","hist_PIm_miss_all_reg_2",400, -0.2, 0.2);
+TH1F *hist_PIm_miss_all_reg_1 = new TH1F("hist_PIm_miss_all_reg_1","hist_PIm_miss_all_reg_1",200, -0.2, 0.2);
+TH1F *hist_PIm_miss_all_reg_2 = new TH1F("hist_PIm_miss_all_reg_2","hist_PIm_miss_all_reg_2",200, -0.2, 0.2);
 
-TH1F *hist_PIm_miss_all_reg_1_sim = new TH1F("hist_PIm_miss_all_reg_1_sim","hist_PIm_miss_all_reg_1_sim",400, -0.2, 0.2);
+TH1F *hist_PIm_miss_all_reg_1_sim = new TH1F("hist_PIm_miss_all_reg_1_sim","hist_PIm_miss_all_reg_1_sim",200, -0.2, 0.2);
 TH1F *hist_PIm_miss_all_reg_2_sim = new TH1F("hist_PIm_miss_all_reg_2_sim","hist_PIm_miss_all_reg_2_sim",400, -0.2, 0.2);
 
 
 TH1F *h_PIp_miss_sim = new TH1F("h_PIp_miss_sim","h_PIp_miss_sim",500, -0.7, 0.3);
-TH1F *h_miss_mass_0_sim = new TH1F("h_miss_mass_0_sim","h_miss_mass_0_sim",400, -0.2, 0.2);
-TH1F *h_miss_en_0_sim = new TH1F("h_miss_en_0_sim","h_miss_en_0_sim",400, -2, 2);
+//TH1F *h_miss_mass_0_sim = new TH1F("h_miss_mass_0_sim","h_miss_mass_0_sim",100,-0.015+0.0001,0.025+0.0001);
 
 
 TH1F *h_miss_mass_0 = new TH1F("h_miss_mass_0","h_miss_mass_0",400, -0.2, 0.2);
+TH1F *h_miss_mass_0_sim = new TH1F("h_miss_mass_0_sim","h_miss_mass_0_sim",400,-0.2,0.2);
+
+TH1F *h_mm_0 = new TH1F("h_mm_0","h_mm_0",400, -0.5, 0.2);
+TH1F *h_mm_0_sim = new TH1F("h_mm_0_sim","h_mm_0_sim",400,-0.5,0.2);
+
+TH1F *h_miss_en_0_sim = new TH1F("h_miss_en_0_sim","h_miss_en_0_sim",400, -2, 2);
+
+
+
 TH1F *h_PIm_miss_en_sim = new TH1F("h_PIm_miss_en_sim","h_PIm_miss_en_sim",400, -2, 2);
 TH1F *h_PIp_miss_en_sim = new TH1F("h_PIp_miss_en_sim","h_PIp_miss_en_sim",400, -2, 2);
 
@@ -309,6 +326,7 @@ TH1F *h_PIp_miss_d_bef_sim = new TH1F("h_PIp_miss_d_bef_sim","h_PIp_miss_d_bef_s
 
 TH1F *hist_PIp_miss_en = new TH1F("hist_PIp_miss_en","hist_PIp_miss_en",400, -2, 2);
 TH1F *hist_P_miss = new TH1F("hist_P_miss","hist_P_miss",400, -0.5, 1.5);
+TH1F *hist_P_miss_sim = new TH1F("hist_P_miss_sim","hist_P_miss_sim",400, -0.5, 1.5);
 TH1F *hist_P_miss_en = new TH1F("hist_P_miss_en","hist_P_miss_en",400, -2, 2);
 TH1F *hist_miss_en_0 = new TH1F("hist_miss_en_0","hist_miss_en_0",400, -2, 2);
  
@@ -607,6 +625,14 @@ qqq.str("");
 qqq << "h_mom_all_reg_sim_" <<i;
 h_mom_all_reg_sim[i] = new TH1F(qqq.str().c_str(),qqq.str().c_str(),600, -0.1, 1.5);
 qqq.str("");
+
+qqq << "h_miss_mass_0_d_" <<i;
+h_miss_mass_0_d[i] = new TH1F(qqq.str().c_str(),qqq.str().c_str(),400,-0.5, 1.5) ;
+qqq.str("");
+
+qqq << "h_miss_mass_0_d_sim" <<i;
+h_miss_mass_0_d_sim[i] = new TH1F(qqq.str().c_str(),qqq.str().c_str(),400,-0.5, 1.5) ;
+qqq.str("");
 };
 
 
@@ -702,6 +728,18 @@ h_maintop_pimismas_sim_7[i] = new TH1F(qqq.str().c_str(),qqq.str().c_str(),400, 
 qqq.str("");
 
 };
+
+for (i=0; i<6; i++) {
+for(j=0; j<6; j++){
+
+
+qqq << "h_w_inclusive_" << i+1 << "_" << j+1;
+h_w_inclusive[i][j] = new TH1F(qqq.str().c_str(),qqq.str().c_str(),100, 0.8, 1.9);
+qqq.str("");
+
+};
+};
+
 
 
 // loops for electron histograms

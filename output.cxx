@@ -274,8 +274,10 @@ h_1d_rc_0975_evt->Write("", TObject::kOverwrite);
        outFile->mkdir("miss_mass_pim_top_th_dep_arr"); */
        
          outFile->mkdir("inv_m_fsi"); 
+         outFile->mkdir("Neutron mm"); 	 
        
-      
+    outFile->mkdir("INCLUSIVE_2018") ;  
+         
   TDirectory *dir, *dir1, *dir2;  
     
 for(jo=0; jo<12; jo++){
@@ -428,6 +430,9 @@ outFile->cd();
    
 };  
 
+
+h_prot_mom->Write("", TObject::kOverwrite); 
+h_prot_mom_sim->Write("", TObject::kOverwrite);
 h_sim_mom_corr_test->Write("", TObject::kOverwrite); 
 h_z_P->Write("", TObject::kOverwrite); 
 h_z_PIp->Write("", TObject::kOverwrite); 
@@ -495,6 +500,13 @@ h_z_corr2_sim->Write("", TObject::kOverwrite);
                     
        h_miss_mass_0->Write("", TObject::kOverwrite);
        h_miss_mass_0_sim->Write("", TObject::kOverwrite); 
+       
+       h_mm_0->Write("", TObject::kOverwrite);
+       h_mm_0_sim->Write("", TObject::kOverwrite); 
+   
+      h_PIm_miss_tmp ->Write("", TObject::kOverwrite);
+      h_PIm_miss_sim_tmp ->Write("", TObject::kOverwrite);
+       
        hist_miss_en_0->Write("", TObject::kOverwrite);
        h_miss_en_0_sim->Write("", TObject::kOverwrite);
       
@@ -540,6 +552,7 @@ h_z_corr2_sim->Write("", TObject::kOverwrite);
       
       
        hist_P_miss->Write("", TObject::kOverwrite);
+       hist_P_miss_sim->Write("", TObject::kOverwrite);
        hist_P_miss_en->Write("", TObject::kOverwrite);
 
 
@@ -1635,9 +1648,23 @@ h_inv_NPIm[ti]->Write("", TObject::kOverwrite);
  
  
  };
-
-
  
+ 
+ outFile->cd("Neutron mm");
+ for (ti=0; ti<5; ti++) { 
+ h_miss_mass_0_d[ti]->Write("", TObject::kOverwrite);
+  h_miss_mass_0_d_sim[ti]->Write("", TObject::kOverwrite);
+ 
+ 
+ };
+ 
+ 
+  outFile->cd("INCLUSIVE_2018"); 
+     for (jo=0; jo<6; jo++){  
+   for (ti=0; ti<6; ti++){ 
+    h_w_inclusive[jo][ti]->Write("", TObject::kOverwrite); 
+  }; 
+}; 
  
  
  

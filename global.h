@@ -66,6 +66,9 @@ extern Float_t fract_integ[3][6][18];
 
 
 extern Short_t ph_cc_match;
+
+extern TH1F *h_prot_mom, *h_prot_mom_sim;
+
 extern TH1F *h_sim_mom_corr_test;
 
 extern TH1F *h_maintop_pimismas_noq2dep[21];
@@ -104,6 +107,8 @@ extern TH1F *h_0_mis_all_reg_sim[5];
 extern TH1F *h_mom_all_reg[5];
 extern TH1F *h_mom_all_reg_sim[5];
 
+extern TH1F *h_miss_mass_0_d[5];
+extern TH1F *h_miss_mass_0_d_sim[5];
 
 extern TH1F *h_w_1dim, *h_w_1dim_sim ;
 
@@ -133,7 +138,7 @@ extern TH1F *h_1d_rc_0875_evt;
 extern TH1F *h_1d_rc_0925_evt;
 extern TH1F *h_1d_rc_0975_evt;
 
-
+  extern TH1F *h_w_inclusive[6][6];
 
 extern TH1F *h_z_P;
 extern TH1F *h_z_PIp;
@@ -160,13 +165,18 @@ extern TH2F *th_cc_vs_seg_1,*th_cc_vs_seg_2,*th_cc_vs_seg_3,*th_cc_vs_seg_4,*th_
 
 extern TH2F *W_2pi_selection,*W_2pi_selection_sim;
 
-extern TH1F *hist_PIm_miss,*hist_PIm_miss_en,*hist_PIp_miss,*hist_PIp_miss_d,*hist_PIp_miss_d_bef, *hist_PIp_miss_en,*hist_P_miss,*hist_P_miss_en, *h_miss_mass_0;
+extern TH1F *hist_PIm_miss,*hist_PIm_miss_en,*hist_PIp_miss,*hist_PIp_miss_d,*hist_PIp_miss_d_bef, *hist_PIp_miss_en,*hist_P_miss,*hist_P_miss_en, *h_miss_mass_0, *hist_P_miss_sim;
 
+extern TH1F *h_mm_0, *h_mm_0_sim;
+
+extern TH1F *h_PIm_miss_tmp;
+extern TH1F *h_PIm_miss_sim_tmp;
 
 extern TH1F *hist_PIm_miss_all_reg_1, *hist_PIm_miss_all_reg_2;
 extern TH1F *hist_PIm_miss_all_reg_1_sim, *hist_PIm_miss_all_reg_2_sim;
 
 extern TH1F *hist_miss_en_0,*h_miss_mom_0,*h_miss_mom_0_sim,*h_miss_mom_0_d; 
+
 
 extern TH1F *h_miss_mom_0_nocut, *h_miss_mom_0_cut_on0, *h_miss_mom_0_cut_onpim, *h_miss_mom_0_nocut_sim, *h_miss_mom_0_cut_on0_sim, *h_miss_mom_0_cut_onpim_sim;
 

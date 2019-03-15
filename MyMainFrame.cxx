@@ -167,7 +167,12 @@ Float_t ARR_MMC_PIM_MISS[5][8][8] = {{{1.,1.,1.,1.,1.,1.,1.,1.},{1.,1.,1.,1.,1.,
 
 //Float_t MMcut_pim_miss[21] = {0.2,0.2,0.2,0.25,0.25,0.25,0.25,0.22,0.22,0.22,0.22,0.27,0.3,0.27,0.3,0.25,0.27,0.27,0.27,0.27,0.27};
 //Float_t MMcut_pim_miss[21] = {0.2,0.22,0.25,0.26,0.26,0.3,0.27,0.25,0.25,0.24,0.24,0.27,0.3,0.27,0.3,0.27,0.3,0.3,0.3,0.3,0.3};
-Float_t MMcut_pim_miss[21] = {0.25,0.25,0.25,0.25,0.25,0.25,0.25,0.25,0.25,0.25,0.25,0.25,0.3,0.3,0.3,0.3,0.3,0.3,0.3,0.3,0.3};
+Float_t MMcut_pim_miss[21] = {0.2,0.2,0.2,0.25,0.25,0.25,0.25,0.25,0.25,0.25,0.25,0.25,0.3,0.3,0.3,0.3,0.3,0.3,0.3,0.3,0.3};
+
+Float_t MMcut_0_miss_min[12]     = {-0.01, -0.0075, -0.0075, -0.007, -0.015, -0.006, -0.01, -0.005, -0.0075, -0.0065, -0.02, -0.02};
+Float_t MMcut_0_miss_min_151[12] = {-0.01, -0.0075, -0.0075, -0.007, -0.015, -0.006, -0.01, -0.010, -0.0075, -0.0065, -0.02, -0.02};
+Float_t MMcut_0_miss_min_158[12] = {-0.01, -0.0075, -0.0075, -0.007, -0.015, -0.006, -0.01, -0.005, -0.0150, -0.0065, -0.02, -0.02};
+
 
 Float_t fract_fsi_corr[12][21] = {{1.,1.,1.,1.,1.,1.,1.,1.,1.,1.,1.,1.,1.,1.,1.,1.,1.,1.,1.,1.,1.},{1., 1., 1., 1., 1., 1., 1., 0.949666, 0.946763, 0.92825, 0.92762, 0.942042, 0.969058, 0.939906, 0.972951, 0.920794, 0.938765, 0.952647, 0.943091, 0.948361, 0.963557},{1., 1., 1., 1., 1., 1., 1., 0.993911, 0.893549, 0.970045, 0.961446, 0.859731, 0.911005, 0.949457, 0.897599, 0.987884, 0.926785, 0.961528, 0.962106, 0.943108, 1.},{1., 1., 1., 1., 1., 1., 1., 0.994626, 0.92888, 0.974134, 0.938982, 0.912881, 0.886699, 0.95578, 0.953117, 0.980564, 0.935179, 0.955753, 0.971683, 0.966479, 1.},{1., 1., 1., 1., 1., 1., 1., 0.976887, 0.915209, 0.920231, 0.971177, 0.938058, 0.90531, 0.963204, 0.936656, 0.988965, 0.929378, 0.957025, 0.987681, 1., 1.},{1., 1., 1., 1., 1., 1., 1., 0.946144, 0.960353, 0.98249, 0.9808, 0.970148, 0.945595, 0.969558, 0.963168, 0.979624, 0.95783, 0.953134, 1., 1., 1.},{1., 1., 1., 1., 1., 1., 1., 0.999138, 0.989533, 0.970615, 0.99736, 0.93694, 0.938233, 0.948618, 0.958399, 0.977104, 1., 1., 1., 1., 1.},{1., 1., 1., 1., 1., 1., 1., 0.995786, 0.941906, 0.954921, 0.991707, 0.943651, 0.936837, 0.950524, 0.941602, 0.983574, 1., 1., 1., 1., 1.},{1., 1., 1., 1., 1., 1., 1., 0.995372, 0.992961, 0.996496, 0.992185, 0.956822, 0.943974, 0.88652, 1., 1., 1., 1., 1., 1., 1.},{1., 1., 1., 1., 1., 1., 1., 0.991166, 0.998852, 0.99667, 0.981678, 0.9876, 1., 1., 1., 1., 1., 1., 1., 1., 1.},{1., 1., 1., 1., 1., 1., 1., 0.9561, 0.976256, 0.982884, 0.985384, 1., 1., 1., 1., 1., 1., 1., 1., 1., 1.},{1., 1., 1., 1., 1., 1., 1., 0.986958, 0.998352, 0.981677, 1., 1., 1., 1., 1., 1., 1., 1., 1., 1., 1.}} ;
 TH1I *hist_adc_off[12]; 
@@ -246,9 +251,9 @@ TH1I *hist_adc_off[12];
 	TLorentzVector P4_D,P4_PIm_miss,P4_PIp_miss,P4_PIp_miss_d,P4_P_miss,P4_PIm_miss_0,P4_Pini_ferm_dat;
 	TLorentzVector P4_PP_rot,P4_PP_rot_1,P4_PP_rot_2,P4_PP_rot_3,P4_PP_rot_2_boost;
 	TLorentzVector  P4_PP_cor, P4_PIp_cor, P4_PIm_cor;
-	TLorentzVector  P4_miss_0,P4_miss_0_d,P4_PIm_miss_d;
+	TLorentzVector  P4_miss_0,P4_miss_0_tmp,P4_miss_0_d,P4_PIm_miss_d, P4_PIm_miss_tmp, P4_PIp_miss_tmp ;
 	TLorentzVector  P4_miss_0_en_comp,P4_PIm_miss_en_comp;
-	TLorentzVector  P4_ELP_for_miss_en_comp;
+	TLorentzVector  P4_ELP_for_miss_en_comp, P4_p_move;
 	
 	TVector3 V3_dir_gamma,P3_PP_rot,uz,ux;
 		
@@ -296,7 +301,7 @@ global();
       // cout << " bin content2 = " << avrg_nphe_sector1->GetBinContent(100,100) << "\n";
 cout << "qqq1 \n";
 
-ifstream input("phel_integr_fract_22jan17.txt");
+ifstream input("phel_integr_fract_12July18.txt");
 
 
 if(input.is_open()){
@@ -590,13 +595,24 @@ if ((LiveTime > 0.8) && (LiveTime <0.9) && (inclusive > 85000) &&(inclusive < 10
    
    block_prev = block_curr;
    };   
- 
+
+//A slight redetermination of mm cut for the pim miss top (the same for data and sim)
+MMcut_pim_miss[1] = 0.2; 
+MMcut_pim_miss[2] = 0.2; 
+MMcut_pim_miss[3] = 0.25;  
+
+if (((Q2>0.65)&&(Q2<0.7))||((Q2>0.8)&&(Q2<0.85))||((Q2>0.9)&&(Q2<0.95)))  MMcut_pim_miss[1] = 0.18;
+if (Q2>0.95) MMcut_pim_miss[2] = 0.175;
+if (((Q2>0.7)&&(Q2<0.75))||(Q2>0.9))  MMcut_pim_miss[3] = 0.2;
+
+
 
 //----------------PROTON ENERGY LOSS Ye unfold-------------
 delta_mom_p_ye = corrfunc.correct_energy_theta_pf(P_P, th_P);
 P_P = P_P - delta_mom_p_ye;
 //----------PROTON ENERGY LOSS----------------------------
 delta_mom_p_skor = corrfunc.corr_pr_mom_skor(P_P, th_P);
+//this delta is added up in cuts_data.cxx
 //--------------------------------------------------------
 
 //MOM CORR
@@ -667,7 +683,10 @@ P4_miss_0 = P4_EL + P4_P - P4_ELP_reg - P4_PP_reg - P4_PIm_reg -P4_PIp_reg;
 
 P4_miss_0_d = P4_EL + P4_D - P4_ELP_reg - P4_PP_reg - P4_PIm_reg -P4_PIp_reg;
 
-
+//cout << P4_miss_0.Mag2()<<" qqq1\n";
+//P4_ELP_reg.SetXYZT(0.95*P_EL*cos(ph_EL*M_PI/180.)*sin(th_EL*M_PI/180.),0.95*P_EL*sin(ph_EL*M_PI/180.)*sin(th_EL*M_PI/180.),0.95*P_EL*cos(th_EL*M_PI/180.),0.95*P_EL);
+//P4_miss_0 = P4_EL + P4_P - P4_ELP_reg - P4_PP_reg - P4_PIm_reg -P4_PIp_reg;
+//cout <<" "<< P4_miss_0.Mag2()<<" qqq2\n";
 //cout<< P4_P[0]<<" "<< P4_P[1]<<" "<< P4_P[2]<<" "<< P4_P[3]<<" \n";
 
 //P4_miss_N = 
@@ -741,6 +760,10 @@ selection_pim_miss = false;
 selection_0_miss = false;
 
 if (bool_el_id_data) {
+
+if ((Q2>=0.4)&&(Q2<=1.)&&(npart<=2)&&(n_PIp ==0)&&(n_PIm==0)&&((n_P==0)||(n_P==1))) h_w_inclusive[sector-1][int((Q2-0.4)/0.1)]->Fill(W,fract_integ[pmt_hit+1][sector-1][segment]);
+
+
 //vertex difference cut
 if ((abs(z_EL - z_P)<5.)&&(abs(z_EL - z_PIp)<5.)&&(abs(z_P - z_PIp)<5.)){
 
@@ -764,7 +787,7 @@ bool_proton_id_data=particle_ID_data.Proton_cuts_data();
 bool_pip_id_data=particle_ID_data.PIp_cuts_data();
 bool_pim_id_data=particle_ID_data.PIm_cuts_data();
 
-if ((W > 1.3)&&(W < 1.825)&&(Q2 > 0.4)&&(Q2 < 1.)&&(npart >=3)){
+/*if ((W > 1.3)&&(W < 1.825)&&(Q2 > 0.4)&&(Q2 < 1.)&&(npart >=3)){
 if ((bool_proton_id_data)&&(bool_pim_id_data)&&(!bool_pip_id_data)){
 
 hist_PIp_miss_d_bef-> Fill(P4_PIp_miss_d.Mag2(),1.);
@@ -784,7 +807,7 @@ if (P4_PIp_miss[3] > 0.2) {
 
 //if (P4_PIp_miss.Mag2() > m_pip*m_pip - 4*0.0302){
 hist_PIp_miss_en->Fill(P4_PIp_miss[3],1.);
-hist_PIp_miss-> Fill(P4_PIp_miss.Mag2(),1.);
+//hist_PIp_miss-> Fill(P4_PIp_miss.Mag2(),1.);
 hist_PIp_miss_d-> Fill(P4_PIp_miss_d.Mag2(),1.);
 //hist_PIp_miss_cor-> Fill(P4_PIp_cor.Mag2(),1.);
 
@@ -812,7 +835,7 @@ if (sqrt((P4_PIp_reg+P4_P_miss)*(P4_PIp_reg+P4_P_miss)) < W - m_pip + 0.05) {
 if (sqrt((P4_PIm_reg+P4_P_miss)*(P4_PIm_reg+P4_P_miss)) > m_pip + m_proton  - 0.05) {
 if (sqrt((P4_PIm_reg+P4_P_miss)*(P4_PIm_reg+P4_P_miss)) < W - m_pip + 0.05) {
 if (P4_P_miss[3] > m_proton  - 0.05) {
-hist_P_miss-> Fill(P4_P_miss.Mag2(),1.);
+//hist_P_miss-> Fill(P4_P_miss.Mag2(),1.);
 hist_P_miss_en->Fill(P4_P_miss[3],1.);
 if (P4_P_miss.Mag2() > m_proton*m_proton - 4*0.103 ){
 selection = false;
@@ -826,7 +849,7 @@ selection = false;
 };
 };
 
-};
+};*/
 
 
 
@@ -857,7 +880,7 @@ th_ph_pim = 180./M_PI*acos((P4_PIm_reg.Vect().Dot((P4_EL-P4_ELP_reg).Vect()))/((
 th_ph_pip = 180./M_PI*acos((P4_PIp_reg.Vect().Dot((P4_EL-P4_ELP_reg).Vect()))/(((P4_EL-P4_ELP_reg).Vect()).Mag())/((P4_PIp_reg.Vect()).Mag()));
 th_ph_pr = 180./M_PI*acos((P4_PP_reg.Vect().Dot((P4_EL-P4_ELP_reg).Vect()))/(((P4_EL-P4_ELP_reg).Vect()).Mag())/((P4_PP_reg.Vect()).Mag()));
 
-
+//	h_miss_mass_0-> Fill(P4_miss_0.Mag2(),1.);
 //cut on missing energy
 	hist_miss_en_0->Fill(P4_miss_0[3],1.);
 //if ((P4_miss_0[3] >  -0.05)) {
@@ -872,17 +895,11 @@ th_ph_pr = 180./M_PI*acos((P4_PP_reg.Vect().Dot((P4_EL-P4_ELP_reg).Vect()))/(((P
 	
 	if ((P4_miss_0.Mag2()>-0.02)&&(P4_miss_0.Mag2()<0.001)){
 	h_pim_mis_all_reg[int((W-1.3)/0.1)]-> Fill(P4_PIm_miss.Mag2(),1.);
-	
-	
-	};
+		};
 	h_0_mis_all_reg[int((W-1.3)/0.1)]-> Fill(P4_miss_0.Mag2(),1.);
-	
 	};
 	h_mom_all_reg[int((W-1.3)/0.1)]-> Fill((P4_miss_0.Vect()).Mag(),1.);
-	
 	};
-
-
 /*
 if ((W>1.3)&&(W<1.8)&&(Q2>0.4)&&(Q2<0.6)) {
 h_pim_mis_fermi_nocut_1[int((Q2-0.4)/0.05)][int((W-1.3)/0.1)]->Fill(P4_PIm_miss.Mag2(),fract_integ[pmt_hit+1][sector-1][segment]);
@@ -926,18 +943,33 @@ h_mis_mom_fermi_7[int((W-1.3)/0.1)]->Fill((P4_miss_0.Vect()).Mag(),fract_integ[p
 	h_inv_NPIm[int((W-1.3)/0.1)]->Fill(sqrt((P4_PIm_reg+P4_miss_0_d ).Mag2()),1.);
 	};
 
-	hist_PIm_miss_all_reg_1-> Fill(P4_PIm_miss.Mag2(),1.);
+
+
+	h_miss_mom_0->Fill((P4_miss_0.Vect()).Mag(),1.);
+
+//P4_p_move.SetXYZT((P4_miss_0.Vect()).X(),(P4_miss_0.Vect()).Y(), (P4_miss_0.Vect()).Z(), sqrt(m_proton*m_proton+(P4_miss_0.Vect()).Mag()*(P4_miss_0.Vect()).Mag()));
+P4_p_move.SetXYZT(0,0,0,m_proton);
+P4_p_move.SetVect(P4_miss_0.Vect());
+P4_miss_0_tmp = P4_EL + P4_p_move - P4_ELP_reg - P4_PP_reg - P4_PIm_reg -P4_PIp_reg;
+P4_PIm_miss_tmp = P4_EL + P4_p_move - P4_ELP_reg - P4_PP_reg -P4_PIp_reg;
+P4_PIp_miss_tmp = P4_EL + P4_p_move - P4_ELP_reg - P4_PP_reg -P4_PIm_reg;
+
+//h_miss_mass_0-> Fill(P4_miss_0_tmp.Mag2(),1.);
+
 
 //cut on missing momentum
 if ((P4_miss_0.Vect()).Mag() <0.2){ 
 
-	h_miss_mom_0->Fill((P4_miss_0.Vect()).Mag(),1.);
 
-//cut on missing mass of pim
-if ((P4_PIm_miss.Mag2()>-0.15)&&(P4_PIm_miss.Mag2()<0.15)){
+//cut on missing mass of 0
+if  ((((W<1.5)&&(P4_miss_0.Mag2()> MMcut_0_miss_min[int((Q2-0.4)/0.05)]))||((W>1.5)&&(W<1.525)&&(P4_miss_0.Mag2()> MMcut_0_miss_min_151[int((Q2-0.4)/0.05)]))||((W>1.525)&&(W<1.575)&&(P4_miss_0.Mag2()> MMcut_0_miss_min[int((Q2-0.4)/0.05)]))||((W>1.575)&&(W<1.6)&&(P4_miss_0.Mag2()> MMcut_0_miss_min_158[int((Q2-0.4)/0.05)]))||((W>1.6)&&(P4_miss_0.Mag2()> MMcut_0_miss_min[int((Q2-0.4)/0.05)])))&&(P4_miss_0.Mag2()<0.001)){
+ 
 
-	h_miss_mass_0-> Fill(P4_miss_0.Mag2(),1.);
-	hist_PIm_miss_all_reg_2-> Fill(P4_PIm_miss.Mag2(),1.);
+//if  ((P4_miss_0.Mag2()> MMcut_0_miss_min[int((Q2-0.4)/0.05)])&&(P4_miss_0.Mag2()<0.001)){
+ 
+
+//if ((sqrt(abs(P4_miss_0.Mag2()))<0.25)&&(P4_miss_0.Mag2()<0.)){
+//if ((sqrt(abs(P4_miss_0_tmp.Mag2()))<0.25)&&(P4_miss_0_tmp.Mag2()<0.)){
 
 	h_miss_mom_0_cut_on0->Fill((P4_miss_0.Vect()).Mag(),1.);
 
@@ -945,17 +977,47 @@ if ((P4_PIm_miss.Mag2()>-0.15)&&(P4_PIm_miss.Mag2()<0.15)){
 	hist_w_el_all_reg->Fill(W,1.);
 
 
+//cout << P4_miss_0.Mag2()<<" "<<m_proton*m_proton +2*m_proton*2.039 - (P4_PP_reg+P4_PIm_reg+P4_PIp_reg).Mag2() -2*P4_EL.Dot(P4_ELP_reg) - 2*m_proton*P4_ELP_reg[3] <<" tt\n";
+//cout << P4_miss_0.Mag2()<<" "<<m_proton*m_proton +2*m_proton*2.039 + (P4_PP_reg+P4_PIm_reg+P4_PIp_reg).Mag2() -2*(P4_EL-P4_ELP_reg).Dot(P4_EL-P4_ELP_reg+P4_P) - 2*P4_EL.Dot(P4_ELP_reg) - 2*m_proton*P4_ELP_reg[3] -2*m_proton*(P4_PP_reg[3]+P4_PIm_reg[3]+P4_PIp_reg[3]) <<" tt\n";
+//cout << P4_miss_0.Mag2()<<" "<< m_proton*m_proton+2*2.039*m_proton+(P4_PP_reg+P4_ELP_reg+P4_PIm_reg+P4_PIp_reg).Mag2() -2*(2.039+m_proton)*(P4_PP_reg[3]+P4_ELP_reg[3]+P4_PIm_reg[3]+P4_PIp_reg[3]) + 2*2.039*(P4_PP_reg[2]+P4_ELP_reg[2]+P4_PIm_reg[2]+P4_PIp_reg[2])  <<" l\n";
+
+//cout << P4_miss_0.Mag2()<<" "<<2*m_proton*m_proton + 2*m_pip*m_pip -2*(2.039+m_proton)*(P4_PP_reg[3]+P4_ELP_reg[3]+P4_PIm_reg[3]+P4_PIp_reg[3]) + 2*2.039*(P4_PP_reg[2]+P4_ELP_reg[2]+P4_PIm_reg[2]+P4_PIp_reg[2]) <<" l\n";
+
+hist_P_miss-> Fill(P4_P_miss.Mag2(),1.);
+hist_PIp_miss-> Fill(P4_PIp_miss.Mag2(),1.);
+hist_PIm_miss_all_reg_2-> Fill(P4_PIm_miss.Mag2(),1.);
+
+//cut on missing mass of pim
+//if ((P4_PIm_miss.Mag2()>-0.15)&&(P4_PIm_miss.Mag2()<0.15)){
+//if ((P4_PIp_miss.Mag2()>-0.15)&&(P4_PIp_miss.Mag2()<0.15)){
+//if ((P4_P_miss.Mag2()>0.6)&&(P4_P_miss.Mag2()<1.2)){
 
 
-//cut on missing mass of 0
-if ((P4_miss_0.Mag2()>-0.02)&&(P4_miss_0.Mag2()<0.001)){
+	
+//if ((P4_miss_0_tmp.Mag2()>-0.075)&&(P4_miss_0_tmp.Mag2()<0.)){
+//if ((P4_PIm_miss_tmp.Mag2()>-0.2)&&(P4_PIm_miss_tmp.Mag2()<0.2)){ 
+//if ((P4_PIp_miss_tmp.Mag2()>-0.2)&&(P4_PIp_miss_tmp.Mag2()<0.2)){ 
+
+
+h_PIm_miss_tmp->Fill(P4_PIp_miss_tmp.Mag2(),1.);
+
+//if ((P4_miss_0_d.Mag2()>0.8)&&(P4_miss_0_d.Mag2()<1.)){
+
+if ((W>1.3)&&(W<1.8)&&(Q2>0.45)&&(Q2<1.))  h_miss_mass_0_d[int((W-1.3)/0.1)]->Fill(P4_miss_0_d.Mag2(),1.);
+
+
+h_miss_mass_0-> Fill(P4_miss_0_tmp.Mag2(),1.);
+hist_PIm_miss_all_reg_1-> Fill(P4_PIm_miss.Mag2(),1.);
+ 
+//if ((P4_miss_0_tmp.Mag2()>-0.04)&&(P4_miss_0_tmp.Mag2()<0.01)){
+if (P4_miss_0.Mag2()>0.)  h_mm_0-> Fill(sqrt(abs(P4_miss_0.Mag2())),1.);
+if (P4_miss_0.Mag2()<0.)  h_mm_0-> Fill(-sqrt(abs(P4_miss_0.Mag2())),1.);
 
 selection_0_miss = true;
 P4_PIm_reg = P4_PIm_miss;
 
 
 //};
-};
 };
 };
 };
@@ -990,7 +1052,7 @@ th_ph_pr = 180./M_PI*acos((P4_PP_reg.Vect().Dot((P4_EL-P4_ELP_reg).Vect()))/(((P
 
 	hist_PIm_miss_en->Fill(P4_PIm_miss[3],1.);
 
-if((P4_PIm_miss[3] > m_pip )) {
+//if((P4_PIm_miss[3] > m_pip )) {
 
 
 
@@ -1046,12 +1108,13 @@ h_pim_mis_fermi_nocut_7[int((W-1.3)/0.025)]->Fill(sqrt(abs(P4_PIm_miss.Mag2())),
 h_maintop_pimismas_noq2dep[int((W-1.3)/0.025)]->Fill(sqrt(abs(P4_PIm_miss.Mag2())),1.);
 
 //if ((P4_PIm_miss.Mag2()> -0.0236)&&(P4_PIm_miss.Mag2()< 0.063)){
+
 if (sqrt(abs(P4_PIm_miss.Mag2())) < MMcut_pim_miss[int((W-1.3)/0.025)]){
 
 W_2pi_selection->Fill(W,Q2,1.);
 selection_pim_miss = true;
 P4_PIm_reg = P4_PIm_miss;
-};
+//};
 };
 
 };
@@ -1099,20 +1162,20 @@ Var_3[2] = theta_PIp_cm;
 Var_3[3] = phi_PIp_cm;
 Var_3[4] = alpha_PPIm_piPIp;
 
-
+h_prot_mom->Fill(P4_PP_reg.Vect().Mag(),1.);
 if((selection_pim_miss)){
 
 //fract_integ[pmt_hit+1][sector-1][segment]
-h_5dim_pim_1[int((Q2-0.4)/0.05)][int((W-1.3)/0.025)]->Fill(Var_1,1.);
-h_5dim_pim_2[int((Q2-0.4)/0.05)][int((W-1.3)/0.025)]->Fill(Var_2,1.);
-h_5dim_pim_3[int((Q2-0.4)/0.05)][int((W-1.3)/0.025)]->Fill(Var_3,1.); 
+h_5dim_pim_1[int((Q2-0.4)/0.05)][int((W-1.3)/0.025)]->Fill(Var_1,fract_integ[pmt_hit+1][sector-1][segment]);
+h_5dim_pim_2[int((Q2-0.4)/0.05)][int((W-1.3)/0.025)]->Fill(Var_2,fract_integ[pmt_hit+1][sector-1][segment]);
+h_5dim_pim_3[int((Q2-0.4)/0.05)][int((W-1.3)/0.025)]->Fill(Var_3,fract_integ[pmt_hit+1][sector-1][segment]); 
 };
 
 if ((selection_0_miss)) {
 
-h_5dim_excl_1[int((Q2-0.4)/0.05)][int((W-1.3)/0.025)]->Fill(Var_1,1.);
-h_5dim_excl_2[int((Q2-0.4)/0.05)][int((W-1.3)/0.025)]->Fill(Var_2,1.);
-h_5dim_excl_3[int((Q2-0.4)/0.05)][int((W-1.3)/0.025)]->Fill(Var_3,1.); 
+h_5dim_excl_1[int((Q2-0.4)/0.05)][int((W-1.3)/0.025)]->Fill(Var_1,fract_integ[pmt_hit+1][sector-1][segment]);
+h_5dim_excl_2[int((Q2-0.4)/0.05)][int((W-1.3)/0.025)]->Fill(Var_2,fract_integ[pmt_hit+1][sector-1][segment]);
+h_5dim_excl_3[int((Q2-0.4)/0.05)][int((W-1.3)/0.025)]->Fill(Var_3,fract_integ[pmt_hit+1][sector-1][segment]); 
 
 };
 
@@ -1690,7 +1753,7 @@ for (m=1; m<=n_files_sim; m++) {
     TBranch *br_beta_PIm_time = t21->GetBranch("beta_PIm_time");
     TBranch *br_beta_PIp_time = t21->GetBranch("beta_PIp_time");
     TBranch *br_beta_P_time = t21->GetBranch("beta_P_time"); 
-  
+//  sigma =1.;
 
   Bool_t adc_cut_switch,tdc_cut_switch;
   
@@ -1827,19 +1890,31 @@ br_pmt_hit->GetEntry(i);
   beta_PIp = br_beta_PIp_time->GetLeaf("beta_PIp_time")->GetValue();
   beta_PIm = br_beta_PIm_time->GetLeaf("beta_PIm_time")->GetValue();
 
- 
+//A slight redetermination of mm cut for the pim miss top (the same for data and sim)
+MMcut_pim_miss[1] = 0.2; 
+MMcut_pim_miss[2] = 0.2; 
+MMcut_pim_miss[3] = 0.25;  
+
+if (((Q2>0.65)&&(Q2<0.7))||((Q2>0.8)&&(Q2<0.85))||((Q2>0.9)&&(Q2<0.95)))  MMcut_pim_miss[1] = 0.18;
+if (Q2>0.95) MMcut_pim_miss[2] = 0.175;
+if (((Q2>0.7)&&(Q2<0.75))||(Q2>0.9))  MMcut_pim_miss[3] = 0.2;
+
+
 //----------ELECTRON MOMENTUM CORRECTION FOR SIM---------- 
   if (indtype==1){
   delta_p_el_sim = corrfunc.corr_el_mom_sim(P_EL, th_EL);
-//  P_EL = P_EL + delta_p_el_sim;
+  P_EL = P_EL + delta_p_el_sim;
   };
 //--------------------------------------------------------
 
 //----------PROTON ENERGY LOSS Ye unfold------------------
+  if (indtype==1){
 delta_mom_p_ye = corrfunc.correct_energy_theta_pf(P_P, th_P);
 P_P = P_P - delta_mom_p_ye;
+};
 //----------PROTON ENERGY LOSS----------------------------
 delta_mom_p_skor = corrfunc.corr_pr_mom_skor(P_P, th_P);
+//this delta is added up in cuts_sim.cxx
 //--------------------------------------------------------
 
   
@@ -1919,7 +1994,7 @@ P4_PIm_miss = P4_EL + P4_P - P4_ELP_reg - P4_PP_reg - P4_PIp_reg;
 P4_PIp_miss = P4_EL + P4_P - P4_ELP_reg - P4_PP_reg - P4_PIm_reg;
 P4_PIp_miss_d = P4_EL + P4_D - P4_ELP_reg - P4_PP_reg - P4_PIm_reg;
 P4_P_miss = P4_EL + P4_P - P4_ELP_reg - P4_PIp_reg - P4_PIm_reg;
-P4_miss_0 = P4_EL + P4_P - P4_ELP_reg - P4_PP_reg - P4_PIm_reg -P4_PIp_reg;
+ P4_miss_0 = P4_EL + P4_P - P4_ELP_reg - P4_PP_reg - P4_PIm_reg -P4_PIp_reg;
 //P4_miss_0_en_comp = P4_EL + P4_P - P4_ELP_for_miss_en_comp - P4_PP_reg - P4_PIm_reg -P4_PIp_reg;
 P4_miss_0_d = P4_EL + P4_D - P4_ELP_reg - P4_PP_reg - P4_PIm_reg -P4_PIp_reg;
 
@@ -1978,6 +2053,12 @@ if ((P4_PIm_miss[0] > 0.) && ( P4_PIm_miss[1]< 0)) ph_PIm_miss = ph_PIm_miss+360
 
 //if (indtype==2) h_PIm_miss_sim-> Fill(P4_PIm_miss.Mag2(),1.);
 if((W > 1.3)&&(W < 1.825)&&(Q2 > 0.4)&&(Q2 < 1.)){
+
+//if ((indtype==2)) h_miss_mass_0_sim-> Fill(P4_miss_0.Mag2(),1.);	
+//if ((indtype==3)) h_miss_mass_0_sim-> Fill(P4_miss_0.Mag2(),10.);	
+//if ((indtype==2)) h_PIm_miss_sim-> Fill(P4_PIm_miss.Mag2(),1.);
+//if ((indtype==3)) h_PIm_miss_sim-> Fill(P4_PIm_miss.Mag2(),10.);
+
 if (indtype==2){
 rot_boost_cmsyst();
 
@@ -2055,6 +2136,9 @@ selection = false;
 selection_pim_miss_sim = false;
 selection_0_miss_sim = false;
 
+//	h_miss_mass_0_sim-> Fill(P4_miss_0.Mag2(),sigma);
+//	h_PIm_miss_sim-> Fill(P4_PIm_miss.Mag2(),sigma);
+	
 if (bool_el_id_sim) {
 
 //vertex difference cut
@@ -2065,7 +2149,11 @@ sim_hist();
 
 if (particle_ID_sim.PIp_cuts_sim()) h_z_corr1_sim->Fill(z_PIp);
 if ((particle_ID_sim.PIp_cuts_sim())&&(particle_ID_sim.PIm_cuts_sim())) h_z_corr2_sim->Fill(z_PIm-z_PIp);
-if ((bool_proton_id_sim)&&(bool_pim_id_sim)&&(!bool_pip_id_sim)){
+
+
+
+
+/*if ((bool_proton_id_sim)&&(bool_pim_id_sim)&&(!bool_pip_id_sim)){
 
 //if ((W > 1.3)&&(W < 1.825)&&(Q2 > 0.4)&&(Q2 < 1.)&&(npart>=3)) {
 if ((W > 1.3)&&(W < 1.825)&&(Q2 > 0.4)&&(Q2 < 1.)) {
@@ -2083,7 +2171,7 @@ h_mm_pip_vs_npart_sim->Fill(npart,P4_PIp_miss.Mag2(),1.);
 
 if (P4_PIp_miss[3] > 0.15) {
 
-h_PIp_miss_sim-> Fill(P4_PIp_miss.Mag2(),1.);
+//h_PIp_miss_sim-> Fill(P4_PIp_miss.Mag2(),1.);
 h_PIp_miss_d_sim-> Fill(P4_PIp_miss_d.Mag2(),1.);
 selection = false;
 //P4_PIp_reg = P4_PIp_miss;
@@ -2098,12 +2186,15 @@ selection = false;
 };
 
 
-};
+};*/
 
 
 
 if ((W > 1.3)&&(W < 1.825)&&(Q2 > 0.4)&&(Q2 < 1.)) {
+
 if ((bool_pip_id_sim)&&(bool_proton_id_sim)&&(bool_pim_id_sim)&&(npart>=4)){
+
+	
 //excl top vertex diffrence cut 
 if ((abs(z_EL - z_PIm)<5.)&&(abs(z_P - z_PIm)<5.)&&(abs(z_PIp - z_PIm)<5.)){
 //cout << P4_PIm_reg[0] << " "<<P4_PIm_reg[1] <<" "<<P4_PIm_reg[2] << " "<<P4_PIm_reg[3] << " reg \n";
@@ -2125,6 +2216,7 @@ th_ph_pim = 180./M_PI*acos((P4_PIm_reg.Vect().Dot((P4_EL-P4_ELP_reg).Vect()))/((
 th_ph_pip = 180./M_PI*acos((P4_PIp_reg.Vect().Dot((P4_EL-P4_ELP_reg).Vect()))/(((P4_EL-P4_ELP_reg).Vect()).Mag())/((P4_PIp_reg.Vect()).Mag()));
 th_ph_pr = 180./M_PI*acos((P4_PP_reg.Vect().Dot((P4_EL-P4_ELP_reg).Vect()))/(((P4_EL-P4_ELP_reg).Vect()).Mag())/((P4_PP_reg.Vect()).Mag()));
 
+	
 //cut on missing energy of 0
 	h_miss_en_0_sim->Fill(P4_miss_0[3],sigma);
 //if ((P4_miss_0[3] >  -0.05)) {
@@ -2183,27 +2275,76 @@ h_mis_mom_fermi_sim_7[int((W-1.3)/0.1)]->Fill((P4_miss_0.Vect()).Mag(),sigma);
 	h_miss_mom_0_cut_onpim_sim->Fill((P4_miss_0.Vect()).Mag(),1.);
 	};
 
-	hist_PIm_miss_all_reg_1_sim-> Fill(P4_PIm_miss.Mag2(),sigma);
 
+//if (indtype==1) h_miss_mass_0_sim-> Fill(P4_miss_0.Mag2(),1.);	
+//if (indtype==4) h_miss_mass_0_sim-> Fill(P4_miss_0.Mag2(),1.);	
+
+//P4_p_move.SetXYZT((P4_miss_0.Vect()).X(),(P4_miss_0.Vect()).Y(), (P4_miss_0.Vect()).Z(), sqrt(m_proton*m_proton+(P4_miss_0.Vect()).Mag()*(P4_miss_0.Vect()).Mag()));
+P4_p_move.SetXYZT(0,0,0,m_proton);
+
+P4_p_move.SetVect(P4_miss_0.Vect());
+P4_miss_0_tmp = P4_EL + P4_p_move - P4_ELP_reg - P4_PP_reg - P4_PIm_reg -P4_PIp_reg;
+P4_PIm_miss_tmp = P4_EL + P4_p_move - P4_ELP_reg - P4_PP_reg -P4_PIp_reg;
+P4_PIp_miss_tmp = P4_EL + P4_p_move - P4_ELP_reg - P4_PP_reg -P4_PIm_reg;
+//h_miss_mass_0_sim-> Fill(P4_miss_0_tmp.Mag2(),sigma);	
+//cout << P4_miss_0.Mag2()<<" "<<P4_miss_0.Vect().Mag()<<" "<< sqrt(px_fermi*px_fermi+py_fermi*py_fermi+pz_fermi*pz_fermi)<<" bb\n";
 //cut on missing momentum
+
+
 if ((P4_miss_0.Vect()).Mag() <0.2){
 
+
 //cut on missing mass of 0
-if ((P4_miss_0.Mag2()>-0.02)&&(P4_miss_0.Mag2()<0.001)){ 
+if  ((((W<1.5)&&(P4_miss_0.Mag2()> MMcut_0_miss_min[int((Q2-0.4)/0.05)]))||((W>1.5)&&(W<1.525)&&(P4_miss_0.Mag2()> MMcut_0_miss_min_151[int((Q2-0.4)/0.05)]))||((W>1.525)&&(W<1.575)&&(P4_miss_0.Mag2()> MMcut_0_miss_min[int((Q2-0.4)/0.05)]))||((W>1.575)&&(W<1.6)&&(P4_miss_0.Mag2()> MMcut_0_miss_min_158[int((Q2-0.4)/0.05)]))||((W>1.6)&&(P4_miss_0.Mag2()> MMcut_0_miss_min[int((Q2-0.4)/0.05)])))&&(P4_miss_0.Mag2()<0.001)){
 
+//if ((P4_miss_0.Mag2()>-0.004)&&(P4_miss_0.Mag2()<0.001)){ 
+//if  ((P4_miss_0.Mag2()> MMcut_0_miss_min[int((Q2-0.4)/0.05)])&&(P4_miss_0.Mag2()<0.001)){
+
+//if ((sqrt(abs(P4_miss_0.Mag2()))<0.25)&&(P4_miss_0.Mag2()<0.)){
+//if ((sqrt(abs(P4_miss_0_tmp.Mag2()))<0.25)&&(P4_miss_0_tmp.Mag2()<0.)){
+
+h_PIp_miss_sim-> Fill(P4_PIp_miss.Mag2(),sigma);
+hist_P_miss_sim-> Fill(P4_P_miss.Mag2(),sigma);
+hist_PIm_miss_all_reg_2_sim-> Fill(P4_PIm_miss.Mag2(),sigma);
 //cut on missing mass of pim
-if ((P4_PIm_miss.Mag2()>-0.15)&&(P4_PIm_miss.Mag2()<0.15)){
+//if ((P4_PIm_miss.Mag2()>-0.15)&&(P4_PIm_miss.Mag2()<0.15)){
+//if ((P4_PIp_miss.Mag2()>-0.15)&&(P4_PIp_miss.Mag2()<0.15)){
+//if ((P4_P_miss.Mag2()>0.6)&&(P4_P_miss.Mag2()<1.2)){
 
-	hist_PIm_miss_all_reg_2_sim-> Fill(P4_PIm_miss.Mag2(),sigma);
-	h_miss_mass_0_sim-> Fill(P4_miss_0.Mag2(),1.);
+
+
+//if ((P4_miss_0_tmp.Mag2()>-0.075)&&(P4_miss_0_tmp.Mag2()<0.)){
+//if ((P4_PIm_miss_tmp.Mag2()>-0.2)&&(P4_PIm_miss_tmp.Mag2()<0.2)){ 
+//if ((P4_PIp_miss_tmp.Mag2()>-0.2)&&(P4_PIp_miss_tmp.Mag2()<0.2)){ 
+
+h_PIm_miss_sim_tmp->Fill(P4_PIp_miss_tmp.Mag2(), sigma);
+
+
+
 	h_miss_mom_0_cut_on0_sim->Fill((P4_miss_0.Vect()).Mag(),1.);
+//+0.0125
 
+//if ((P4_miss_0_d.Mag2()+0.0125>0.8)&&(P4_miss_0_d.Mag2()+0.0125<1.)){ 
+
+	if ((W>1.3)&&(W<1.8)&&(Q2>0.45)&&(Q2<1.)) h_miss_mass_0_d_sim[int((W-1.3)/0.1)]->Fill(P4_miss_0_d.Mag2()+0.0125,1.);
+
+
+
+h_miss_mass_0_sim-> Fill(P4_miss_0_tmp.Mag2(),sigma);
+hist_PIm_miss_all_reg_1_sim-> Fill(P4_PIm_miss.Mag2(),sigma); 
+
+//if ((P4_miss_0_tmp.Mag2()>-0.04)&&(P4_miss_0_tmp.Mag2()<0.01)){
+
+if (P4_miss_0.Mag2()>0.) h_mm_0_sim-> Fill(sqrt(abs(P4_miss_0.Mag2())),1.); 
+if (P4_miss_0.Mag2()<0.) h_mm_0_sim-> Fill(-sqrt(abs(P4_miss_0.Mag2())),1.);
 
 selection_0_miss_sim = true;
 P4_PIm_reg = P4_PIm_miss;
 
 //};
-};
+//};
+//};
+//};
 };
 };
 };
@@ -2218,9 +2359,11 @@ P4_PIm_reg = P4_PIm_miss;
 
 //if ((W > 1.3)&&(W < 1.825)&&(Q2 > 0.4)&&(Q2 < 1.)&&(npart>=3)){
 if ((W > 1.3)&&(W < 1.825)&&(Q2 > 0.4)&&(Q2 < 1.)&&(npart>=3)){
+
 if ((bool_pip_id_sim)&&(bool_proton_id_sim)&&(n_PIm == 0)){
 
 
+	
 if (sqrt((P4_PIp_reg+P4_PIm_miss)*(P4_PIp_reg+P4_PIm_miss)) > 2*m_pip) {
 if (sqrt((P4_PIp_reg+P4_PIm_miss)*(P4_PIp_reg+P4_PIm_miss)) < W - m_proton) {
 if (sqrt((P4_PIp_reg+P4_PP_reg)*(P4_PIp_reg+P4_PP_reg)) > m_pip + m_proton) {
@@ -2237,7 +2380,7 @@ th_ph_pr = 180./M_PI*acos((P4_PP_reg.Vect().Dot((P4_EL-P4_ELP_reg).Vect()))/(((P
 
 
 	h_PIm_miss_en_sim->Fill(P4_PIm_miss[3],sigma);
-if (P4_PIm_miss[3] > m_pip) {
+//if (P4_PIm_miss[3] > m_pip) {
 
 	if ((W>1.3)&&(W<1.8)&&(Q2>0.45)&&(Q2<0.5)){
 		
@@ -2284,7 +2427,6 @@ h_pim_mis_fermi_nocut_sim_7[int((W-1.3)/0.025)]->Fill(sqrt(abs(P4_PIm_miss.Mag2(
 //};
 
 
-	h_PIm_miss_sim-> Fill(P4_PIm_miss.Mag2(),sigma);
 	h_maintop_pimismas_noq2dep_sim[int((W-1.3)/0.025)]->Fill(sqrt(abs(P4_PIm_miss.Mag2())),sigma);
 
 if (sqrt(abs(P4_PIm_miss.Mag2())) < MMcut_pim_miss[int((W-1.3)/0.025)]){
@@ -2293,7 +2435,7 @@ if (sqrt(abs(P4_PIm_miss.Mag2())) < MMcut_pim_miss[int((W-1.3)/0.025)]){
 W_2pi_selection_sim->Fill(W,Q2,sigma);
 selection_pim_miss_sim= true;
 P4_PIm_reg = P4_PIm_miss;
-};
+//};
 };
 };
 };
@@ -2341,6 +2483,7 @@ Var_3[3] = phi_PIp_cm;
 Var_3[4] = alpha_PPIm_piPIp;
 
 
+h_prot_mom_sim->Fill(P4_PP_reg.Vect().Mag(),sigma);
 
 if ((selection_pim_miss_sim)){
 

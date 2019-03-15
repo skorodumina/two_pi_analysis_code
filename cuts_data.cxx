@@ -27,15 +27,15 @@ ostringstream qqq1;
    Float_t th_min,th_max,par1,par2,par3,fid_a,fid_b;
    Short_t i;
   
- 
 
-   
+
+ 
    Float_t ph_el_arr[3][6][18] = {{{1000.,22.,20.,20.,25.,23.,26.,22.,25.,27.,27.,29.,29.,29.,32.,30.,29.,1000.},
-                             {1000.,27.,20.,18.,22.,20.,23.,21.,23.,23.,24.,24.,26.,31.,30.,27.,25.,1000.},
-                             {1000.,25.,23.,23.,25.,25.,22.,24.,31.,28.,27.,30.,32.,36.,49.,41.,40.,1000.},
-                             {1000.,18.,23.,20.,20.,20.,25.,27.,24.,24.,27.,29.,22.,26.,43.,44.,30.,1000.},
-                             {1000.,25.,25.,28.,26.,25.,26.,22.,23.,27.,30.,30.,45.,31.,35.,45.,35.,1000.},
-                             {1000.,26.,22.,25.,25.,30.,26.,27.,25.,35.,28.,37.,30.,30.,40.,40.,40.,1000.}},
+                             {1000.,27.,20.,19.,22.,20.,23.,21.,23.,23.,25.,24.,26.,31.,30.,27.,25.,1000.},
+                             {1000.,25.,23.,23.,25.,25.,22.,24.,31.,28.,27.,31.,35.,36.,49.,43.,41.,1000.},
+                             {1000.,18.,23.,20.,20.,21.,25.,27.,24.,24.,27.,29.,22.,26.,43.,45.,30.,1000.},
+                             {1000.,25.,25.,28.,26.,25.,26.,22.,24.,27.,30.,30.,45.,31.,35.,45.,35.,1000.},
+                             {1000.,26.,22.,25.,25.,30.,27.,27.,25.,35.,29.,37.,30.,30.,40.,43.,40.,1000.}},
 			     
 			     {{1000.,0.,0.,0.,0.,0.,0.,0.,0.,0.,0.,0.,0.,0.,0.,0.,0.,1000.},
                              {1000.,0.,0.,0.,0.,0.,0.,0.,0.,0.,0.,0.,0.,0.,0.,0.,0.,1000.},
@@ -44,12 +44,12 @@ ostringstream qqq1;
 		             {1000.,0.,0.,0.,0.,0.,0.,0.,0.,0.,0.,0.,0.,0.,0.,0.,0.,1000.},
 			     {1000.,0.,0.,0.,0.,0.,0.,0.,0.,0.,0.,0.,0.,0.,0.,0.,0.,1000.}},
 			     
-			     {{1000.,22.,20.,18.,21.,20.,20.,22.,25.,25.,29.,25.,25.,30.,30.,30.,25.,1000.},
-                             {1000.,25.,23.,18.,19.,23.,24.,25.,29.,28.,26.,23.,26.,44.,39.,38.,35.,1000.},
-			     {1000.,24.,22.,25.,28.,23.,23.,25.,24.,30.,33.,28.,28.,34.,35.,36.,34.,1000.},
-			     {1000.,25.,23.,23.,23.,20.,25.,31.,24.,26.,28.,28.,23.,25.,32.,24.,32.,1000.},
+			     {{1000.,22.,21.,18.,21.,20.,20.,22.,25.,25.,29.,25.,25.,30.,30.,30.,25.,1000.},
+                             {1000.,25.,24.,18.,19.,23.,24.,25.,29.,28.,26.,23.,26.,44.,39.,38.,35.,1000.},
+			     {1000.,24.,22.,25.,28.,23.,23.,25.,24.,30.,30.,28.,28.,35.,36.,37.,35.,1000.},
+			     {1000.,25.,23.,23.,23.,20.,26.,31.,24.,27.,28.,28.,23.,25.,32.,24.,28.,1000.},
 			     {1000.,23.,21.,21.,23.,45.,45.,30.,25.,31.,30.,35.,47.,30.,45.,55.,40.,1000.},
-			     {1000.,25.,22.,22.,23.,35.,33.,23.,26.,30.,40.,35.,27.,40.,75.,40.,40.,1000.}}};
+			     {1000.,25.,22.,22.,25.,35.,33.,23.,26.,30.,40.,35.,27.,40.,75.,40.,40.,1000.}}};
 			     
 			     
      
@@ -81,18 +81,18 @@ if ((LiveTime > 0.8) && (LiveTime <0.9) && (inclusive > 85000) &&(inclusive < 10
 //calorimeter threshold cut + manually remove the first and last cc segments
 if ((P_EL > 0.461)&&(segment!=0)&&(segment!=17)) {
 
-   th_min=(9.5+17./(P_EL+0.2));
+ //  th_min=(9.5+17./(P_EL+0.2));
    
    
-/*  
+ 
   
    th_min= (11.7398+8.21504/(0.433327*P_EL+0.158076));
    par1=0.85+1.1*P_EL;
    par2=-62.8-30.*P_EL; 
-   par3 = 0.007*P_EL + 0.0079;
+   par3 = 0.0047*P_EL + 0.0079;
 
-   fid_a = 41.3*pow((sin((th_EL-th_min)*par3)),(par1+par2/th_EL+1600./th_EL/th_EL)) -0.5; 
-   fid_b = -41.3*pow((sin((th_EL-th_min)*par3)),(par1+par2/th_EL+1600./th_EL/th_EL))+0.5; */
+   fid_a = 41.3*pow((sin((th_EL-th_min)*par3)),(par1+par2/th_EL+1485./th_EL/th_EL))+1.; 
+   fid_b = -41.3*pow((sin((th_EL-th_min)*par3)),(par1+par2/th_EL+1485./th_EL/th_EL))-1.; 
      
    th_max = 76.8617 -76.537*P_EL + 77.9387*P_EL*P_EL-28.389*P_EL*P_EL*P_EL;
   
@@ -133,12 +133,14 @@ if (norm_nphe_s1->GetBinContent(norm_nphe_s1->GetXaxis()->FindBin(theta_cc),norm
 
 	nphe_sector1_after->Fill(nphe,1.);
 	
+
 //nphe cut after poisson fit
 if (nphe > ph_el_arr[pmt_hit+1][0][segment]){
 
 	if (pmt_hit == -1) ph_el_left[0][segment]->Fill(nphe,1.);
 	if (pmt_hit == 0) ph_el_both[0][segment]->Fill(nphe,1.);
 	if (pmt_hit == 1) ph_el_right[0][segment]->Fill(nphe,1.);
+
 
 //vertex cut
 if ((z_EL>-2.65) && (z_EL<1.85)){
@@ -152,13 +154,13 @@ if ((ph_EL >= 330) && (ph_EL <= 360)){
 	};
 
 //fiducial cut 
-if ((th_EL > th_min) && (th_EL < th_max)){
+if ((th_EL > th_min) && (th_EL < th_max)&& (ph_EL > fid_b+360) && (ph_EL < fid_a+360)){
 	
 	if ((P_EL < 1.75999) && (P_EL > 0.4)){
 	ph_vs_th_1pe_fid[int((P_EL*100-40)/8)] ->Fill(th_EL,ph_EL-360,1.);
 	};
 
-	if ((W>1.3)&&(W<1.825)&&(Q2>0.4)&&(Q2<1.)&&(n_PIp==1)&&(n_P==1)) th_vs_p_e_2[0]->Fill(P_EL,th_EL,1.);
+	if ((W>1.3)&&(W<1.825)&&(Q2>0.4)&&(Q2<1.)&&(n_PIp==1)) th_vs_p_e_2[0]->Fill(P_EL,th_EL,1.);
 
 //	hist_z_el_1->Fill(z_EL,1.);
 
@@ -175,7 +177,7 @@ if ((ph_EL >= 0) && (ph_EL <= 30)) {
 	};
 
 //fiducial cut 	
-if ((th_EL > th_min) && (th_EL < th_max)){
+if ((th_EL > th_min) && (th_EL < th_max) && (ph_EL > fid_b) && (ph_EL < fid_a)){
 
 	if ((P_EL < 1.75999) &&(P_EL > 0.4)){
 	ph_vs_th_1pe_fid[int((P_EL*100-40)/8)] -> Fill(th_EL,ph_EL,1.);
@@ -244,7 +246,9 @@ if (nphe > ph_el_arr[pmt_hit+1][1][segment]){
 	if (pmt_hit == -1) ph_el_left[1][segment]->Fill(nphe,1.);
 	if (pmt_hit == 0) ph_el_both[1][segment]->Fill(nphe,1.);
 	if (pmt_hit == 1) ph_el_right[1][segment]->Fill(nphe,1.);
-		
+
+
+	
 	ph_vs_th_2 -> Fill(th_EL,ph_EL-60,1.);
 
 	if ((P_EL < 1.75999) &&(P_EL > 0.4))  {
@@ -252,7 +256,7 @@ if (nphe > ph_el_arr[pmt_hit+1][1][segment]){
 	}; 
 
 //fiducial cut
-if ((th_EL > th_min) && (th_EL < th_max)&&(PdHit_EL!=16)){
+if ((th_EL > th_min) && (th_EL < th_max)&& (ph_EL > fid_b+60) && (ph_EL < fid_a+60)&&(PdHit_EL!=16)){
 	if ((P_EL < 1.75999) &&(P_EL > 0.4))  {
 	ph_vs_th_2pe_fid[int((P_EL*100-40)/8)] ->Fill(th_EL,ph_EL-60,1.);
 	};
@@ -261,7 +265,7 @@ if ((th_EL > th_min) && (th_EL < th_max)&&(PdHit_EL!=16)){
 	
 //th_vs_p    	
 if ((th_EL > (11.7398+8.21504/(0.433327*(P_EL+0.1)+0.158076))+18.3)||(th_EL < (11.7398+8.21504/(0.433327*(P_EL+0.1)+0.158076))+16.)){
-if ((th_EL > (11.7398+8.21504/(0.433327*(P_EL+0.1)+0.125)) +3.05)||(th_EL < (11.7398+8.21504/(0.433327*(P_EL+0.1)+0.14)) +2.3)){
+//if ((th_EL > (11.7398+8.21504/(0.433327*(P_EL+0.1)+0.125)) +3.05)||(th_EL < (11.7398+8.21504/(0.433327*(P_EL+0.1)+0.14)) +2.3)){
 //if (th_EL > (11.7398+8.5/(0.433327*(P_EL+0.1)+0.15)) +3.3){
 //if ((th_EL > (11.7398+8.5/(0.433327*(P_EL+0.1)+0.15)) +6.)||(th_EL < (11.7398+8.21504/(0.433327*(P_EL+0.1)+0.14)) +4.7)){
 
@@ -277,7 +281,7 @@ if ((z_EL>-2.35) && (z_EL<2.15)){
     
     };//vertex cut
     };//th_vs_p      
-    };//th_vs_p  
+//    };//th_vs_p  
   //  };//th_vs_p         
    };//fiducial 
    };//nphe cut after poisson fit
@@ -327,12 +331,14 @@ if (norm_nphe_s3->GetBinContent(norm_nphe_s3->GetXaxis()->FindBin(theta_cc),norm
 
 	nphe_sector3_after->Fill(nphe,1.);
 	
+
 //nphe cut after poisson fit	
 if (nphe > ph_el_arr[pmt_hit+1][2][segment]){
 
 	if (pmt_hit == -1) ph_el_left[2][segment]->Fill(nphe,1.);
 	if (pmt_hit == 0) ph_el_both[2][segment]->Fill(nphe,1.);
 	if (pmt_hit == 1) ph_el_right[2][segment]->Fill(nphe,1.);
+
 	
 	ph_vs_th_3 -> Fill(th_EL,ph_EL-120,1.);
 
@@ -340,7 +346,7 @@ if (nphe > ph_el_arr[pmt_hit+1][2][segment]){
 	ph_vs_th_3pe[int((P_EL*100-40)/8)] ->Fill(th_EL,ph_EL-120,1.);
 	};
 //fiducial cut
-if ((th_EL > th_min) && (th_EL < th_max)&&(PdHit_EL!=44)){
+if ((th_EL > th_min) && (th_EL < th_max)&& (ph_EL > fid_b+120) && (ph_EL < fid_a+120)&&(PdHit_EL!=44)){
 
 	if ((P_EL < 1.75999) &&(P_EL > 0.4))  {
 	ph_vs_th_3pe_fid[int((P_EL*100-40)/8)] ->Fill(th_EL,ph_EL-120,1.);
@@ -403,6 +409,7 @@ if (norm_nphe_s4->GetBinContent(norm_nphe_s4->GetXaxis()->FindBin(theta_cc),norm
 
 	nphe_sector4_after->Fill(nphe,1.);
 
+
 //nphe cut after poisson fit 	
 if (nphe > ph_el_arr[pmt_hit+1][3][segment]){
 
@@ -416,7 +423,7 @@ if (nphe > ph_el_arr[pmt_hit+1][3][segment]){
 	ph_vs_th_4pe[int((P_EL*100-40)/8)] ->Fill(th_EL,ph_EL-180,1.);
 		};
 //fiducial cut
-if ((th_EL > th_min) && (th_EL < th_max)){
+if ((th_EL > th_min) && (th_EL < th_max)&& (ph_EL > fid_b+180) && (ph_EL < fid_a+180)){
 
 	if ((P_EL < 1.75999) &&(P_EL > 0.4))  {
 	ph_vs_th_4pe_fid[int((P_EL*100-40)/8)] ->Fill(th_EL,ph_EL-180,1.);
@@ -486,20 +493,22 @@ if (norm_nphe_s5->GetBinContent(norm_nphe_s5->GetXaxis()->FindBin(theta_cc),norm
 
 	nphe_sector5_after->Fill(nphe,1.);
 	
+
 //nphe cut after poisson fit 	
 if (nphe > ph_el_arr[pmt_hit+1][4][segment]){
 
 	if (pmt_hit == -1) ph_el_left[4][segment]->Fill(nphe,1.);
 	if (pmt_hit == 0) ph_el_both[4][segment]->Fill(nphe,1.);
 	if (pmt_hit == 1) ph_el_right[4][segment]->Fill(nphe,1.);
-	
+
+
 	ph_vs_th_5 -> Fill(th_EL,ph_EL-240,1);
   
 	if ((P_EL < 1.75999) &&(P_EL > 0.4))  {
 	ph_vs_th_5pe[int((P_EL*100-40)/8)] ->Fill(th_EL,ph_EL-240,1.);
 		};
 //fiducial cut
-if ((th_EL > th_min) && (th_EL < th_max)&&(PdHit_EL!=17)){
+if ((th_EL > th_min) && (th_EL < th_max)&& (ph_EL > fid_b+240) && (ph_EL < fid_a+240)&&(PdHit_EL!=17)){
 
 
  
@@ -524,7 +533,7 @@ if ((z_EL>-2.9) && (z_EL< 1.6)){
    
    };//vertex cut
    };//th_vs_p
-   };//th_vs_p   
+  };//th_vs_p   
    };//fiducial 
    };//nphe cut after poisson fit    
    };//geometrical cut on number of photoelectrons
@@ -573,12 +582,14 @@ if (norm_nphe_s6->GetBinContent(norm_nphe_s6->GetXaxis()->FindBin(theta_cc),norm
 
 	nphe_sector6_after->Fill(nphe,1.);	
 	
+
 //nphe cut after poisson fit	
 if (nphe > ph_el_arr[pmt_hit+1][5][segment]){
 
 	if (pmt_hit == -1) ph_el_left[5][segment]->Fill(nphe,1.);
 	if (pmt_hit == 0) ph_el_both[5][segment]->Fill(nphe,1.);
 	if (pmt_hit == 1) ph_el_right[5][segment]->Fill(nphe,1.);
+
 
 	ph_vs_th_6 -> Fill(th_EL,ph_EL-300,1); 
 
@@ -587,7 +598,7 @@ if (nphe > ph_el_arr[pmt_hit+1][5][segment]){
 	};
 
 //fiducial cut	
-if ((th_EL > th_min) && (th_EL < th_max)){
+if ((th_EL > th_min) && (th_EL < th_max)&& (ph_EL > fid_b+300) && (ph_EL < fid_a+300)){
 
 	if ((P_EL < 1.75999) &&(P_EL > 0.4))  {
 	ph_vs_th_6pe_fid[int((P_EL*100-40)/8)] ->Fill(th_EL,ph_EL-300,1.);
@@ -647,8 +658,8 @@ if ((z_EL>-3.) && (z_EL<1.5)){
    th_min = 12.;
    th_max = 60.;
 //   th_max2 = 94.0079-98.7448*P_P + 84.5143*P_P*P_P-32.0668*P_P*P_P*P_P;
-  p_fid_a = 25.*(1-exp(-1.*0.12*(th_P-10.)))-2.5;
-  p_fid_b = -25.*(1-exp(-1.*0.12*(th_P-10.)))+2.5; 
+  p_fid_a = 25.*(1-exp(-1.*0.12*(th_P-10.)))-3.;
+  p_fid_b = -25.*(1-exp(-1.*0.12*(th_P-10.)))+3.; 
 
    cuts_data = false; 
 
@@ -888,8 +899,8 @@ return cuts_data;
    th_max = 120.;
 //   th_max2 = 222.947-505.444*P_PIp + 534.834*P_PIp*P_PIp-223.395*P_PIp*P_PIp*P_PIp;
    
-  pip_fid_a = 25.*(1-exp(-1.*0.12*(th_PIp-10.)))-2.5;
-  pip_fid_b = -25.*(1-exp(-1.*0.12*(th_PIp-10.)))+2.5;
+  pip_fid_a = 25.*(1-exp(-1.*0.12*(th_PIp-10.)))-3.;
+  pip_fid_b = -25.*(1-exp(-1.*0.12*(th_PIp-10.)))+3.;
 
 
    cuts_data = false; 
@@ -1100,7 +1111,7 @@ return cuts_data;
     bool cuts_data::PIm_cuts_data(){
        
    bool cuts_data;
-   Float_t m_pim,th_min,th_max,th_edge,par1,par2,par3,pim_fid_a,pim_fid_b, th_min_lowp;
+   Float_t m_pim,th_min,th_max,th_edge,par1,par2,par3,pim_fid_a,pim_fid_b, th_min_lowp, a_shrink;
    
    m_pim = 0.13957; 
    
@@ -1111,11 +1122,30 @@ return cuts_data;
  // if (P_PIm<0.23) th_max = 140.;  
  // if (P_PIm>0.23) th_max = 238.213-537.237*P_PIm + 546.985*P_PIm*P_PIm-212.017*P_PIm*P_PIm*P_PIm;
   
-  th_edge = th_max- 4./3.*(th_max-th_min)/2.;
+  th_edge = th_max- 5.2/3.*(th_max-th_min)/2.;
     
   par1=0.61+1.18*P_PIm;
   par2=-59.2-35.3*P_PIm; 
-  par3=17.2*P_PIm-11.9*P_PIm*P_PIm-2.;
+    
+  a_shrink = 1.;
+  
+/*  if ((Q2>0.45)&&(Q2<0.50)&&(W>1.3)&&(W<1.325)) a_shrink = 2.5;
+  if ((Q2>0.50)&&(Q2<0.55)&&(((W>1.3)&&(W<1.325))||((W>1.35)&&(W<1.375)))) a_shrink = 2.5;
+  if ((Q2>0.55)&&(Q2<0.60)&&(W>1.325)&&(W<1.4)) a_shrink = 2.5;
+  if ((Q2>0.60)&&(Q2<0.65)&&(W>1.35)&&(W<1.375)) a_shrink = 2.5;
+  if ((Q2>0.65)&&(Q2<0.70)&&(((W>1.3)&&(W<1.325))||((W>1.35)&&(W<1.4)))) a_shrink = 2.5;
+  if ((Q2>0.70)&&(Q2<0.75)&&(W>1.35)&&(W<1.425)) a_shrink = 2.5;
+  if ((Q2>0.75)&&(Q2<0.80)&&(W>1.35)&&(W<1.4)) a_shrink = 2.5;
+  if ((Q2>0.80)&&(Q2<0.85)&&(((W>1.3)&&(W<1.325))||((W>1.35)&&(W<1.4)))) a_shrink = 2.5;
+  if ((Q2>0.85)&&(Q2<0.90)&&(W>1.35)&&(W<1.4)) a_shrink = 2.5;
+  if ((Q2>0.90)&&(Q2<0.95)&&(W>1.35)&&(W<1.375)) a_shrink = 2.5;
+  if ((Q2>0.95)&&(Q2<1.00)&&(((W>1.325)&&(W<1.375))||((W>1.4)&&(W<1.425)))) a_shrink = 2.5;
+*/  
+  
+  
+//  cout << Q2<<" "<< W<< " "<< a_shrink<< " \n";
+  
+  par3=17.2*P_PIm-11.9*P_PIm*P_PIm-a_shrink;
    
    pim_fid_a=+23.5*pow((sin((th_PIm-th_min)*0.015)),(par1+par2/th_PIm+1400./th_PIm/th_PIm))+par3;
    pim_fid_b=-23.5*pow((sin((th_PIm-th_min)*0.015)),(par1+par2/th_PIm+1400./th_PIm/th_PIm))-par3;
@@ -1138,16 +1168,18 @@ if ((ph_PIm >= 330) && (ph_PIm <=360)){
 
 	ph_th_pim_all_p[0] -> Fill(th_PIm,ph_PIm-360,1);
 
-	if ((P_PIm > 0.1) && (P_PIm < 1.6)) ph_vs_th_pim[0][int((P_PIm-0.1)/0.1)]->Fill(th_PIm,ph_PIm-360,1);	
+	
 	
 //fiducial cut sector 1
 if ((th_PIm > th_min)&&(th_PIm < th_max)&&(ph_PIm > pim_fid_b+360) && (ph_PIm < pim_fid_a+360)){
 
-		
+	if ((P_PIm > 0.1) && (P_PIm < 1.6)) ph_vs_th_pim[0][int((P_PIm-0.1)/0.1)]->Fill(th_PIm,ph_PIm-360,1);		
+
+	th_vs_p_pim_2[0]->Fill(P_PIm,th_PIm,1.);
 //th_vs_p
 if (th_PIm < (11.09+8./(0.472*(P_PIm+0.3)+0.117))+77.){		
 
-	th_vs_p_pim_2[0]->Fill(P_PIm,th_PIm,1.);	
+	
 	hist_z_el_1->Fill(z_PIm,1.);
 	
 cuts_data = true;
@@ -1159,16 +1191,17 @@ if ((ph_PIm >= 0) && (ph_PIm <=30)){
 
 	ph_th_pim_all_p[0] -> Fill(th_PIm,ph_PIm,1);
  
-	if ((P_PIm > 0.1) && (P_PIm < 1.6)) ph_vs_th_pim[0][int((P_PIm-0.1)/0.1)]->Fill(th_PIm,ph_PIm,1);
+
 		
 //fiducial cut sector 1 
 if ((th_PIm > th_min)&&(th_PIm < th_max)&&(ph_PIm > pim_fid_b) && (ph_PIm < pim_fid_a)){
+	if ((P_PIm > 0.1) && (P_PIm < 1.6)) ph_vs_th_pim[0][int((P_PIm-0.1)/0.1)]->Fill(th_PIm,ph_PIm,1);	
 	
-	
+	th_vs_p_pim_2[0]->Fill(P_PIm,th_PIm,1.);
 //th_vs_p	
 if (th_PIm < (11.09+8./(0.472*(P_PIm+0.3)+0.117))+77.){		
 
-	th_vs_p_pim_2[0]->Fill(P_PIm,th_PIm,1.);	
+	
 	hist_z_el_1->Fill(z_PIm,1.);
 	
 cuts_data = true;
@@ -1182,17 +1215,18 @@ if ((ph_PIm >= 30) && (ph_PIm <=90)&&(PdHit_PIm!=16)) {
     
 	ph_th_pim_all_p[1] -> Fill(th_PIm,ph_PIm-60,1);
 
-	if ((P_PIm > 0.1) && (P_PIm < 1.6)) ph_vs_th_pim[1][int((P_PIm-0.1)/0.1)]->Fill(th_PIm,ph_PIm-60,1);
+
 	
 //fiducial cut sector 2 
 if ((th_PIm > th_min)&&(th_PIm < th_max)&&(ph_PIm > pim_fid_b+60) && (ph_PIm < pim_fid_a+60)){
 
-
+	if ((P_PIm > 0.1) && (P_PIm < 1.6)) ph_vs_th_pim[1][int((P_PIm-0.1)/0.1)]->Fill(th_PIm,ph_PIm-60,1);
 	
+	th_vs_p_pim_2[1]->Fill(P_PIm,th_PIm,1.);
 //th_vs_p
 if ((th_PIm < 36.152+3.69909e-05/(5.40783e-06*P_PIm+1.81169e-07)-2.5) || (th_PIm > 36.152+3.69909e-05/(5.40783e-06*P_PIm+1.81169e-07)+2.)){ 
 
-	th_vs_p_pim_2[1]->Fill(P_PIm,th_PIm,1.);	
+	
 	hist_z_el_2->Fill(z_PIm,1.);
 	
 cuts_data = true;
@@ -1206,17 +1240,17 @@ if ((ph_PIm >= 90) && (ph_PIm <=150)&&(PdHit_PIm!=44)) {
 	ph_th_pim_all_p[2] -> Fill(th_PIm,ph_PIm-120,1);
  
 
-	if ((P_PIm > 0.1) && (P_PIm < 1.6)) ph_vs_th_pim[2][int((P_PIm-0.1)/0.1)]->Fill(th_PIm,ph_PIm-120,1); 
 
 //fiducial cut sector 3 
 if ((th_PIm > th_min)&&(th_PIm < th_max)&&(ph_PIm > pim_fid_b+120) && (ph_PIm < pim_fid_a+120)){
 
+	if ((P_PIm > 0.1) && (P_PIm < 1.6)) ph_vs_th_pim[2][int((P_PIm-0.1)/0.1)]->Fill(th_PIm,ph_PIm-120,1); 
 
+	th_vs_p_pim_2[2]->Fill(P_PIm,th_PIm,1.);
 //th_vs_p
 if (th_PIm <(11.09+8./(0.472*(P_PIm+0.2)+0.117))+85.){ 
 if ((th_PIm <36.152+3.69909e-05/(5.40783e-06*P_PIm+1.5e-07)-8.5)||(th_PIm >36.152+3.69909e-05/(5.40783e-06*P_PIm+0.2e-07)-5.5)){ 
 
-	th_vs_p_pim_2[2]->Fill(P_PIm,th_PIm,1.);
 	hist_z_el_3->Fill(z_PIm,1.);
 	
 cuts_data = true;
@@ -1230,17 +1264,17 @@ if ((ph_PIm >= 150) && (ph_PIm <=210)){
 
 	ph_th_pim_all_p[3] -> Fill(th_PIm,ph_PIm-180,1);
 
-	if ((P_PIm > 0.1) && (P_PIm < 1.6)) ph_vs_th_pim[3][int((P_PIm-0.1)/0.1)]->Fill(th_PIm,ph_PIm-180,1);	
 	
 //fiducial cut sector 4
 if ((th_PIm > th_min)&&(th_PIm < th_max)&&(ph_PIm > pim_fid_b+180) && (ph_PIm < pim_fid_a+180)){
 
+	if ((P_PIm > 0.1) && (P_PIm < 1.6)) ph_vs_th_pim[3][int((P_PIm-0.1)/0.1)]->Fill(th_PIm,ph_PIm-180,1);	
 
+	th_vs_p_pim_2[3]->Fill(P_PIm,th_PIm,1.);
 //th_vs_p
 if ((th_PIm < 36.152+3.69909e-05/(5.40783e-06*(P_PIm+0.31)+1.81169e-07)+62.)||((th_PIm>36.152+3.69909e-05/(5.40783e-06*(P_PIm+0.31)+1.81169e-07)+66.)&&(th_PIm <36.152+3.69909e-05/(5.40783e-06*(P_PIm+0.25)+1.81169e-07)+80.))){
 
 
-	th_vs_p_pim_2[3]->Fill(P_PIm,th_PIm,1.);
 	hist_z_el_4->Fill(z_PIm,1.);
 
 cuts_data = true;
@@ -1253,16 +1287,17 @@ if ((ph_PIm >= 210) && (ph_PIm <=270)&&(PdHit_PIm!=17)) {
 
 	ph_th_pim_all_p[4] -> Fill(th_PIm,ph_PIm-240,1);
 
-	if ((P_PIm > 0.1) && (P_PIm < 1.6)) ph_vs_th_pim[4][int((P_PIm-0.1)/0.1)]->Fill(th_PIm,ph_PIm-240,1);
 	
 //fiducial cut sector 5 
 if ((th_PIm > th_min)&&(th_PIm < th_max)&&(ph_PIm > pim_fid_b+240) && (ph_PIm < pim_fid_a+240)){
 
+	if ((P_PIm > 0.1) && (P_PIm < 1.6)) ph_vs_th_pim[4][int((P_PIm-0.1)/0.1)]->Fill(th_PIm,ph_PIm-240,1);
 
+	th_vs_p_pim_2[4]->Fill(P_PIm,th_PIm,1.);
 //th_vs_p
 if ((th_PIm<36.152+3.69909e-05/(5.40783e-06*(P_PIm)+1.81169e-07)-1.)||((th_PIm>36.152+3.69909e-05/(5.40783e-06*(P_PIm-0.01)+1.81169e-07)+3)&&(th_PIm<36.152+3.69909e-05/(5.40783e-06*(P_PIm+0.1)+1.81169e-07)+63.))){ 
 
-	th_vs_p_pim_2[4]->Fill(P_PIm,th_PIm,1.);
+
 	hist_z_el_5->Fill(z_PIm,1.);
 	
 cuts_data = true;
@@ -1276,18 +1311,19 @@ if ((ph_PIm >= 270) && (ph_PIm <=330)){
  
 	ph_th_pim_all_p[5] -> Fill(th_PIm,ph_PIm-300,1);
  
-	if ((P_PIm > 0.1) && (P_PIm < 1.6)) ph_vs_th_pim[5][int((P_PIm-0.1)/0.1)]->Fill(th_PIm,ph_PIm-300,1); 
 	
 //fiducial cut sector 6 
 if ((th_PIm > th_min)&&(th_PIm < th_max)&&(ph_PIm > pim_fid_b+300) && (ph_PIm < pim_fid_a+300)){
 
+	if ((P_PIm > 0.1) && (P_PIm < 1.6)) ph_vs_th_pim[5][int((P_PIm-0.1)/0.1)]->Fill(th_PIm,ph_PIm-300,1); 
 
-
+	th_vs_p_pim_2[5]->Fill(P_PIm,th_PIm,1.);
+	
 //th_vs_p
 //if ((th_PIm <36.152+3.69909e-05/(5.40783e-06*(P_PIm+0.15)+1.81169e-07)+71.) || (th_PIm > 36.152+3.69909e-05/(5.40783e-06*(P_PIm+0.1)+1.81169e-07)+72.5 )){  
 if (th_PIm <36.152+3.69909e-05/(5.40783e-06*(P_PIm+0.15)+1.81169e-07)+71.){  
 	
-	th_vs_p_pim_2[5]->Fill(P_PIm,th_PIm,1.);
+
 	hist_z_el_6->Fill(z_PIm,1.);
 
 cuts_data = true;
