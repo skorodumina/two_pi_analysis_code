@@ -164,6 +164,7 @@ extern TH2F *hist_ectot_sector1,*hist_ectot_sector2,*hist_ectot_sector3,*hist_ec
 extern TH2F *th_cc_vs_seg_1,*th_cc_vs_seg_2,*th_cc_vs_seg_3,*th_cc_vs_seg_4,*th_cc_vs_seg_5,*th_cc_vs_seg_6;
 
 extern TH2F *W_2pi_selection,*W_2pi_selection_sim;
+extern TH2F *h_dalitz;
 
 extern TH1F *hist_PIm_miss,*hist_PIm_miss_en,*hist_PIp_miss,*hist_PIp_miss_d,*hist_PIp_miss_d_bef, *hist_PIp_miss_en,*hist_P_miss,*hist_P_miss_en, *h_miss_mass_0, *hist_P_miss_sim;
 

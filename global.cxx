@@ -233,7 +233,7 @@ TH2F *th_cc_vs_seg_6_sim = new TH2F("th_cc_vs_seg_6_sim","th_cc_vs_seg_6_sim",20
 TH2F *W_2pi_selection = new TH2F("W_2pi_selection","W_2pi_selection",200, 1.2, 1.9,200, 0.2, 1.4);
 TH2F *W_2pi_selection_sim = new TH2F("W_2pi_selection_sim","W_2pi_selection_sim",200, 1.2, 1.9,200, 0.2, 1.4);
 
-
+TH2F *h_dalitz = new TH2F ("h_dalitz","h_dalitz",200,0.13957+0.13957, 1.425-0.938272,200, 0.938272+0.13957, 1.425-0.13957);
 
 
 

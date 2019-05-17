@@ -489,6 +489,7 @@ h_z_corr2_sim->Write("", TObject::kOverwrite);
       
       W_2pi_selection->Write("", TObject::kOverwrite);
       W_2pi_selection_sim->Write("", TObject::kOverwrite);
+      h_dalitz ->Write("", TObject::kOverwrite);
       
       h_w_1dim->Write("", TObject::kOverwrite);
       h_w_1dim_sim->Write("", TObject::kOverwrite);
