@@ -8,11 +8,15 @@
 /cache/mss/home/skorodum/e1e/data_2pi_conv_2July2018/out_conv_2pi_2July2018_104.root
 /cache/mss/home/skorodum/e1e/data_2pi_conv_2July2018/out_conv_2pi_2July2018_105.root
 1 // number of input files with empty target
-/cache/mss/home/skorodum/e1e/data_2pi_conv_8Mar2018/out_conv_2pi_8Mar2018_100.root
-2// number of input files with smulation
-/cache/mss/clas/e1e/production/simulation_2pi/sim_skorodum_Aug2016/converted_July2018_cc_ok/out_newFrad_July2018_1.root
-/cache/mss/clas/e1e/production/simulation_2pi/sim_skorodum_Aug2016/converted_July2018_cc_ok/out_newFrad_July2018_2.root
-out_data_test.root // output file
+/cache/mss/home/skorodum/e1e/data_2pi_conv_2July2018/out_conv_2pi_2July2018_105.root
+6// number of input files with smulation
+/cache/mss/clas/e1e/production/simulation_2pi/sim_skorodum_Aug2016/converted_July2018_cc_ok/out_newFrad_July2018_244.root
+/cache/mss/clas/e1e/production/simulation_2pi/sim_skorodum_Aug2016/converted_July2018_cc_ok/out_newFrad_July2018_24440.root
+/cache/mss/clas/e1e/production/simulation_2pi/sim_skorodum_Aug2016/converted_July2018_cc_ok/out_newFrad_July2018_24441.root
+/cache/mss/clas/e1e/production/simulation_2pi/sim_skorodum_Aug2016/converted_July2018_cc_ok/out_newFrad_July2018_24442.root
+/cache/mss/clas/e1e/production/simulation_2pi/sim_skorodum_Aug2016/converted_July2018_cc_ok/out_newFrad_July2018_24443.root
+/cache/mss/clas/e1e/production/simulation_2pi/sim_skorodum_Aug2016/converted_July2018_cc_ok/out_newFrad_July2018_24444.root
+out_data_test_p_mom.root // output file
 
 
 

@@ -1,12 +1,12 @@
 1 // flag 1-data; 2-simulation
 2.039 // beam energy in GeV
 1 // number of input files
-/cache/home/skorodum/e1e/out_conv_empty_2pi_8Mar2018.root
+/volatile/clas/clase1-6/skorodum/cross_section_2pi/out_conv_empty_2pi_2July2018.root
 1 // number of input files with empty target
-/cache/home/skorodum/e1e/out_conv_empty_2pi_8Mar2018.root
+/volatile/clas/clase1-6/skorodum/cross_section_2pi/out_conv_empty_2pi_2July2018.root
 1// number of input files with smulation
-/cache/mss/clas/e1e/production/simulation_2pi/sim_skorodum_Aug2016/converted_Aug2016/out_newFrad_Aug2016_11111.root
-out_data_empty_6apr18.root // output file
+/cache/mss/clas/e1e/production/simulation_2pi/sim_skorodum_Aug2016/converted_July2018_cc_ok/out_newFrad_July2018_244.root
+out_data_empty_test10Jul2021_NOpmomcut.root // output file
 
 
 
