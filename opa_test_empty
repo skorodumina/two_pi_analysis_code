@@ -5,8 +5,8 @@
 1 // number of input files with empty target
 /volatile/clas/clase1-6/skorodum/cross_section_2pi/out_conv_empty_2pi_2July2018.root
 1// number of input files with smulation
-/cache/mss/clas/e1e/production/simulation_2pi/sim_skorodum_Aug2016/converted_July2018_cc_ok/out_newFrad_July2018_244.root
-out_data_empty_test10Jul2021_NOpmomcut.root // output file
+/cache/mss/clas/e1e/production/simulation_2pi/sim_skorodum_Aug2016/converted_July2018_cc_ok/out_newFrad_July2018_243.root
+out_data_empty_FINAL.root // output file
 
 
 
