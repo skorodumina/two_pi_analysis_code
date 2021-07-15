@@ -1,0 +1,33 @@
+1 // flag 1-data; 2-simulation
+2.039 // beam energy in GeV
+1 // number of input files
+/cache/mss/home/skorodum/e1e/data_2pi_conv_2July2018/out_conv_2pi_2July2018_100.root
+1 // number of input files with empty target
+/cache/mss/home/skorodum/e1e/data_2pi_conv_2July2018/out_conv_2pi_2July2018_9.root
+25// number of input files with smulation
+/cache/mss/clas/e1e/production/simulation_2pi/sim_skorodum_Aug2016/converted_July2018_cc_ok/out_newFrad_July2018_1.root
+/cache/mss/clas/e1e/production/simulation_2pi/sim_skorodum_Aug2016/converted_July2018_cc_ok/out_newFrad_July2018_2.root
+/cache/mss/clas/e1e/production/simulation_2pi/sim_skorodum_Aug2016/converted_July2018_cc_ok/out_newFrad_July2018_3.root
+/cache/mss/clas/e1e/production/simulation_2pi/sim_skorodum_Aug2016/converted_July2018_cc_ok/out_newFrad_July2018_4.root
+/cache/mss/clas/e1e/production/simulation_2pi/sim_skorodum_Aug2016/converted_July2018_cc_ok/out_newFrad_July2018_5.root
+/cache/mss/clas/e1e/production/simulation_2pi/sim_skorodum_Aug2016/converted_July2018_cc_ok/out_newFrad_July2018_6.root
+/cache/mss/clas/e1e/production/simulation_2pi/sim_skorodum_Aug2016/converted_July2018_cc_ok/out_newFrad_July2018_7.root
+/cache/mss/clas/e1e/production/simulation_2pi/sim_skorodum_Aug2016/converted_July2018_cc_ok/out_newFrad_July2018_8.root
+/cache/mss/clas/e1e/production/simulation_2pi/sim_skorodum_Aug2016/converted_July2018_cc_ok/out_newFrad_July2018_9.root
+/cache/mss/clas/e1e/production/simulation_2pi/sim_skorodum_Aug2016/converted_July2018_cc_ok/out_newFrad_July2018_10.root
+/cache/mss/clas/e1e/production/simulation_2pi/sim_skorodum_Aug2016/converted_July2018_cc_ok/out_newFrad_July2018_11.root
+/cache/mss/clas/e1e/production/simulation_2pi/sim_skorodum_Aug2016/converted_July2018_cc_ok/out_newFrad_July2018_12.root
+/cache/mss/clas/e1e/production/simulation_2pi/sim_skorodum_Aug2016/converted_July2018_cc_ok/out_newFrad_July2018_13.root
+/cache/mss/clas/e1e/production/simulation_2pi/sim_skorodum_Aug2016/converted_July2018_cc_ok/out_newFrad_July2018_14.root
+/cache/mss/clas/e1e/production/simulation_2pi/sim_skorodum_Aug2016/converted_July2018_cc_ok/out_newFrad_July2018_15.root
+/cache/mss/clas/e1e/production/simulation_2pi/sim_skorodum_Aug2016/converted_July2018_cc_ok/out_newFrad_July2018_16.root
+/cache/mss/clas/e1e/production/simulation_2pi/sim_skorodum_Aug2016/converted_July2018_cc_ok/out_newFrad_July2018_17.root
+/cache/mss/clas/e1e/production/simulation_2pi/sim_skorodum_Aug2016/converted_July2018_cc_ok/out_newFrad_July2018_18.root
+/cache/mss/clas/e1e/production/simulation_2pi/sim_skorodum_Aug2016/converted_July2018_cc_ok/out_newFrad_July2018_19.root
+/cache/mss/clas/e1e/production/simulation_2pi/sim_skorodum_Aug2016/converted_July2018_cc_ok/out_newFrad_July2018_20.root
+/cache/mss/clas/e1e/production/simulation_2pi/sim_skorodum_Aug2016/converted_July2018_cc_ok/out_newFrad_July2018_21.root
+/cache/mss/clas/e1e/production/simulation_2pi/sim_skorodum_Aug2016/converted_July2018_cc_ok/out_newFrad_July2018_22.root
+/cache/mss/clas/e1e/production/simulation_2pi/sim_skorodum_Aug2016/converted_July2018_cc_ok/out_newFrad_July2018_23.root
+/cache/mss/clas/e1e/production/simulation_2pi/sim_skorodum_Aug2016/converted_July2018_cc_ok/out_newFrad_July2018_24.root
+/cache/mss/clas/e1e/production/simulation_2pi/sim_skorodum_Aug2016/converted_July2018_cc_ok/out_newFrad_July2018_25.root
+out_sim_15Jul2021_test.root // output file
